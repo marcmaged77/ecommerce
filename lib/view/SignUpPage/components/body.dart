@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:souq/components/SignCard.dart';
 import 'package:souq/components/customTextField.dart';
+import 'package:souq/constants.dart';
 
 
 
@@ -20,6 +21,13 @@ class Body extends StatelessWidget {
 
 
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: kPrimaryColor ,
+        title: Image.asset("assets/icons/shopify.png",width: 120,),
+
+      ),
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.only(

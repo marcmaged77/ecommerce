@@ -58,7 +58,7 @@ class SignCard extends StatelessWidget {
           BoxShadow(
             color: Colors.grey.withOpacity(0.1), //color of shadow
             spreadRadius: 1, //spread radius
-            offset: Offset(0, 1), // changes position of shadow
+            offset: Offset(0, 01), // changes position of shadow
             //first paramerter of offset is left-right
             //second parameter is top to down
           ),

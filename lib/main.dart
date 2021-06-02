@@ -14,10 +14,12 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         fontFamily: 'first',
+        backgroundColor: Colors.white,
 
         primarySwatch: Colors.blue,
       ),
       home:Scaffold(
+
         body: LoginScreen(),
       ),
     );

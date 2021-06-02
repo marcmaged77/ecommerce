@@ -13,6 +13,13 @@ class Body extends StatelessWidget {
     var height = size.height;
     var width = size.width;
     return Scaffold(
+      appBar: AppBar(
+        title: Image.asset("assets/icons/shopify.png",width: 120,),
+        backgroundColor: kPrimaryColor,
+        elevation: 0,
+        iconTheme: IconThemeData(color:Colors.black)
+      ),
+      extendBodyBehindAppBar: true,
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.only(
@@ -70,7 +77,7 @@ class Body extends StatelessWidget {
               ),
               child: ListTile(
                 onTap: (){print('sign in google');},
-                title: Text('Sign In With Facebook'),
+                title: Text('Sign In With Google'),
                 leading: SvgPicture.asset(
                   "assets/icons/google-plus.svg",
                   width: 33,
