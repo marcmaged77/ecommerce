@@ -15,6 +15,7 @@ class Body extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Image.asset("assets/icons/shopify.png",width: 120,),
+        centerTitle: true,
         backgroundColor: kPrimaryColor,
         elevation: 0,
         iconTheme: IconThemeData(color:Colors.black)
@@ -60,6 +61,7 @@ class Body extends StatelessWidget {
               child: ListTile(
                 onTap: (){print('sign in facebook');},
                 title: Text('Sign In With Facebook'),
+
                 leading: SvgPicture.asset(
                   "assets/icons/facebook.svg",
                   color: kPrimaryColor,
