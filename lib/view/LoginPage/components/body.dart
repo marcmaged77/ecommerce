@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:souq/components/SignCard.dart';
 import 'package:souq/components/orDivider.dart';
+import 'package:souq/core/view_model/auth_view_model.dart';
 
 import '../../../constants.dart';
 
-class Body extends StatelessWidget {
+class Body extends GetWidget<AuthViewModel> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -14,12 +16,14 @@ class Body extends StatelessWidget {
     var width = size.width;
     return Scaffold(
       appBar: AppBar(
-        title: Image.asset("assets/icons/shopify.png",width: 120,),
-        centerTitle: true,
-        backgroundColor: kPrimaryColor,
-        elevation: 0,
-        iconTheme: IconThemeData(color:Colors.black)
-      ),
+          title: Image.asset(
+            "assets/icons/shopify.png",
+            width: 120,
+          ),
+          centerTitle: true,
+          backgroundColor: kPrimaryColor,
+          elevation: 0,
+          iconTheme: IconThemeData(color: Colors.black)),
       extendBodyBehindAppBar: true,
       body: SingleChildScrollView(
         child: Container(
@@ -59,9 +63,11 @@ class Body extends StatelessWidget {
                 shape: BoxShape.rectangle,
               ),
               child: ListTile(
-                onTap: (){print('sign in facebook');},
+                onTap: () {
+                  print('sign in facebook');
+                  controller.signOutGoogle();
+                },
                 title: Text('Sign In With Facebook'),
-
                 leading: SvgPicture.asset(
                   "assets/icons/facebook.svg",
                   color: kPrimaryColor,
@@ -78,7 +84,10 @@ class Body extends StatelessWidget {
                 shape: BoxShape.rectangle,
               ),
               child: ListTile(
-                onTap: (){print('sign in google');},
+                onTap: () {
+                  print('sign in google');
+                  controller.googleSignInMethod();
+                },
                 title: Text('Sign In With Google'),
                 leading: SvgPicture.asset(
                   "assets/icons/google-plus.svg",

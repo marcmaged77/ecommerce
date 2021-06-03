@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:souq/core/view_model/navigation.dart';
 import 'package:souq/view/SignUpPage/sign_up.dart';
 
 import '../constants.dart';
@@ -12,38 +13,34 @@ class SignCard extends StatelessWidget {
   final String buttonText;
   final VoidCallback buttonFunction;
   final VoidCallback firstRightPress;
-  final Widget child ;
+  final Widget child;
 
   final String firstTextContainerheader;
   final String secondTextContainerheader;
   final String firstTextContainerHintText;
   final String secondTextContainerHintText;
 
-
   final String forgotPassword;
 
-  const SignCard({
-    Key? key,
-    this.firstLeft = "",
-    this.firstRight = '',
-    this.secondColumnText = '',
-    this.forgotPassword = '',
-
-    required this.firstRightPress,
-
+  const SignCard(
+      {Key? key,
+      this.firstLeft = "",
+      this.firstRight = '',
+      this.secondColumnText = '',
+      this.forgotPassword = '',
+      required this.firstRightPress,
 
 //TEXTfields text and hint and function
-    this.firstTextContainerheader = "",
-    this.secondTextContainerheader = "",
-    this.firstTextContainerHintText= "",
-    this.secondTextContainerHintText = "",
+      this.firstTextContainerheader = "",
+      this.secondTextContainerheader = "",
+      this.firstTextContainerHintText = "",
+      this.secondTextContainerHintText = "",
 
 //BUTTON TEXT AND FUNCTION
-    this.buttonText = '',
-    required this.buttonFunction,
-
-      required this.child
-  }) : super(key: key);
+      this.buttonText = '',
+      required this.buttonFunction,
+      required this.child})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -81,13 +78,8 @@ class SignCard extends StatelessWidget {
                 ),
                 FlatButton(
                     onPressed: () {
-print("hello");
-Navigator.push(context, MaterialPageRoute(builder: (context) {
-  return Signup();
-}));
-
-
-
+                      print("go to sign up");
+                      goToSignup(context);
                     },
                     child: Text(
                       firstRight,
@@ -107,18 +99,21 @@ Navigator.push(context, MaterialPageRoute(builder: (context) {
             SizedBox(
               height: height * 0.06,
             ),
-            CustomTextField(heading: firstTextContainerheader, hintText: firstTextContainerHintText, obscure: false),
+            CustomTextField(
+                heading: firstTextContainerheader,
+                hintText: firstTextContainerHintText,
+                obscure: false),
             SizedBox(
               height: height * 0.03,
             ),
-            CustomTextField(heading: secondTextContainerheader, hintText: secondTextContainerHintText, obscure: true),
+            CustomTextField(
+                heading: secondTextContainerheader,
+                hintText: secondTextContainerHintText,
+                obscure: true),
             child,
             SizedBox(
               height: height * 0.025,
             ),
-
-
-
             GestureDetector(
               onTap: () {
                 print('forgot');
@@ -132,7 +127,7 @@ Navigator.push(context, MaterialPageRoute(builder: (context) {
             ),
             button(
                 text: buttonText,
-                press:buttonFunction,
+                press: buttonFunction,
                 color: kPrimaryColor,
                 widthP: 0.8,
                 textColor: Colors.white),
@@ -145,5 +140,3 @@ Navigator.push(context, MaterialPageRoute(builder: (context) {
     );
   }
 }
-
-
