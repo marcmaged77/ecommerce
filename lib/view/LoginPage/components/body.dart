@@ -44,6 +44,8 @@ class Body extends GetWidget<AuthViewModel> {
                 secondTextContainerheader: "Password",
                 firstTextContainerHintText: "iamMarc@hotmail.com",
                 secondTextContainerHintText: "Password",
+                secondTextContainerObscure: true,
+
                 forgotPassword: 'Forgot Password?',
                 buttonText: 'SIGN IN',
                 buttonFunction: () {

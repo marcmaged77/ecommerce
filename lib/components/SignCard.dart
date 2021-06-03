@@ -21,6 +21,7 @@ class SignCard extends StatelessWidget {
   final String secondTextContainerHintText;
 
   final String forgotPassword;
+  final bool  secondTextContainerObscure;
 
   const SignCard(
       {Key? key,
@@ -35,6 +36,7 @@ class SignCard extends StatelessWidget {
       this.secondTextContainerheader = "",
       this.firstTextContainerHintText = "",
       this.secondTextContainerHintText = "",
+        this.secondTextContainerObscure = false,
 
 //BUTTON TEXT AND FUNCTION
       this.buttonText = '',
@@ -109,7 +111,7 @@ class SignCard extends StatelessWidget {
             CustomTextField(
                 heading: secondTextContainerheader,
                 hintText: secondTextContainerHintText,
-                obscure: true),
+                obscure: secondTextContainerObscure),
             child,
             SizedBox(
               height: height * 0.025,
