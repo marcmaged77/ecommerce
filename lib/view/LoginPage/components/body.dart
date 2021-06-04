@@ -8,6 +8,13 @@ import 'package:souq/core/view_model/auth_view_model.dart';
 import '../../../constants.dart';
 
 class Body extends GetWidget<AuthViewModel> {
+
+
+  final TextController1 = TextEditingController();
+  final TextController2 = TextEditingController();
+  final TextController3 = TextEditingController();
+
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -34,12 +41,31 @@ class Body extends GetWidget<AuthViewModel> {
           ),
           child: Column(children: <Widget>[
             SignCard(
-                firstLeft: 'Welcome,',
-                firstRight: 'Sign Up',
-                secondColumnText: 'Sign In To Continue',
+
+
+              //fUNCTIONS
+              onSaved1: (value){},
+                onSaved2: (value){},
+                validator1: (value){},
+                validator2: (value){},
+                controller1:TextController1 ,
+                controller2: TextController2,
+
+
                 firstRightPress: () {
                   print('helloooo');
                 },
+
+                buttonFunction: () {
+                  print('signin');
+                },
+
+
+                ///////////////////////////////////////////////////UI///////////////////////////////////////////////////////////
+                firstLeft: 'Welcome,',
+                firstRight: 'Sign Up',
+                secondColumnText: 'Sign In To Continue',
+
                 firstTextContainerheader: "Your Email",
                 secondTextContainerheader: "Password",
                 firstTextContainerHintText: "iamMarc@hotmail.com",
@@ -48,16 +74,22 @@ class Body extends GetWidget<AuthViewModel> {
 
                 forgotPassword: 'Forgot Password?',
                 buttonText: 'SIGN IN',
-                buttonFunction: () {
-                  print('signin');
-                },
+
                 child: SizedBox(
                   height: 0,
                 )),
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
             orDivider(width: 0.06),
             SizedBox(
               height: height * 0.01,
             ),
+
+
+
+            ////////////////////////////////////////SOCIAL SIGNING////////////////////////////////////////////////////
+
+            /////////////////////////////////////////////fACEBOOK//////////////////////////////////////////////
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(4),
@@ -76,9 +108,14 @@ class Body extends GetWidget<AuthViewModel> {
                 ),
               ),
             ),
+
+
             SizedBox(
               height: height * 0.025,
             ),
+
+
+            /////////////////////////////////////////////GOOGLE//////////////////////////////////////////////
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(4),

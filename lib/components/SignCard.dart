@@ -15,16 +15,37 @@ class SignCard extends StatelessWidget {
   final VoidCallback firstRightPress;
   final Widget child;
 
+
+ final FormFieldSetter<String> onSaved1;
+  final FormFieldSetter<String> onSaved2;
+  final FormFieldValidator<String> validator1;
+      final FormFieldValidator<String> validator2;
+  final TextEditingController controller1;
+  final TextEditingController controller2;
+
+
+
+
   final String firstTextContainerheader;
   final String secondTextContainerheader;
   final String firstTextContainerHintText;
   final String secondTextContainerHintText;
 
+
+
   final String forgotPassword;
-  final bool  secondTextContainerObscure;
+  final bool secondTextContainerObscure;
 
   const SignCard(
       {Key? key,
+
+        required this.onSaved1,
+        required this.onSaved2,
+        required this.validator1,
+        required this.validator2,
+        required this.controller1,
+        required this.controller2,
+
       this.firstLeft = "",
       this.firstRight = '',
       this.secondColumnText = '',
@@ -104,14 +125,22 @@ class SignCard extends StatelessWidget {
             CustomTextField(
                 heading: firstTextContainerheader,
                 hintText: firstTextContainerHintText,
-                obscure: false),
+                obscure: false,
+            onSaved: onSaved1,
+              validator: validator1,
+              controller: controller1,
+            ),
             SizedBox(
               height: height * 0.03,
             ),
             CustomTextField(
                 heading: secondTextContainerheader,
                 hintText: secondTextContainerHintText,
-                obscure: secondTextContainerObscure),
+                obscure: secondTextContainerObscure,
+            onSaved: onSaved2,
+              validator: validator2,
+              controller: controller2,
+            ),
             child,
             SizedBox(
               height: height * 0.025,

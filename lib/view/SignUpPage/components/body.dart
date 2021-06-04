@@ -4,30 +4,28 @@ import 'package:souq/components/SignCard.dart';
 import 'package:souq/components/customTextField.dart';
 import 'package:souq/constants.dart';
 
-
-
-
-
-
 class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
-
     Size size = MediaQuery.of(context).size;
 
     var height = size.height;
     var width = size.width;
 
-
+    final TextController1 = TextEditingController();
+    final TextController2 = TextEditingController();
+    final TextController3 = TextEditingController();
 
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: kPrimaryColor ,
-        title: Image.asset("assets/icons/shopify.png",width: 120,),
-centerTitle:true,
+        backgroundColor: kPrimaryColor,
+        title: Image.asset(
+          "assets/icons/shopify.png",
+          width: 120,
+        ),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -39,26 +37,36 @@ centerTitle:true,
           child: Column(
             children: <Widget>[
               SignCard(
+                onSaved1: (value){} ,
+                  onSaved2: (value){},
+                  validator1: (value){},
+                  validator2: (value){},
+                  controller1: TextController1,
+                  controller2: TextController2,
+
+
+
                   buttonFunction: () {
                     print('sign up');
                   },
-                  firstLeft: 'Sign Up',
 
+                  firstRightPress: () {},
+
+                  firstLeft: 'Sign Up',
                   buttonText: "SIGN UP",
                   firstTextContainerheader: 'Name',
                   secondTextContainerheader: 'Your Email',
                   firstTextContainerHintText: "Marc",
                   secondTextContainerHintText: "iamMarc@hotmailcom",
 
-
-                  firstRightPress: (){},
-
-
                   child: Column(children: <Widget>[
                     SizedBox(
                       height: height * 0.023,
                     ),
                     CustomTextField(
+                      validator: (value){},
+                      onSaved: (value){},
+                        controller: TextController3,
                         heading: 'Password',
                         hintText: 'Your Password',
                         obscure: true)
@@ -67,6 +75,7 @@ centerTitle:true,
           ),
         ),
       ),
-    );;
+    );
+    ;
   }
 }
