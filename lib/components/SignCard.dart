@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:souq/core/view_model/auth_view_model.dart';
 import 'package:souq/core/view_model/navigation.dart';
 import 'package:souq/view/SignUpPage/sign_up.dart';
 
@@ -6,7 +8,7 @@ import '../constants.dart';
 import 'button.dart';
 import 'customTextField.dart';
 
-class SignCard extends StatelessWidget {
+class SignCard extends GetWidget <AuthViewModel> {
   final String firstLeft;
   final String firstRight;
   final String secondColumnText;
@@ -22,6 +24,7 @@ class SignCard extends StatelessWidget {
       final FormFieldValidator<String> validator2;
   final TextEditingController controller1;
   final TextEditingController controller2;
+  final GlobalKey globalKey;
 
 
 
@@ -38,7 +41,7 @@ class SignCard extends StatelessWidget {
 
   const SignCard(
       {Key? key,
-
+required this.globalKey,
         required this.onSaved1,
         required this.onSaved2,
         required this.validator1,
@@ -147,7 +150,22 @@ class SignCard extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                print('forgot');
+
+controller.signOutGoogle();
+                controller.signOutFacebook();
+
+
+//                 try {
+//                   if(controller.email != null)
+//                     controller.signOutGoogle();
+//                   print('sucess');
+//                   print('forgot, signed out ');
+//
+//                 }catch(e){
+// print(e);
+//                 }
+
+
               },
               child: Container(
                   alignment: Alignment.centerRight,

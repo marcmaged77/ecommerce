@@ -12,6 +12,9 @@ class Body extends StatelessWidget {
     var height = size.height;
     var width = size.width;
 
+
+    final _formKey = GlobalKey<FormState>();
+
     final TextController1 = TextEditingController();
     final TextController2 = TextEditingController();
     final TextController3 = TextEditingController();
@@ -37,6 +40,7 @@ class Body extends StatelessWidget {
           child: Column(
             children: <Widget>[
               SignCard(
+                globalKey:_formKey ,
                 onSaved1: (value){} ,
                   onSaved2: (value){},
                   validator1: (value){},

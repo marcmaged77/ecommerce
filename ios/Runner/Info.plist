@@ -24,6 +24,21 @@
 
     	<string>com.googleusercontent.apps.515530935428-4bvc9k0rehqm11ddainch8nfbe8of3v8</string>
         		</array>
+
+
+<key>CFBundleURLTypes</key>
+<array>
+  <dict>
+  <key>CFBundleURLSchemes</key>
+  <array>
+    <string>fb312467017038064</string>
+  </array>
+  </dict>
+</array>
+<key>FacebookAppID</key>
+<string>312467017038064</string>
+<key>FacebookDisplayName</key>
+<string>souq</string>
         	</dict>
         </array>
 

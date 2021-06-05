@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class button extends StatelessWidget {
   final String text;
   final VoidCallback press;
+
   final Color color;
   final  Color textColor;
   final double widthP;

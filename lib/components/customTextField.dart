@@ -1,6 +1,5 @@
 
 
-import 'dart:js';
 
 import 'package:flutter/material.dart';
 
@@ -28,6 +27,9 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final _formKey = GlobalKey<FormState>();
+
     return Column(
       children: [
         Container(

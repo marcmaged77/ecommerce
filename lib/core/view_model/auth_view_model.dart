@@ -1,39 +1,123 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
-
-
-
-
-
-
-
-
-
 
 //gextController very good for memory leak
 
 class AuthViewModel extends GetxController {
-
-
+  //google instance
   GoogleSignIn _googleSignIn = GoogleSignIn();
-  FirebaseAuth _auth =FirebaseAuth.instance;
-  late String name;
-  late String email;
-  late String imageUrl;
+
+  //facebook instance
+  // FacebookLogin _facebookLogin = FacebookLogin();
+  static final FacebookLogin _facebookLogin = new FacebookLogin();
+
+  //firebase instance
+ static final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  late String email, password, name;
 
 
+  late  String imageUrl;
+
+
+
+  //SIGN UP METHOD
+  Future signUp({ required String email, required String password}) async {
+    try {
+      await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return null;
+    } on FirebaseAuthException catch (e) {
+      return e.message;
+    }
+  }
+
+  // SIGN IN METHOD
+  void signIn({required String email, required String password}) async {
+    try {
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      print(email);
+    } on FirebaseAuthException catch (e) {
+      print( e.message);
+      Get.snackbar("error", e.toString(), colorText: Colors.black, snackPosition: SnackPosition.TOP);
+    }
+  }
+
+  //SIGN OUT METHOD
+  Future signOut() async {
+    await _auth.signOut();
+
+    print('signout');
+  }
+
+
+
+  // void signInEmail() async{
+  //
+  //   // try{
+  //   //  await  _auth.signInWithEmailAndPassword(email: email, password: password);
+  //   //  return null;
+  //   // }catch(e){
+  //   //   print(e);
+  //   //   Get.snackbar("error", e.toString(), colorText: Colors.black, snackPosition: SnackPosition.TOP);
+  //
+  //
+  //   try {
+  //     final user = await _auth.signInWithEmailAndPassword(
+  //         email: email, password: password);
+  //     if (user != null) {
+  //       print(email);
+  //     }
+  //
+  //
+  //
+  //   } catch (e) {
+  //     print(e);
+  //
+  //   }
+  //
+  //
+  //
+  //
+  // }
+
+
+
+
+
+void facebookSignInMethod() async{
+
+  FacebookLoginResult result = await _facebookLogin.logInWithReadPermissions(['email']);
+
+final accessToken = result.accessToken.token;
+
+if(result.status == FacebookLoginStatus.loggedIn){
+  final faceCredential = FacebookAuthProvider.credential(accessToken);
+  await _auth.signInWithCredential(faceCredential);
+}
+
+}
+
+
+  void signOutFacebook() async {
+    await _facebookLogin.logOut();
+
+    print("User Signed Out from facebook");
+  }
 
 
   Future<String?> googleSignInMethod() async {
-
     await Firebase.initializeApp();
 
-
     final GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
+
+
     final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount!.authentication;
 
     final AuthCredential credential = GoogleAuthProvider.credential(
@@ -56,8 +140,6 @@ class AuthViewModel extends GetxController {
       email = user.email!;
       imageUrl = user.photoURL!;
 
-
-
       final User? currentUser = _auth.currentUser;
       assert(user.uid == currentUser!.uid);
 
@@ -66,11 +148,9 @@ class AuthViewModel extends GetxController {
       // prefs.setString('name', name);
       // prefs.setString('imageUrl', imageUrl);
 
-
       print('signInWithGoogle succeeded: $user');
       print(name);
       print(email);
-
 
       return '$user';
     }
@@ -78,48 +158,19 @@ class AuthViewModel extends GetxController {
     return null;
   }
 
-
-
-
-
-
-
-
-  void signOutGoogle() async{
+  void signOutGoogle() async {
     await _googleSignIn.signOut();
 
-    print("User Signed Out");
+    print("User Signed Out from google");
   }
 
-// void googleSignInMethod() async {
-//
-// final GoogleSignInAccount? googleUser =  await _googleSignIn.signIn();
-//
-// final GoogleSignInAuthentication googleSignInAuthentication = await googleUser!.authentication;
-// final AuthCredential credential = GoogleAuthProvider.credential(
-//   idToken: googleSignInAuthentication.idToken,
-//   accessToken: googleSignInAuthentication.accessToken
-// );
-// UserCredential userCredential = await _auth.signInWithCredential(credential);
-//
-//
-// print(userCredential);
-// print(googleUser);
-//
-//
-// }
-//
-// void signOutGoogle() async{
-//   await _googleSignIn.signOut();
-//
-// }
 
 
 
 
 
 // first function to run
-@override
+  @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
@@ -140,11 +191,4 @@ class AuthViewModel extends GetxController {
     // TODO: implement onClose
     super.onClose();
   }
-
-
-
-
-
-
 }
-

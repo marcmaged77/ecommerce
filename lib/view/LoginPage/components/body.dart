@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -7,17 +8,58 @@ import 'package:souq/core/view_model/auth_view_model.dart';
 
 import '../../../constants.dart';
 
-class Body extends GetWidget<AuthViewModel> {
 
 
-  final TextController1 = TextEditingController();
-  final TextController2 = TextEditingController();
-  final TextController3 = TextEditingController();
 
+
+
+
+
+
+class Body extends GetWidget<AuthViewModel>  {
+  final _formKey = GlobalKey<FormState>();
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+   // String? email ;
+   // String? password;
+
+  // Future signIn({required String email, required String password}) async {
+  //   try {
+  //     await _auth.signInWithEmailAndPassword(email: email, password: password);
+  //     print(email);
+  //   } on FirebaseAuthException catch (e) {
+  //     print( e.message);
+  //     Get.snackbar("error", e.toString(), colorText: Colors.black, snackPosition: SnackPosition.TOP);
+  //   }
+  // }
+
+  // void signInWithEmailAndPassword({ required String? email, required String? password}) async {
+  //   try {
+  //     await _auth.signInWithEmailAndPassword(email: email, password: password);
+  //   } catch (e) {
+  //     Get.snackbar(
+  //       'Error login account',
+  //       e.toString(),
+  //       colorText: Colors.black,
+  //       snackPosition: SnackPosition.BOTTOM,
+  //     );
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
+
     Size size = MediaQuery.of(context).size;
+    final TextController1 = TextEditingController();
+    final TextController2 = TextEditingController();
+    final TextController3 = TextEditingController();
+
+
+
+
+
+
+
 
     var height = size.height;
     var width = size.width;
@@ -42,12 +84,12 @@ class Body extends GetWidget<AuthViewModel> {
           child: Column(children: <Widget>[
             SignCard(
 
-
-              //fUNCTIONS
-              onSaved1: (value){},
-                onSaved2: (value){},
-                validator1: (value){},
-                validator2: (value){},
+globalKey: _formKey ,
+              //fUNCTIONS,
+              onSaved1: (value){controller.email= value!;},
+                onSaved2: (value){controller.password = value!;},
+                validator1: (val) => val!.isNotEmpty ? null : " please enter a email address",
+                validator2: (val)=> val!.length < 6 ? " please 6 or more character" : null,
                 controller1:TextController1 ,
                 controller2: TextController2,
 
@@ -56,8 +98,10 @@ class Body extends GetWidget<AuthViewModel> {
                   print('helloooo');
                 },
 
-                buttonFunction: () {
+                buttonFunction: ()  async{
                   print('signin');
+                  controller.signIn(email: controller.email, password: controller.password);
+
                 },
 
 
@@ -99,7 +143,8 @@ class Body extends GetWidget<AuthViewModel> {
               child: ListTile(
                 onTap: () {
                   print('sign in facebook');
-                  controller.signOutGoogle();
+
+                  controller.facebookSignInMethod();
                 },
                 title: Text('Sign In With Facebook'),
                 leading: SvgPicture.asset(
@@ -139,6 +184,8 @@ class Body extends GetWidget<AuthViewModel> {
         ),
       ),
     );
-    ;
+
   }
+
+
 }
