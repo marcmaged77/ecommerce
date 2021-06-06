@@ -94,11 +94,11 @@ class AuthViewModel extends GetxController {
 
 
 void facebookSignInMethod() async{
-
   FacebookLoginResult result = await _facebookLogin.logInWithReadPermissions(['email']);
 
 final accessToken = result.accessToken.token;
-
+print(result.status);
+print("facebook username : ${FacebookAuthProvider.FACEBOOK_SIGN_IN_METHOD}");
 if(result.status == FacebookLoginStatus.loggedIn){
   final faceCredential = FacebookAuthProvider.credential(accessToken);
   await _auth.signInWithCredential(faceCredential);
