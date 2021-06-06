@@ -24,7 +24,6 @@ class SignCard extends GetWidget <AuthViewModel> {
       final FormFieldValidator<String> validator2;
   final TextEditingController controller1;
   final TextEditingController controller2;
-  final GlobalKey globalKey;
 
 
 
@@ -41,7 +40,6 @@ class SignCard extends GetWidget <AuthViewModel> {
 
   const SignCard(
       {Key? key,
-required this.globalKey,
         required this.onSaved1,
         required this.onSaved2,
         required this.validator1,

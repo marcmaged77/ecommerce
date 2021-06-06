@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:souq/components/SignCard.dart';
 import 'package:souq/components/customTextField.dart';
 import 'package:souq/constants.dart';
+import 'package:souq/core/view_model/auth_view_model.dart';
 
-class Body extends StatelessWidget {
+class Body extends GetWidget<AuthViewModel>{
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -40,9 +42,9 @@ class Body extends StatelessWidget {
           child: Column(
             children: <Widget>[
               SignCard(
-                globalKey:_formKey ,
-                onSaved1: (value){} ,
-                  onSaved2: (value){},
+
+                onSaved1: (value){TextController1.text = value!;} ,
+                  onSaved2: (value){TextController2.text = value!;},
                   validator1: (value){},
                   validator2: (value){},
                   controller1: TextController1,
@@ -50,8 +52,10 @@ class Body extends StatelessWidget {
 
 
 
-                  buttonFunction: () {
+                  buttonFunction: () async {
                     print('sign up');
+
+                    controller.signUp(email: TextController2.text, password: TextController3.text);
                   },
 
                   firstRightPress: () {},
@@ -69,7 +73,7 @@ class Body extends StatelessWidget {
                     ),
                     CustomTextField(
                       validator: (value){},
-                      onSaved: (value){},
+                      onSaved: (value){TextController3.text = value!;},
                         controller: TextController3,
                         heading: 'Password',
                         hintText: 'Your Password',

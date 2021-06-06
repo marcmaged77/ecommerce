@@ -84,10 +84,9 @@ class Body extends GetWidget<AuthViewModel>  {
           child: Column(children: <Widget>[
             SignCard(
 
-globalKey: _formKey ,
               //fUNCTIONS,
-              onSaved1: (value){controller.email= value!;},
-                onSaved2: (value){controller.password = value!;},
+              onSaved1: (value){TextController1.text= value!;},
+                onSaved2: (value){TextController2.text = value!;},
                 validator1: (val) => val!.isNotEmpty ? null : " please enter a email address",
                 validator2: (val)=> val!.length < 6 ? " please 6 or more character" : null,
                 controller1:TextController1 ,
@@ -100,7 +99,12 @@ globalKey: _formKey ,
 
                 buttonFunction: ()  async{
                   print('signin');
-                  controller.signIn(email: controller.email, password: controller.password);
+
+
+
+                    controller.signIn(email: TextController1.text, password: TextController2.text);
+
+
 
                 },
 
@@ -141,7 +145,7 @@ globalKey: _formKey ,
                 shape: BoxShape.rectangle,
               ),
               child: ListTile(
-                onTap: () {
+                onTap: () async {
                   print('sign in facebook');
 
                   controller.facebookSignInMethod();

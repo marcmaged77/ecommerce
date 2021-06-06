@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:souq/view/HomeScreen/home_screen.dart';
 
 //gextController very good for memory leak
 
@@ -26,7 +27,7 @@ class AuthViewModel extends GetxController {
 
 
   //SIGN UP METHOD
-  Future signUp({ required String email, required String password}) async {
+  Future signUp({ required String email, required String password, }) async {
     try {
       await _auth.createUserWithEmailAndPassword(
         email: email,
@@ -43,6 +44,7 @@ class AuthViewModel extends GetxController {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       print(email);
+      Get.offAll(homeScreen(email: email,));
     } on FirebaseAuthException catch (e) {
       print( e.message);
       Get.snackbar("error", e.toString(), colorText: Colors.black, snackPosition: SnackPosition.TOP);
