@@ -184,6 +184,8 @@ class Body extends GetWidget<AuthViewModel>  {
                 ),
               ),
             ),
+
+            SizedBox(height: 30,)
           ]),
         ),
       ),

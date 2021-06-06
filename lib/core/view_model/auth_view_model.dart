@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +7,8 @@ import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:souq/view/HomeScreen/home_screen.dart';
+
+import 'package:http/http.dart' as http;
 
 //gextController very good for memory leak
 
@@ -44,7 +48,7 @@ class AuthViewModel extends GetxController {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       print(email);
-      Get.offAll(homeScreen(email: email,));
+      Get.offAll(homeScreen(email: email, name: null,));
     } on FirebaseAuthException catch (e) {
       print( e.message);
       Get.snackbar("error", e.toString(), colorText: Colors.black, snackPosition: SnackPosition.TOP);
@@ -94,15 +98,69 @@ class AuthViewModel extends GetxController {
 
 
 void facebookSignInMethod() async{
-  FacebookLoginResult result = await _facebookLogin.logInWithReadPermissions(['email']);
 
-final accessToken = result.accessToken.token;
-print(result.status);
-print("facebook username : ${FacebookAuthProvider.FACEBOOK_SIGN_IN_METHOD}");
-if(result.status == FacebookLoginStatus.loggedIn){
-  final faceCredential = FacebookAuthProvider.credential(accessToken);
-  await _auth.signInWithCredential(faceCredential);
-}
+
+
+  // final facebookLogin = FacebookLogin();
+final FacebookLoginResult result = await _facebookLogin.logInWithReadPermissions(['email']);
+
+
+  switch (result.status) {
+
+
+    case FacebookLoginStatus.loggedIn:
+      final graphResponse = await http.get(
+          Uri.parse(
+              'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email&access_token=${result.accessToken.token}'));
+      final profile = jsonDecode(graphResponse.body);
+
+
+
+  final FacebookAccessToken accessToken =  result.accessToken ;
+
+
+  email = profile['email'];
+  name = profile['first_name'];
+
+      Get.offAll(homeScreen(email: email, name: name,));
+
+
+  print('''loged in 
+      token: ${accessToken.token},
+      user id : ${accessToken.userId},
+      Expires: ${accessToken.expires},
+      Permissions : ${accessToken.permissions},
+      declined Permissions: ${accessToken.declinedPermissions}
+  
+      
+      
+      
+      ''');
+
+
+
+
+
+break;
+    case FacebookLoginStatus.cancelledByUser:
+print("login canceled by the user");
+
+
+
+break;
+    case FacebookLoginStatus.error:
+      print('something went wrong with the login process.\n ${result.errorMessage}');
+      break;
+  }
+//   FacebookLoginResult result = await _facebookLogin.logInWithReadPermissions(['email']);
+//
+// final accessToken = result.accessToken.token;
+// print(result.status);
+// print("facebook username : ${FacebookAuthProvider.FACEBOOK_SIGN_IN_METHOD}");
+// if(result.status == FacebookLoginStatus.loggedIn){
+//   final faceCredential = FacebookAuthProvider.credential(accessToken);
+//   await _auth.signInWithCredential(faceCredential);
+// }
 
 }
 
