@@ -43,8 +43,20 @@ class homeScreen extends StatelessWidget {
 
 
         appBar: AppBar(
+          backgroundColor: Colors.grey.shade50,
+          centerTitle: true,
           elevation: 0,
-toolbarHeight: height * 0.099,
+flexibleSpace:   Column(
+  children :[  Image.asset(
+  "assets/icons/shopify.png",
+  width: 120,
+
+),
+    textFormField()
+
+  ]
+),
+toolbarHeight: height * .150,
           // flexibleSpace:
 
           // Container(
