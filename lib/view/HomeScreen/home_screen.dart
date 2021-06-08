@@ -45,21 +45,20 @@ class homeScreen extends StatelessWidget {
         appBar: AppBar(
           elevation: 0,
 toolbarHeight: height * 0.099,
-          flexibleSpace:
+          // flexibleSpace:
 
-          Container(
-            color: Colors.grey.shade50,
-            child: Column(children: <Widget>[
-              SizedBox(height: height * 0.02,),
-             Image.asset(
-                "assets/icons/shopify.png",
-                width: 120,
-              ),
-              Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                  child:  textFormField()),
-            ]),
-          ),
+          // Container(
+          //   child: Column(children: <Widget>[
+          //     SizedBox(height: height * 0.02,),
+          //    Image.asset(
+          //       "assets/icons/shopify.png",
+          //       width: 120,
+          //     ),
+          //     Container(
+          //         margin: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+          //         child:  textFormField()),
+          //   ]),
+          // ),
 
 
         ),
