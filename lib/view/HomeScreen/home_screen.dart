@@ -175,7 +175,7 @@ class ListViewProducts extends StatelessWidget {
                     //you can set more BoxShadow() here
                   ],
                   color: Colors.white),
-              height: height * .34,
+              height: height * .356,
               width: width * .36,
               child: Column(
                 children:<Widget> [
