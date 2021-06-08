@@ -148,6 +148,7 @@ class ListViewProducts extends StatelessWidget {
     var height = size.height;
     var width = size.width;
     return Container(
+      height: height * 0.34,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: names.length,
@@ -169,8 +170,8 @@ class ListViewProducts extends StatelessWidget {
                     //you can set more BoxShadow() here
                   ],
                   color: Colors.white),
-              height: height * .4,
-              width: width * .4,
+              height: height * .36,
+              width: width * .36,
               child: Column(
                 children:<Widget> [
                   Container(
