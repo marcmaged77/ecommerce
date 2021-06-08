@@ -39,9 +39,13 @@ class homeScreen extends StatelessWidget {
     var height = size.height;
     var width = size.width;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+
+
         appBar: AppBar(
           elevation: 0,
-          toolbarHeight: 88, // Set this height
+          toolbarHeight: height *0.09, // Set this height
+
           flexibleSpace:
 
           Container(
