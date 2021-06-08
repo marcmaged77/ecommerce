@@ -129,7 +129,7 @@ class ListViewProducts extends StatelessWidget {
     var height = size.height;
     var width = size.width;
     return Container(
-      height: height * .47,
+      height: height * .45,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: names.length,
@@ -158,7 +158,7 @@ class ListViewProducts extends StatelessWidget {
                   Container(
                    child:   Image.asset('assets/homeview/product2.png')
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(height: height * 0.003,),
                   Container(
                     padding: EdgeInsets.only(left: 5),
                       alignment: Alignment.topLeft,
