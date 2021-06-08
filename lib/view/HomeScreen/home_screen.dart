@@ -47,7 +47,9 @@ class homeScreen extends StatelessWidget {
           centerTitle: true,
           elevation: 0,
 flexibleSpace:   Column(
-  children :[  Image.asset(
+  children :[
+    SizedBox(height: height * 0.009,),
+    Image.asset(
   "assets/icons/shopify.png",
   width: 120,
 
