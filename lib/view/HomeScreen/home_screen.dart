@@ -208,6 +208,8 @@ builder: (controller) =>
   print(index);
   
       },
+       selectedItemColor: Colors.black,
+       backgroundColor: Colors.grey.shade50,
   
   ),
 );
