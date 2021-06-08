@@ -158,7 +158,6 @@ class Body extends GetWidget<AuthViewModel>  {
                 ),
               ),
             ),
-FlatButton(onPressed: (){print("martin 3el2");}, child: Text("Push me")),
             SizedBox(height: 30,)
           ]),
         ),

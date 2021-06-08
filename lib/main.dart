@@ -10,9 +10,9 @@ import 'package:flutter/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setEnabledSystemUIOverlays([
-    SystemUiOverlay.bottom, //This line is used for showing the bottom bar
-  ]);
+  // SystemChrome.setEnabledSystemUIOverlays([
+  //   SystemUiOverlay.bottom, //This line is used for showing the bottom bar
+  // ]);
 
   // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
   //   statusBarColor: Colors.black,

@@ -92,13 +92,13 @@ class homeScreen extends StatelessWidget {
               textFormField(),
 
               SizedBox(
-                height: 30,
+                height: 50,
               ),
               Container(
                   alignment: Alignment.topLeft,
                   child: Text(
                     "Categories",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, fontFamily: 'first'),
                   )),
               SizedBox(
                 height: 30,
@@ -107,6 +107,9 @@ class homeScreen extends StatelessWidget {
 
               //listview
               ListViewCategories(names: names, ),
+              SizedBox(
+                height: 40,
+              ),
 
 
               Row(
@@ -120,6 +123,10 @@ class homeScreen extends StatelessWidget {
 
 
               ],),
+              SizedBox(
+                height: 30,
+
+              ),
 
 
               ListViewProducts(names: names),
@@ -301,7 +308,6 @@ class ListViewProducts extends StatelessWidget {
     );
   }
 }
-
 
 class ListViewCategories extends StatelessWidget {
    ListViewCategories({
