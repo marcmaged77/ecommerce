@@ -148,7 +148,6 @@ class ListViewProducts extends StatelessWidget {
     var height = size.height;
     var width = size.width;
     return Container(
-      height: height * 1,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: names.length,
