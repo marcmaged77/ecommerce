@@ -14,6 +14,10 @@ void main() async {
   //   SystemUiOverlay.bottom, //This line is used for showing the bottom bar
   // ]);
 
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.black,
+  ));
+
 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
