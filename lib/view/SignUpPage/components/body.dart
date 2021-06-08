@@ -55,7 +55,11 @@ class Body extends GetWidget<AuthViewModel>{
                   buttonFunction: () async {
                     print('sign up');
 
-                    controller.signUp(email: TextController2.text, password: TextController3.text);
+
+
+
+
+controller.signUp(name:TextController1.text , email: TextController2.text, password: TextController3.text);
                   },
 
                   firstRightPress: () {},

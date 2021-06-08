@@ -17,34 +17,8 @@ import '../../../constants.dart';
 
 
 class Body extends GetWidget<AuthViewModel>  {
-  final _formKey = GlobalKey<FormState>();
 
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-   // String? email ;
-   // String? password;
 
-  // Future signIn({required String email, required String password}) async {
-  //   try {
-  //     await _auth.signInWithEmailAndPassword(email: email, password: password);
-  //     print(email);
-  //   } on FirebaseAuthException catch (e) {
-  //     print( e.message);
-  //     Get.snackbar("error", e.toString(), colorText: Colors.black, snackPosition: SnackPosition.TOP);
-  //   }
-  // }
-
-  // void signInWithEmailAndPassword({ required String? email, required String? password}) async {
-  //   try {
-  //     await _auth.signInWithEmailAndPassword(email: email, password: password);
-  //   } catch (e) {
-  //     Get.snackbar(
-  //       'Error login account',
-  //       e.toString(),
-  //       colorText: Colors.black,
-  //       snackPosition: SnackPosition.BOTTOM,
-  //     );
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +76,7 @@ class Body extends GetWidget<AuthViewModel>  {
 
 
 
-                    controller.signIn(email: TextController1.text, password: TextController2.text);
+                    controller.signIn(email: TextController1.text , password: TextController2.text );
 
 
 
@@ -184,7 +158,7 @@ class Body extends GetWidget<AuthViewModel>  {
                 ),
               ),
             ),
-
+FlatButton(onPressed: (){print("martin 3el2");}, child: Text("Push me")),
             SizedBox(height: 30,)
           ]),
         ),

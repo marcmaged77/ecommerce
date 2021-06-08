@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:souq/core/services/firestore_user.dart';
+import 'package:souq/model/user_model.dart';
 import 'package:souq/view/HomeScreen/home_screen.dart';
 
 import 'package:http/http.dart' as http;
@@ -13,33 +15,73 @@ import 'package:http/http.dart' as http;
 //gextController very good for memory leak
 
 class AuthViewModel extends GetxController {
+
+
+
+
+
   //google instance
   GoogleSignIn _googleSignIn = GoogleSignIn();
 
   //facebook instance
-  // FacebookLogin _facebookLogin = FacebookLogin();
   static final FacebookLogin _facebookLogin = new FacebookLogin();
 
   //firebase instance
  static final FirebaseAuth _auth = FirebaseAuth.instance;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
   late String email, password, name;
 
 
-  late  String imageUrl;
+  late  String pic;
+
+
+
+
+
+
+
 
 
 
   //SIGN UP METHOD
-  Future signUp({ required String email, required String password, }) async {
+  Future signUp({ required String name, required String email, required String password, }) async {
     try {
-      await _auth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+      //      UserCredential result =
+      //       // User? user = result.user;
+      //       // user!.updateProfile(displayName: name);
+
+
+      await _auth.createUserWithEmailAndPassword(email: email, password: password).then((user) async {
+
+
+        UserModel userModel = UserModel(email: user.user!.email!, userId: user.user!.uid, name: name, pic: 'pic');
+
+        await FireStoreUser().addUserToFireStore(userModel);
+
+
+      });
+
+
+
       return null;
     } on FirebaseAuthException catch (e) {
-      return e.message;
+
+      print('THE ERROR : ${e.message}');
+
+      // return e.message;
     }
   }
 
@@ -64,36 +106,6 @@ class AuthViewModel extends GetxController {
 
 
 
-  // void signInEmail() async{
-  //
-  //   // try{
-  //   //  await  _auth.signInWithEmailAndPassword(email: email, password: password);
-  //   //  return null;
-  //   // }catch(e){
-  //   //   print(e);
-  //   //   Get.snackbar("error", e.toString(), colorText: Colors.black, snackPosition: SnackPosition.TOP);
-  //
-  //
-  //   try {
-  //     final user = await _auth.signInWithEmailAndPassword(
-  //         email: email, password: password);
-  //     if (user != null) {
-  //       print(email);
-  //     }
-  //
-  //
-  //
-  //   } catch (e) {
-  //     print(e);
-  //
-  //   }
-  //
-  //
-  //
-  //
-  // }
-
-
 
 
 
@@ -105,13 +117,16 @@ void facebookSignInMethod() async{
 final FacebookLoginResult result = await _facebookLogin.logInWithReadPermissions(['email']);
 
 
+
+
+
   switch (result.status) {
 
 
     case FacebookLoginStatus.loggedIn:
       final graphResponse = await http.get(
           Uri.parse(
-              'https://graph.facebook.com/v2.12/me?fields=name,first_name,last_name,email&access_token=${result.accessToken.token}'));
+              'https://graph.facebook.com/v2.12/me?fields=name,picture.width(800).height(800),first_name,last_name,email&access_token=${result.accessToken.token}'));
       final profile = jsonDecode(graphResponse.body);
 
 
@@ -121,11 +136,20 @@ final FacebookLoginResult result = await _facebookLogin.logInWithReadPermissions
 
   email = profile['email'];
   name = profile['first_name'];
+  pic = profile['picture']["data"]['url'];
 
-      Get.offAll(homeScreen(email: email, name: name,));
 
 
-  print('''loged in 
+
+      //
+      UserModel userModel = UserModel(email:email, userId: result.accessToken.userId, name: name, pic : pic );
+
+      await FireStoreUser().addUserToFireStore(userModel);
+
+      Get.offAll(homeScreen(email: email, name: name, pic: pic,));
+
+
+  print('''logged in 
       token: ${accessToken.token},
       user id : ${accessToken.userId},
       Expires: ${accessToken.expires},
@@ -185,7 +209,14 @@ break;
       idToken: googleSignInAuthentication.idToken,
     );
 
+
+
     final UserCredential authResult = await _auth.signInWithCredential(credential);
+
+
+
+
+
     final User? user = authResult.user;
 
     if (user != null) {
@@ -198,7 +229,13 @@ break;
 
       name = user.displayName!;
       email = user.email!;
-      imageUrl = user.photoURL!;
+      pic = user.photoURL!;
+
+      UserModel userModel = UserModel(email:email, userId: user.uid, name: name, pic: pic  );
+
+      await FireStoreUser().addUserToFireStore(userModel);
+
+
 
       final User? currentUser = _auth.currentUser;
       assert(user.uid == currentUser!.uid);
@@ -224,7 +261,26 @@ break;
     print("User Signed Out from google");
   }
 
+void saveUser(UserCredential user) async{
 
+
+
+
+    UserModel userModel = UserModel(email: user.user!.email!, userId: user.user!.uid,
+
+
+        name: name,
+
+
+        pic: pic  == null ? pic : '');
+
+    await FireStoreUser().addUserToFireStore(userModel);
+
+
+
+
+
+}
 
 
 

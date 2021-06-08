@@ -1,38 +1,130 @@
 import 'package:flutter/material.dart';
-
+import 'package:souq/components/customTextField.dart';
 
 class homeScreen extends StatelessWidget {
-
-
+  final List<String> names = <String>[
+    'Men',
+    'Women',
+    'Devices',
+    'Gadgets',
+    'Gaming',
+    's',
+    's',
+    "s",
+  ];
 
   late String email;
   late String? name;
+  late String? pic;
 
-  homeScreen ({
+  final TextController1 = TextEditingController();
 
-   Key? key,
+  homeScreen({
+    Key? key,
     required this.email,
-     this.name,
-
-
-  })
-     : super(key: key);
+    this.name,
+    this.pic,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      
-      body: Container(
-        child: Column(
+    Size size = MediaQuery.of(context).size;
 
-          mainAxisAlignment: MainAxisAlignment.center,
+    var height = size.height;
+    var width = size.width;
+    return Scaffold(
+      body: Container(
+        padding: EdgeInsets.only(top: size.height * 0.060, left: 20, right: 10),
+        child: Column(
           children: <Widget>[
-            Text(email),
-            name != null ?  Text(name!) : Container()
-            // Text(name)
+
+
+
+
+            //textfield
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.grey.shade300,
+              ),
+              child: TextFormField(
+                decoration: InputDecoration(
+                    border: InputBorder.none,
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: Colors.black,
+                    )),
+              ),
+            ),
+
+
+            SizedBox(
+              height: 30,
+            ),
+            Container(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  "Categories",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                )),
+            SizedBox(
+              height: 30,
+            ),
+
+
+            //listview
+            Container(
+              height: 100,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemCount: names.length,
+                itemBuilder: (context, index) {
+                  return Column(children: <Widget>[
+                    Container(
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.3),
+                              //color of shadow
+                              spreadRadius: 1,
+                              //spread radius
+                              offset:
+                                  Offset(0, 01), // changes position of shadow
+                              //first paramerter of offset is left-right
+                              //second parameter is top to down
+                            ),
+                            //you can set more BoxShadow() here
+                          ],
+                          borderRadius: BorderRadius.circular(55),
+                          color: Colors.white),
+                      height: 60,
+                      width: 60,
+                      child: Image.asset('assets/homeview/Icon_Mens Shoe.png'),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(names[index])
+                  ]);
+                },
+                separatorBuilder: (context, index) => SizedBox(
+                  width: 20,
+                ),
+              ),
+            ),
             
-            
-            
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+              Text('Best Selling', style: TextStyle( fontSize: 20, fontWeight: FontWeight.w600)),
+                   FlatButton(
+                       onPressed: (){print('see all');},
+                       child: Text('See All', style: TextStyle( fontSize: 17))),
+
+
+
+            ],)
           ],
         ),
       ),

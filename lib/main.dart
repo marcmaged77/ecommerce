@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:souq/core/helper/binding.dart';
+import 'package:souq/view/HomeScreen/home_screen.dart';
 import 'package:souq/view/LoginPage/loginScreen.dart';
 import 'package:flutter/services.dart';
 
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
       ),
       home:Scaffold(
 
-        body: LoginScreen(),
+        body: homeScreen(),
       ),
     );
   }

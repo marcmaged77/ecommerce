@@ -37,6 +37,8 @@ class orDivider extends StatelessWidget {
               color:                Colors.black,
 
             ),
+
+
           ),
         ],
       ),
