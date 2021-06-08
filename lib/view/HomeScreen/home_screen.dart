@@ -42,20 +42,7 @@ class homeScreen extends StatelessWidget {
 
 
             //textfield
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.grey.shade300,
-              ),
-              child: TextFormField(
-                decoration: InputDecoration(
-                    border: InputBorder.none,
-                    prefixIcon: Icon(
-                      Icons.search,
-                      color: Colors.black,
-                    )),
-              ),
-            ),
+            textFormField(),
 
 
             SizedBox(
@@ -73,45 +60,7 @@ class homeScreen extends StatelessWidget {
 
 
             //listview
-            Container(
-              height: 100,
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemCount: names.length,
-                itemBuilder: (context, index) {
-                  return Column(children: <Widget>[
-                    Container(
-                      decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.3),
-                              //color of shadow
-                              spreadRadius: 1,
-                              //spread radius
-                              offset:
-                                  Offset(0, 01), // changes position of shadow
-                              //first paramerter of offset is left-right
-                              //second parameter is top to down
-                            ),
-                            //you can set more BoxShadow() here
-                          ],
-                          borderRadius: BorderRadius.circular(55),
-                          color: Colors.white),
-                      height: 60,
-                      width: 60,
-                      child: Image.asset('assets/homeview/Icon_Mens Shoe.png'),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(names[index])
-                  ]);
-                },
-                separatorBuilder: (context, index) => SizedBox(
-                  width: 20,
-                ),
-              ),
-            ),
+            ListViewCategories(names: names),
             
 
             Row(
@@ -127,6 +76,135 @@ class homeScreen extends StatelessWidget {
             ],)
           ],
         ),
+      ),
+    );
+  }
+}
+
+
+
+class ListViewProducts extends StatelessWidget {
+  const ListViewProducts({
+    Key? key,
+    required this.names,
+  }) : super(key: key);
+
+  final List<String> names;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 100,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        itemCount: names.length,
+        itemBuilder: (context, index) {
+          return Column(children: <Widget>[
+            Container(
+              decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      //color of shadow
+                      spreadRadius: 1,
+                      //spread radius
+                      offset:
+                      Offset(0, 01), // changes position of shadow
+                      //first paramerter of offset is left-right
+                      //second parameter is top to down
+                    ),
+                    //you can set more BoxShadow() here
+                  ],
+                  borderRadius: BorderRadius.circular(55),
+                  color: Colors.white),
+              height: 60,
+              width: 60,
+              child: Image.asset('assets/homeview/Icon_Mens Shoe.png'),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(names[index])
+          ]);
+        },
+        separatorBuilder: (context, index) => SizedBox(
+          width: 20,
+        ),
+      ),
+    );
+  }
+}
+class ListViewCategories extends StatelessWidget {
+  const ListViewCategories({
+    Key? key,
+    required this.names,
+  }) : super(key: key);
+
+  final List<String> names;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 100,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        itemCount: names.length,
+        itemBuilder: (context, index) {
+          return Column(children: <Widget>[
+            Container(
+              decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.1),
+                      //color of shadow
+                      spreadRadius: 0.1,
+                      //spread radius
+                      offset:
+                          Offset(0, 001), // changes position of shadow
+                      //first paramerter of offset is left-right
+                      //second parameter is top to down
+                    ),
+                    //you can set more BoxShadow() here
+                  ],
+                  borderRadius: BorderRadius.circular(55),
+                  color: Colors.white),
+              height: 60,
+              width: 60,
+              child: Image.asset('assets/homeview/Icon_Mens Shoe.png'),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(names[index])
+          ]);
+        },
+        separatorBuilder: (context, index) => SizedBox(
+          width: 20,
+        ),
+      ),
+    );
+  }
+}
+
+class textFormField extends StatelessWidget {
+  const textFormField({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: Colors.grey.shade300,
+      ),
+      child: TextFormField(
+        decoration: InputDecoration(
+            border: InputBorder.none,
+            prefixIcon: Icon(
+              Icons.search,
+              color: Colors.black,
+            )),
       ),
     );
   }
