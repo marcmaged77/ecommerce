@@ -1,7 +1,9 @@
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:souq/components/customTextField.dart';
 import 'package:souq/constants.dart';
+import 'package:souq/core/view_model/home_view_model.dart';
 
 class homeScreen extends StatelessWidget {
   final List<String> names = <String>[
@@ -131,37 +133,83 @@ class homeScreen extends StatelessWidget {
 
   bottomNavigationBar() {
 
-return BottomNavigationBar(
+return GetBuilder<HomeViewModel>(
+  init: HomeViewModel(),
+builder: (controller) =>
+     BottomNavigationBar(
+  
+  
+  
+  
+  
+    items: [
+  
+    BottomNavigationBarItem(
+  
+      // activeIcon:Text("Explore") ,
+  
+  
+  
+        label: '',
+  
+        icon: Padding(
+          padding: EdgeInsets.only(top: 10),
 
+          child: Image.asset('assets/homeview/Explore.png',fit: BoxFit.contain,
 
-  items: [
-  BottomNavigationBarItem(
-    // activeIcon:Text("Explore") ,
+    width: 35,),
+        )),
+  
+  
+  
+    BottomNavigationBarItem(
+  
+       activeIcon:Text("Cart") ,
+  
+  
+  
+    label: '',
+  
+  
+  
+        icon: Padding(
+          padding: EdgeInsets.only(top: 10),
 
-      label: '',
-      icon: Image.asset('assets/homeview/Explore.png',fit: BoxFit.contain,
-  width: 35,)),
+          child: Image.asset('assets/homeview/Icon_Cart.png',fit: BoxFit.contain,
 
-  BottomNavigationBarItem(
-     activeIcon:Text("Cart") ,
+      width: 20,),
+        )),
+  
+  
+  
+    BottomNavigationBarItem(
+  
+        activeIcon:Text("Account") ,
+  
+  
+  
+        label: '',
+  
+  
+  
+        icon: Padding(
+          padding: EdgeInsets.only(top: 10),
+          child: Image.asset('assets/homeview/Icon_User.png',fit: BoxFit.contain,
 
-  label: '',
-
-      icon: Image.asset('assets/homeview/Icon_Cart.png',fit: BoxFit.contain,
-    width: 20,)),
-
-  BottomNavigationBarItem(
-      activeIcon:Text("Account") ,
-
-      label: '',
-
-      icon: Image.asset('assets/homeview/Icon_User.png',fit: BoxFit.contain,
-        width: 20,)),
-    ],
-  currentIndex: 0,
-    onTap: (index){
-print(index);
-    },
+            width: 20,),
+        )),
+  
+      ],
+  
+    currentIndex: controller.NavigatorValue,
+  
+      onTap: (index){
+  controller.changeSelectedValue(index);
+  print(index);
+  
+      },
+  
+  ),
 );
 
   }
