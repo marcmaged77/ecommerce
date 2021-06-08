@@ -44,13 +44,13 @@ class homeScreen extends StatelessWidget {
 
         appBar: AppBar(
           elevation: 0,
-
+toolbarHeight: height * 0.099,
           flexibleSpace:
 
           Container(
-            padding: EdgeInsets.only(top: height * 0.001),
             color: Colors.grey.shade50,
             child: Column(children: <Widget>[
+              SizedBox(height: height * 0.02,),
              Image.asset(
                 "assets/icons/shopify.png",
                 width: 120,
