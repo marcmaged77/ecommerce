@@ -42,43 +42,43 @@ class homeScreen extends StatelessWidget {
       resizeToAvoidBottomInset: false,
 
 
-        appBar: AppBar(
-          backgroundColor: Colors.grey.shade50,
-          centerTitle: true,
-          elevation: 0,
-flexibleSpace:   Column(
-  children :[
-    SizedBox(height: height * 0.009,),
-    Image.asset(
-  "assets/icons/shopify.png",
-  width: 120,
-
-),
-    textFormField()
-
-  ]
-),
-toolbarHeight: height * .150,
-          // flexibleSpace:
-
-          // Container(
-          //   child: Column(children: <Widget>[
-          //     SizedBox(height: height * 0.02,),
-          //    Image.asset(
-          //       "assets/icons/shopify.png",
-          //       width: 120,
-          //     ),
-          //     Container(
-          //         margin: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-          //         child:  textFormField()),
-          //   ]),
-          // ),
-
-
-        ),
+//         appBar: AppBar(
+//           backgroundColor: Colors.grey.shade50,
+//           centerTitle: true,
+//           elevation: 0,
+// flexibleSpace:   Column(
+//   children :[
+//     SizedBox(height: height * 0.009,),
+//     Image.asset(
+//   "assets/icons/shopify.png",
+//   width: 120,
+//
+// ),
+//     textFormField()
+//
+//   ]
+// ),
+// toolbarHeight: height * .150,
+//           // flexibleSpace:
+//
+//           // Container(
+//           //   child: Column(children: <Widget>[
+//           //     SizedBox(height: height * 0.02,),
+//           //    Image.asset(
+//           //       "assets/icons/shopify.png",
+//           //       width: 120,
+//           //     ),
+//           //     Container(
+//           //         margin: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+//           //         child:  textFormField()),
+//           //   ]),
+//           // ),
+//
+//
+//         ),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.only( left: 20, right: 10),
+          padding: EdgeInsets.only( top : height * 0.06, left: 20, right: 10),
           child: Column(
             children: <Widget>[
 
@@ -86,7 +86,7 @@ toolbarHeight: height * .150,
 
 
               //textfield
-
+              textFormField(),
 
               SizedBox(
                 height: 30,
@@ -148,7 +148,8 @@ class ListViewProducts extends StatelessWidget {
     var height = size.height;
     var width = size.width;
     return Container(
-      height: height * 0.34,
+
+      height: 350,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: names.length,
