@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:souq/components/customTextField.dart';
 import 'package:souq/constants.dart';
@@ -39,7 +40,7 @@ class homeScreen extends StatelessWidget {
     var height = size.height;
     var width = size.width;
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      bottomNavigationBar: bottomNavigationBar(),
 
 
 //         appBar: AppBar(
@@ -127,6 +128,43 @@ class homeScreen extends StatelessWidget {
       ),
     );
   }
+
+  bottomNavigationBar() {
+
+return BottomNavigationBar(
+
+
+  items: [
+  BottomNavigationBarItem(
+    // activeIcon:Text("Explore") ,
+
+      label: '',
+      icon: Image.asset('assets/homeview/Explore.png',fit: BoxFit.contain,
+  width: 35,)),
+
+  BottomNavigationBarItem(
+     activeIcon:Text("Cart") ,
+
+  label: '',
+
+      icon: Image.asset('assets/homeview/Icon_Cart.png',fit: BoxFit.contain,
+    width: 20,)),
+
+  BottomNavigationBarItem(
+      activeIcon:Text("Account") ,
+
+      label: '',
+
+      icon: Image.asset('assets/homeview/Icon_User.png',fit: BoxFit.contain,
+        width: 20,)),
+    ],
+  currentIndex: 0,
+    onTap: (index){
+print(index);
+    },
+);
+
+  }
 }
 
 
@@ -180,7 +218,7 @@ class ListViewProducts extends StatelessWidget {
               child: Column(
                 children:<Widget> [
                   Container(
-                   child:   Image.asset('assets/homeview/product2.png')
+                   child:   Image.asset('assets/homeview/product2.png',width: 250,)
                   ),
                   SizedBox(height: height * 0.003,),
                   Container(
