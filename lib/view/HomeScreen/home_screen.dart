@@ -44,7 +44,6 @@ class homeScreen extends StatelessWidget {
 
         appBar: AppBar(
           elevation: 0,
-          toolbarHeight: height *0.2, // Set this height
 
           flexibleSpace:
 
