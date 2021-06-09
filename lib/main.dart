@@ -7,6 +7,7 @@ import 'package:souq/core/helper/binding.dart';
 import 'package:souq/view/HomeScreen/home_screen.dart';
 import 'package:souq/view/LoginPage/loginScreen.dart';
 import 'package:flutter/services.dart';
+import 'package:souq/view/control_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

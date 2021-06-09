@@ -27,7 +27,7 @@ class AuthViewModel extends GetxController {
   static final FacebookLogin _facebookLogin = new FacebookLogin();
 
   //firebase instance
- static final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
 
 
@@ -194,6 +194,15 @@ break;
 
     print("User Signed Out from facebook");
   }
+
+
+
+
+
+
+
+
+
 
 
   Future<String?> googleSignInMethod() async {
