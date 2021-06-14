@@ -11,14 +11,16 @@ import 'package:souq/model/user_model.dart';
 import 'package:souq/view/HomeScreen/home_screen.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:souq/view/control_view.dart';
+
 
 //gextController very good for memory leak
 
 class AuthViewModel extends GetxController {
 
 
-
-
+//spinner
+  bool showSpinner = false;
 
   //google instance
   GoogleSignIn _googleSignIn = GoogleSignIn();
@@ -33,20 +35,14 @@ class AuthViewModel extends GetxController {
 
 
 
-
-
-
-
-
-
-
-
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   late String email, password, name;
 
 
   late  String pic;
 
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -56,6 +52,8 @@ class AuthViewModel extends GetxController {
 
 
 
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //SIGN UP METHOD
   Future signUp({ required String name, required String email, required String password, }) async {
     try {
@@ -87,11 +85,19 @@ class AuthViewModel extends GetxController {
 
   // SIGN IN METHOD
   void signIn({required String email, required String password}) async {
+
+
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
+
       print(email);
-      Get.offAll(homeScreen(email: email, name: null,));
+      showSpinner = true;
+
+      Get.offAll(ControlView());
+      // Get.offAll(homeScreen(email: email, name: null,));
     } on FirebaseAuthException catch (e) {
+      showSpinner = false;
+
       print( e.message);
       Get.snackbar("error", e.toString(), colorText: Colors.black, snackPosition: SnackPosition.TOP);
     }
@@ -105,6 +111,7 @@ class AuthViewModel extends GetxController {
   }
 
 
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -168,12 +175,14 @@ final FacebookLoginResult result = await _facebookLogin.logInWithReadPermissions
 break;
     case FacebookLoginStatus.cancelledByUser:
 print("login canceled by the user");
-
+showSpinner = false;
 
 
 break;
     case FacebookLoginStatus.error:
       print('something went wrong with the login process.\n ${result.errorMessage}');
+      showSpinner = false;
+
       break;
   }
 //   FacebookLoginResult result = await _facebookLogin.logInWithReadPermissions(['email']);
@@ -240,6 +249,9 @@ break;
       email = user.email!;
       pic = user.photoURL!;
 
+      Get.offAll(ControlView());
+
+
       UserModel userModel = UserModel(email:email, userId: user.uid, name: name, pic: pic  );
 
       await FireStoreUser().addUserToFireStore(userModel);
@@ -259,10 +271,12 @@ break;
       print(email);
 
       return '$user';
+    }else {
+      showSpinner = false;
+      return null;
+    }
     }
 
-    return null;
-  }
 
   void signOutGoogle() async {
     await _googleSignIn.signOut();

@@ -22,7 +22,7 @@ class homeScreen extends StatelessWidget {
 
 
 
-  late String email;
+  late String? email;
   late String? name;
   late String? pic;
 
@@ -30,7 +30,7 @@ class homeScreen extends StatelessWidget {
 
   homeScreen({
     Key? key,
-    required this.email,
+     this.email,
     this.name,
     this.pic,
   }) : super(key: key);
@@ -42,7 +42,6 @@ class homeScreen extends StatelessWidget {
     var height = size.height;
     var width = size.width;
     return Scaffold(
-      bottomNavigationBar: bottomNavigationBar(),
 
 
 //         appBar: AppBar(
@@ -138,90 +137,7 @@ class homeScreen extends StatelessWidget {
     );
   }
 
-  bottomNavigationBar() {
 
-return GetBuilder<HomeViewModel>(
-  init: HomeViewModel(),
-builder: (controller) =>
-     BottomNavigationBar(
-  
-  
-  
-  
-  
-    items: [
-  
-    BottomNavigationBarItem(
-  
-      // activeIcon:Text("Explore") ,
-  
-  
-  
-        label: '',
-  
-        icon: Padding(
-          padding: EdgeInsets.only(top: 10),
-
-          child: Image.asset('assets/homeview/Explore.png',fit: BoxFit.contain,
-
-    width: 35,),
-        )),
-  
-  
-  
-    BottomNavigationBarItem(
-  
-       activeIcon:Text("Cart") ,
-  
-  
-  
-    label: '',
-  
-  
-  
-        icon: Padding(
-          padding: EdgeInsets.only(top: 10),
-
-          child: Image.asset('assets/homeview/Icon_Cart.png',fit: BoxFit.contain,
-
-      width: 20,),
-        )),
-  
-  
-  
-    BottomNavigationBarItem(
-  
-        activeIcon:Text("Account") ,
-  
-  
-  
-        label: '',
-  
-  
-  
-        icon: Padding(
-          padding: EdgeInsets.only(top: 10),
-          child: Image.asset('assets/homeview/Icon_User.png',fit: BoxFit.contain,
-
-            width: 20,),
-        )),
-  
-      ],
-  
-    currentIndex: controller.NavigatorValue,
-  
-      onTap: (index){
-  controller.changeSelectedValue(index);
-  print(index);
-  
-      },
-       selectedItemColor: Colors.black,
-       backgroundColor: Colors.grey.shade50,
-  
-  ),
-);
-
-  }
 }
 
 
