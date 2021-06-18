@@ -37,10 +37,10 @@ class AuthViewModel extends GetxController {
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  late String email, password, name;
+   String email, password, name;
 
 
-  late  String pic;
+    String pic;
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -55,7 +55,7 @@ class AuthViewModel extends GetxController {
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //SIGN UP METHOD
-  Future signUp({ required String name, required String email, required String password, }) async {
+  Future signUp({   name,   email,   password, }) async {
     try {
       //      UserCredential result =
       //       // User? user = result.user;
@@ -65,7 +65,7 @@ class AuthViewModel extends GetxController {
       await _auth.createUserWithEmailAndPassword(email: email, password: password).then((user) async {
 
 
-        UserModel userModel = UserModel(email: user.user!.email!, userId: user.user!.uid, name: name, pic: 'pic');
+        UserModel userModel = UserModel(email: user.user.email, userId: user.user.uid, name: name, pic: 'pic');
 
         await FireStoreUser().addUserToFireStore(userModel);
 
@@ -84,19 +84,17 @@ class AuthViewModel extends GetxController {
   }
 
   // SIGN IN METHOD
-  void signIn({required String email, required String password}) async {
+  void signIn({  email,   password}) async {
 
 
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
 
       print(email);
-      showSpinner = true;
 
       Get.offAll(ControlView());
       // Get.offAll(homeScreen(email: email, name: null,));
     } on FirebaseAuthException catch (e) {
-      showSpinner = false;
 
       print( e.message);
       Get.snackbar("error", e.toString(), colorText: Colors.black, snackPosition: SnackPosition.TOP);
@@ -155,6 +153,7 @@ final FacebookLoginResult result = await _facebookLogin.logInWithReadPermissions
 
       Get.offAll(homeScreen(email: email, name: name, pic: pic,));
 
+      // Get.offAll(homeScreen());
 
   print('''logged in 
       token: ${accessToken.token},
@@ -214,13 +213,13 @@ break;
 
 
 
-  Future<String?> googleSignInMethod() async {
+  Future<String> googleSignInMethod() async {
     await Firebase.initializeApp();
 
-    final GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
+    final GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
 
 
-    final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount!.authentication;
+    final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
 
     final AuthCredential credential = GoogleAuthProvider.credential(
       accessToken: googleSignInAuthentication.accessToken,
@@ -235,7 +234,7 @@ break;
 
 
 
-    final User? user = authResult.user;
+    final User user = authResult.user;
 
     if (user != null) {
       assert(!user.isAnonymous);
@@ -245,9 +244,9 @@ break;
       assert(user.displayName != null);
       assert(user.photoURL != null);
 
-      name = user.displayName!;
-      email = user.email!;
-      pic = user.photoURL!;
+      name = user.displayName;
+      email = user.email;
+      pic = user.photoURL;
 
       Get.offAll(ControlView());
 
@@ -258,8 +257,8 @@ break;
 
 
 
-      final User? currentUser = _auth.currentUser;
-      assert(user.uid == currentUser!.uid);
+      final User currentUser = _auth.currentUser;
+      assert(user.uid == currentUser.uid);
 
       // SharedPreferences prefs = await SharedPreferences.getInstance();
       // prefs.setString('email', email);
@@ -289,12 +288,13 @@ void saveUser(UserCredential user) async{
 
 
 
-    UserModel userModel = UserModel(email: user.user!.email!, userId: user.user!.uid,
+    UserModel userModel = UserModel(email: user.user.email, userId: user.user.uid,
 
 
         name: name,
 
 
+        // ignore: unnecessary_null_comparison
         pic: pic  == null ? pic : '');
 
     await FireStoreUser().addUserToFireStore(userModel);

@@ -5,7 +5,7 @@ class orDivider extends StatelessWidget {
   final double width;
 
   const orDivider({
-    required this.width,
+     this.width,
 
 
 

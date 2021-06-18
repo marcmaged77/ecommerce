@@ -1,9 +1,9 @@
 
 class UserModel {
-  late String userId, email, name;
-  late String? pic;
+   String userId, email, name;
+   String pic;
 
-  UserModel({required this.email, required this.userId,required this.name, required this.pic});
+  UserModel({ this.email,  this.userId, this.name,  this.pic});
 
 
 

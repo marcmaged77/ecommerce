@@ -8,23 +8,37 @@ import 'package:souq/view/HomeScreen/home_screen.dart';
 import 'package:souq/view/LoginPage/loginScreen.dart';
 import 'package:souq/view/profileView/profile_view.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
-
 import 'cartView/cart_view.dart';
 
 
 
 class ControlView extends StatefulWidget {
-  const ControlView({Key? key}) : super(key: key);
+  const ControlView({Key key}) : super(key: key);
   @override
   _ControlViewState createState() => _ControlViewState();
 }
 class _ControlViewState extends State<ControlView> {
 
   int _currentIndex = 0;
+  bool typing = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.grey.shade50,
+          elevation: 0.0,
+          title: typing ? TextBox() : Text("Title"),
+          leading: IconButton(
+            icon: Icon(typing ? Icons.done : Icons.search),
+            onPressed: () {
+              setState(() {
+                typing = !typing;
+              });
+            },
+            color: Colors.black,
+          ),
+        ),
       body:Container(
         child:
           (_currentIndex == 0 ? homeScreen() : (_currentIndex == 1 ? Cart() : profileView())),
@@ -49,7 +63,7 @@ class _ControlViewState extends State<ControlView> {
           ),
           CustomNavigationBarItem(
             icon: Padding(
-                padding: EdgeInsets.only(top: 5),
+                padding: EdgeInsets.only(top: 5,left: 3),
                 child: Image.asset('assets/homeview/Icon_Cart.png')),
             title: Text("Me"),
           ),
@@ -77,9 +91,34 @@ class _ControlViewState extends State<ControlView> {
       )
     );
   }
+
+
+
 }
 
+class TextBox extends StatelessWidget {
+  const TextBox({
+    Key key,
+  }) : super(key: key);
 
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: Colors.grey.shade300,
+      ),
+      child: TextFormField(
+        decoration: InputDecoration(
+            border: InputBorder.none,
+            prefixIcon: Icon(
+              Icons.search,
+              color: Colors.black,
+            )),
+      ),
+    );
+  }
+}
 
 
 

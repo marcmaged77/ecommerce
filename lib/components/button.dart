@@ -11,11 +11,11 @@ class button extends StatelessWidget {
 
 
   const button({
-    required this.text,
-    required this.press,
-    required this.color,
-    required this.widthP,
-    required this.textColor
+     this.text,
+     this.press,
+     this.color,
+     this.widthP,
+     this.textColor
   }) ;
 
 

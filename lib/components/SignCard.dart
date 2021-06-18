@@ -39,19 +39,19 @@ class SignCard extends GetWidget <AuthViewModel> {
   final bool secondTextContainerObscure;
 
   const SignCard(
-      {Key? key,
-        required this.onSaved1,
-        required this.onSaved2,
-        required this.validator1,
-        required this.validator2,
-        required this.controller1,
-        required this.controller2,
+      {Key key,
+         this.onSaved1,
+         this.onSaved2,
+         this.validator1,
+         this.validator2,
+         this.controller1,
+         this.controller2,
 
       this.firstLeft = "",
       this.firstRight = '',
       this.secondColumnText = '',
       this.forgotPassword = '',
-      required this.firstRightPress,
+       this.firstRightPress,
 
 //TEXTfields text and hint and function
       this.firstTextContainerheader = "",
@@ -62,8 +62,8 @@ class SignCard extends GetWidget <AuthViewModel> {
 
 //BUTTON TEXT AND FUNCTION
       this.buttonText = '',
-      required this.buttonFunction,
-      required this.child})
+       this.buttonFunction,
+       this.child})
       : super(key: key);
 
   @override

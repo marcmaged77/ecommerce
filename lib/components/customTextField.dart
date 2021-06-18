@@ -16,12 +16,12 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
 
   const CustomTextField({
-    required this.heading,
-    required this.hintText,
-    required this.obscure,
-    required this.onSaved,
-     required this.validator,
-    required this.controller
+     this.heading,
+     this.hintText,
+     this.obscure,
+     this.onSaved,
+      this.validator,
+     this.controller
 
   }) ;
 

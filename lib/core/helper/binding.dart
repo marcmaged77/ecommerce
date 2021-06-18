@@ -6,6 +6,7 @@
 import 'package:get/get.dart';
 import 'package:souq/core/view_model/auth_view_model.dart';
 import 'package:souq/core/view_model/home_view_model.dart';
+import 'package:souq/model/category_model.dart';
 
 class Binding extends Bindings{
 
@@ -16,7 +17,7 @@ class Binding extends Bindings{
     
     Get.lazyPut(() => AuthViewModel());
     Get.lazyPut(() => HomeViewModel());
-
+    Get.lazyPut(() => CategoryModel());
 
 
   }
