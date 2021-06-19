@@ -64,7 +64,7 @@ class DetailScreen extends StatelessWidget {
 
                     //price
                     Container(
-                      padding: EdgeInsets.only(top: 10,left: 10),
+                      padding: EdgeInsets.only(top: 9,left: 10),
                       child: Column(
                         children: [
                           Text('Price',style: TextStyle(fontSize: 15),),
