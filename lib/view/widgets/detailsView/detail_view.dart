@@ -21,7 +21,7 @@ class DetailScreen extends StatelessWidget {
       bottomNavigationBar:
 
           Container(
-            padding: EdgeInsets.only(left: 15,right: 15,bottom: 10),
+            padding: EdgeInsets.only(left: 15,right: 15,bottom: 15),
             child: Container(
               padding: EdgeInsets.only(
                 left: width * 0.060,
