@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:souq/components/customTextField.dart';
 import 'package:souq/constants.dart';
 import 'package:souq/core/view_model/home_view_model.dart';
+import 'package:souq/view/widgets/detailsView/detail_view.dart';
 
 
 // final categoryRef = FirebaseFirestore.instance.collection('Categories') ;
@@ -187,22 +188,22 @@ import 'package:souq/core/view_model/home_view_model.dart';
 
 
 
-class homeScreen extends  GetWidget<HomeViewModel> {
+class homeScreen extends  StatelessWidget {
 
 
 
-
-  final List<String> names = <String>[
-    'Men',
-    'Women',
-    'Devices',
-    'Gadgets',
-    'Gaming',
-    's',
-    's',
-    "s",
-  ];
-
+  //
+  // final List<String> names = <String>[
+  //   'Men',
+  //   'Women',
+  //   'Devices',
+  //   'Gadgets',
+  //   'Gaming',
+  //   's',
+  //   's',
+  //   "s",
+  // ];
+  //
 
 
 
@@ -228,6 +229,7 @@ class homeScreen extends  GetWidget<HomeViewModel> {
     var height = size.height;
     var width = size.width;
     return GetBuilder<HomeViewModel>(
+init: Get.find(),
       builder: (controller)=>
 
       controller.loading.value == true ? Center(child: CircularProgressIndicator()) :
@@ -263,7 +265,7 @@ class homeScreen extends  GetWidget<HomeViewModel> {
 
 
                   //listview
-                  ListViewCategories(names: names, ),
+                  ListViewCategories(),
                   SizedBox(
                     height: 40,
                   ),
@@ -286,7 +288,7 @@ class homeScreen extends  GetWidget<HomeViewModel> {
                   ),
 
 
-                  ListViewProducts(names: names),
+                  ListViewProducts(),
                   SizedBox(height: 1000,)
                 ],
               ),
@@ -305,10 +307,10 @@ class homeScreen extends  GetWidget<HomeViewModel> {
 class ListViewProducts extends StatelessWidget {
   const ListViewProducts({
     Key key,
-     this.names,
+
   }) : super(key: key);
 
-  final List<String> names;
+
 
 
   @override
@@ -349,59 +351,65 @@ class ListViewProducts extends StatelessWidget {
                     color: Colors.white),
                 height: height * .356,
                 width: width * .36,
-                child: Column(
-                  children:<Widget> [
+                child: FlatButton(
+                  onPressed: (){
+                    Get.to(DetailScreen(model: controller.productModel[index],));
 
-                    Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Container(
+                  },
+                  child: Column(
+                    children:<Widget> [
 
-                          child:  (controller.productModel[index].pic == null)
-                              ? Image.asset('assets/homeview/product2.png',width: 250,)
+                      Padding(
+                        padding: EdgeInsets.all(3),
+                        child: Container(
 
-                              : Image.network(controller.productModel[index].pic,fit: BoxFit.cover,height: 150,
-                            loadingBuilder:(BuildContext context, Widget child,ImageChunkEvent loadingProgress) {
-                              if (loadingProgress == null) return child;
-                              return Center(
-                                child: CircularProgressIndicator(
-                                  value: loadingProgress.expectedTotalBytes != null ?
-                                  loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes
-                                      : null,
-                                ),
-                              );
-                            },
-                          ),
+                            child:  (controller.productModel[index].pic == null)
+                                ? Image.asset('assets/homeview/product2.png',width: 250,)
+
+                                : Image.network(controller.productModel[index].pic,fit: BoxFit.cover,height: 170,
+                              loadingBuilder:(BuildContext context, Widget child,ImageChunkEvent loadingProgress) {
+                                if (loadingProgress == null) return child;
+                                return Center(
+                                  child: CircularProgressIndicator(
+                                    value: loadingProgress.expectedTotalBytes != null ?
+                                    loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes
+                                        : null,
+                                  ),
+                                );
+                              },
+                            ),
+                        ),
                       ),
-                    ),
 
-                    // Padding(
-                    //   padding: EdgeInsets.all(10),
-                    //   child: Container(
-                    //
-                    //    child:  (controller.productModel[index].pic == null)
-                    //        ? Image.asset('assets/homeview/product2.png',width: 250,)
-                    //        : Image.network(controller.productModel[index].pic,fit: BoxFit.cover,height: 150,)
-                    //   ),
-                    // ),
-                    SizedBox(height: height * 0.003,),
-                    Container(
-                      padding: EdgeInsets.only(left: 5),
-                        alignment: Alignment.topLeft,
-                        child: Text(controller.productModel[index].name,style: TextStyle(fontSize: 17),)),
-
-                    Container(
+                      // Padding(
+                      //   padding: EdgeInsets.all(10),
+                      //   child: Container(
+                      //
+                      //    child:  (controller.productModel[index].pic == null)
+                      //        ? Image.asset('assets/homeview/product2.png',width: 250,)
+                      //        : Image.network(controller.productModel[index].pic,fit: BoxFit.cover,height: 150,)
+                      //   ),
+                      // ),
+                      SizedBox(height: height * 0.003,),
+                      Container(
                         padding: EdgeInsets.only(left: 5),
-                        alignment: Alignment.topLeft,
-                        child: Text(controller.productModel[index].description,style: TextStyle(fontSize: 13, color: Colors.grey),)),
+                          alignment: Alignment.topLeft,
+                          child: Text(controller.productModel[index].name,style: TextStyle(fontSize: 17),)),
 
-                    Container(
-                        padding: EdgeInsets.only(left: 5, top: 10),
-                        alignment: Alignment.topLeft,
-                        child: Text('${controller.productModel[index].price} EGP',style: TextStyle(fontSize: 17, color: kPrimaryColor),)),
+                      Container(
+                          padding: EdgeInsets.only(left: 5),
+                          alignment: Alignment.topLeft,
+                          child: Text(controller.productModel[index].description,style: TextStyle(fontSize: 13, color: Colors.grey),)),
+
+                      Container(
+                          padding: EdgeInsets.only(left: 5, top: 10),
+                          alignment: Alignment.topLeft,
+                          child: Text('${controller.productModel[index].price} EGP',style: TextStyle(fontSize: 17, color: kPrimaryColor),)),
 
 
-                  ],
+                    ],
 
+                  ),
                 )
               ),
 
@@ -420,10 +428,10 @@ class ListViewCategories extends StatelessWidget {
    ListViewCategories({
     Key key,
 
-     this.names,
+
   }) : super(key: key);
 
-  final List<String> names;
+
 
   final List <String> imgs = <String> [
     'assets/homeview/Icon_Mens Shoe.png',

@@ -8,9 +8,11 @@ class button extends StatelessWidget {
   final Color color;
   final  Color textColor;
   final double widthP;
+  final double radius;
 
 
   const button({
+    this.radius,
      this.text,
      this.press,
      this.color,
@@ -31,7 +33,7 @@ class button extends StatelessWidget {
    return Container(
      width: width * widthP,
      child: ClipRRect(
-       borderRadius: BorderRadius.circular(1),
+       borderRadius: BorderRadius.circular(radius != null ?  radius : 1,),
        child: FlatButton(
          padding: EdgeInsets.symmetric(horizontal: 45,vertical :15),
          color: color,

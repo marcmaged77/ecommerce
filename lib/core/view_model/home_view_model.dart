@@ -35,8 +35,10 @@ ValueNotifier<bool> get loading => _loading;
   List<ProductModel> _productModel = [];
 
  HomeViewModel() {
-  getCategory();
-  getProduct();
+
+
+   getCategory();
+   getProduct();
 }
 
 getCategory() async {
@@ -50,6 +52,7 @@ getCategory() async {
 
       for (int i = 0; i < value.docs.length; i++) {
         _categoryModel.add(CategoryModel.fromJson(value.docs[i].data()));
+        _loading.value = false;
 
 
       }
@@ -59,13 +62,14 @@ getCategory() async {
       // update();
     update();
     });
-  _loading.value = false;
 
   }
 
 
 
  getProduct() async {
+   _loading.value = true;
+
    print('getting Products');
 
 
@@ -73,6 +77,7 @@ getCategory() async {
       for (int i = 0; i < value.docs.length; i++) {
         _productModel.add(ProductModel.fromJson(value.docs[i].data()));
         // print(_productModel.length);
+        _loading.value = false;
 
       }
 

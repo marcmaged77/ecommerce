@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:souq/core/view_model/auth_view_model.dart';
 import 'package:souq/core/view_model/navigation.dart';
-import 'package:souq/view/SignUpPage/sign_up.dart';
+import 'package:souq/view/Auth/SignUpPage/sign_up.dart';
 
 import '../constants.dart';
 import 'button.dart';
@@ -76,6 +76,7 @@ class SignCard extends GetWidget <AuthViewModel> {
     return Container(
       decoration: BoxDecoration(
         boxShadow: [
+
           BoxShadow(
             color: Colors.grey.withOpacity(0.1), //color of shadow
             spreadRadius: 1, //spread radius

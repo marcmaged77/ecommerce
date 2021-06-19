@@ -3,7 +3,6 @@ import 'package:souq/constants.dart';
 
 class orDivider extends StatelessWidget {
   final double width;
-
   const orDivider({
      this.width,
 

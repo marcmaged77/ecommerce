@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:souq/view/SignUpPage/sign_up.dart';
+import 'package:souq/view/Auth/SignUpPage/sign_up.dart';
 
 
 

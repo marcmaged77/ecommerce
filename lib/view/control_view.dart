@@ -5,7 +5,7 @@ import 'package:souq/constants.dart';
 import 'package:souq/core/view_model/auth_view_model.dart';
 import 'package:souq/core/view_model/home_view_model.dart';
 import 'package:souq/view/HomeScreen/home_screen.dart';
-import 'package:souq/view/LoginPage/loginScreen.dart';
+import 'package:souq/view/Auth/LoginPage/loginScreen.dart';
 import 'package:souq/view/profileView/profile_view.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'cartView/cart_view.dart';
