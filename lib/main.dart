@@ -7,7 +7,12 @@ import 'package:souq/core/helper/binding.dart';
 import 'package:souq/view/HomeScreen/home_screen.dart';
 import 'package:souq/view/Auth/LoginPage/loginScreen.dart';
 import 'package:flutter/services.dart';
+import 'package:souq/view/Splash/splash_screen.dart';
 import 'package:souq/view/control_view.dart';
+import 'package:souq/view/onboarding/welcome_screen.dart';
+import 'package:souq/view/widgets/alertLocation/alert_location.dart';
+import 'package:splashscreen/splashscreen.dart';
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,10 +31,17 @@ void main() async {
   runApp(MyApp());
 }
 
+
+
+
 class MyApp extends StatelessWidget {
+
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
+
     return GetMaterialApp(
       initialBinding: Binding(),
       debugShowCheckedModeBanner: false,
@@ -40,10 +52,33 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home:LoginScreen()
+      home:
+
+
+
+      // AnimatedSplashScreen(
+      //   splash: Splash(),
+      //   nextScreen: WelcomeScreen(),
+      //   splashTransition: SplashTransition.fadeTransition,
+      //
+      //
+      // )
+
+
+      SplashScreen( seconds: 2,
+        imageBackground:       AssetImage('assets/background/BG.png',),
+        image: Image.asset('assets/logo/Logo-img.png', ),
+        photoSize: 70,
+        useLoader: false,
+        title:           Text('WELCOME TO', style: TextStyle(letterSpacing: 5, fontSize: 14, color: Colors.white, fontFamily: 'thirdLight',fontWeight: FontWeight.bold ),),
+        subtitle:             Text('SHOPIFY', style: TextStyle(fontSize: 24, color: Colors.white, fontFamily: 'third'),),
+      navigateAfterSeconds: ControlView(),
+      ),
+
 
     );
   }
 }
 
 
+// SplashScreen( seconds: 2, imageBackground:       AssetImage('assets/background/BG.png',), image: Image.asset('assets/logo/Logo-img.png', ), photoSize: 70, useLoader: false, title:           Text('WELCOME TO', style: TextStyle(letterSpacing: 5, fontSize: 14, color: Colors.white, fontFamily: 'thirdLight',fontWeight: FontWeight.bold ),), subtitle:             Text('SHOPIFY', style: TextStyle(fontSize: 24, color: Colors.white, fontFamily: 'third'),), )

@@ -12,6 +12,10 @@ import 'package:souq/view/profileView/profile_view.dart';
 
 
 class HomeViewModel extends GetxController{
+
+
+
+
 ValueNotifier<bool> get loading => _loading;
   ValueNotifier<bool> _loading = ValueNotifier(false);
 
@@ -21,9 +25,12 @@ ValueNotifier<bool> get loading => _loading;
   FirebaseFirestore.instance.collection('Categories') ;
 
 
-  //instance of products collection of firestore
+
+
+
+//instance of products collection of firestore
   final  _ProductReference =
-  FirebaseFirestore.instance.collection('Products') ;
+  FirebaseFirestore.instance.collection('Products');
 
 //adding data to the category model
   List<CategoryModel> get categoryModel => _categoryModel;
@@ -40,6 +47,8 @@ ValueNotifier<bool> get loading => _loading;
    getCategory();
    getProduct();
 }
+
+
 
 getCategory() async {
 
@@ -76,7 +85,6 @@ getCategory() async {
    await  _ProductReference.get().then((QuerySnapshot value) {
       for (int i = 0; i < value.docs.length; i++) {
         _productModel.add(ProductModel.fromJson(value.docs[i].data()));
-        // print(_productModel.length);
         _loading.value = false;
 
       }
