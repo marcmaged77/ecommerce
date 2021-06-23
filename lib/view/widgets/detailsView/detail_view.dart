@@ -7,7 +7,7 @@ import 'package:souq/constants.dart';
 import 'package:souq/model/products_mode.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:souq/view/widgets/descriptionPage/description_page.dart';
-
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 class DetailScreen extends StatelessWidget {
   ProductModel model;
 
@@ -19,6 +19,8 @@ class DetailScreen extends StatelessWidget {
 
     var height = size.height;
     var width = size.width;
+
+
     return Scaffold(
       bottomNavigationBar: Container(
         padding: EdgeInsets.only(left: 17, right: 17, bottom: 18),
@@ -385,6 +387,102 @@ class DetailScreen extends StatelessWidget {
                         ]),
                     isThreeLine: true,
                     subtitle: Text('Wonderful product, perfect gift to buy'),
+                  ),
+
+                  SizedBox(height: 10,),
+
+
+                  button(
+                    widthP: 1,
+                    text: "write a review",
+                    press: (){
+                      print("milva");
+showCupertinoModalBottomSheet(context: context, builder: (context) =>
+Scaffold(
+  appBar: AppBar(
+    title: Text('Write a Review', style: TextStyle(color: Colors.black),),
+    backgroundColor: Colors.transparent,
+    centerTitle: true,
+    elevation: 0.0,
+    leading: BackButton(
+      color: Colors.black,
+    ),
+
+  ),
+  body:   Container(
+    padding: EdgeInsets.only(
+        left: width * 0.06,
+        right: width * 0.06,
+        top: height * 0.04
+
+    ),
+
+    child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+
+        children:[
+      ListTile(
+        leading: Container(
+          width: 50.0,
+          height: 50.0,
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: NetworkImage(model.pic)),
+              borderRadius: BorderRadius.all(Radius.circular(60))),
+        ),
+        title: Text(model.name),
+        subtitle: Text(model.description),
+
+
+
+      ),
+
+      SizedBox(height: 20,),
+
+      Container(
+
+          child: Text('Write Your Review')),
+
+          SizedBox(height: 20,),
+
+  SizedBox(
+      width: 400,
+      child: TextField(
+        decoration: InputDecoration(
+          hintText: 'placeholder text',
+          contentPadding:
+          EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+          border: OutlineInputBorder(),
+        ),
+      ),),
+
+          SizedBox(height: 20,),
+
+      button(
+        widthP: 2,
+        text: 'Submit Your Review',
+        press: (){},
+        color: kPrimaryColor,
+        textColor: Colors.white,
+        radius: 10,
+
+
+      )
+      
+      
+      // Text('milva')
+
+
+    ]),
+  ),
+)
+);
+                    },
+  color: kPrimaryColor,
+                    textColor: Colors.white,
+                    radius: 10,
+
                   ),
 
                   SizedBox(

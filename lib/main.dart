@@ -71,7 +71,7 @@ class MyApp extends StatelessWidget {
         photoSize: 70,
         useLoader: false,
         title:           Text('WELCOME TO', style: TextStyle(letterSpacing: 5, fontSize: 14, color: Colors.white, fontFamily: 'thirdLight',fontWeight: FontWeight.bold ),),
-        subtitle:             Text('SHOPIFY', style: TextStyle(fontSize: 24, color: Colors.white, fontFamily: 'third'),),
+        // subtitle:             Text('SHOPIFY', style: TextStyle(fontSize: 24, color: Colors.white, fontFamily: 'third'),),
       navigateAfterSeconds: ControlView(),
       ),
 

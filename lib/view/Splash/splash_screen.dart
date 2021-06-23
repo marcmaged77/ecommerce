@@ -25,11 +25,14 @@ class Splash extends StatelessWidget {
         top: height * 0.4,
         left: width * 0.3,
         child: Center(
-          child: Column(children:[
+
+          child: Column(
+
+              children:[
 
             Image.asset('assets/logo/Logo-img.png'),
-          SizedBox(height: 20,),
-          Text('WELCOME TO', style: TextStyle(letterSpacing: 5, fontSize: 14, color: Colors.white, fontFamily: 'third'),),
+            SizedBox(height: 20,),
+            Text('WELCOME TO', style: TextStyle(letterSpacing: 5, fontSize: 14, color: Colors.white, fontFamily: 'third'),),
             SizedBox(height: 5,),
 
             Text('SHOPIFY', style: TextStyle(fontSize: 24, color: Colors.white, fontFamily: 'third'),),
