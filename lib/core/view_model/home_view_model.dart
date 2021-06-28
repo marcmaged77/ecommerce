@@ -81,17 +81,30 @@ getCategory() async {
 
    print('getting Products');
 
+// DocumentSnapshot snapshot = await _ProductReference.doc('Products').get();
+// var data = snapshot.data() as Map;
+// var reviews = data['reviews'];
 
-   await  _ProductReference.get().then((QuerySnapshot value) {
+
+   await  _ProductReference.get().then((QuerySnapshot value)  async  {
+
+     // DocumentSnapshot snapshot = await _ProductReference.doc('Products').get();
+     // var data = snapshot.data() as Map;
+     // var reviews = data['reviews'];
+     //
+     // reviews.forEach((reviewsData)  {
+     //
+     //
+     //
+     // });
+
       for (int i = 0; i < value.docs.length; i++) {
         _productModel.add(ProductModel.fromJson(value.docs[i].data()));
         _loading.value = false;
-
       }
 
-
-
-      // print(value.docs[0].data());
+print('hellloooooo');
+      print(value.docs.length);
       update();
     });
   }

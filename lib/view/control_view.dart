@@ -13,18 +13,43 @@ import 'cartView/cart_view.dart';
 
 
 class ControlView extends StatefulWidget {
-  const ControlView({Key key}) : super(key: key);
+
+  String name;
+  String email;
+  String pic;
+
+
+  ControlView({Key key,
+  this.name,
+    this.email,
+    this.pic
+  }) : super(key: key);
   @override
   _ControlViewState createState() => _ControlViewState();
 }
 class _ControlViewState extends State<ControlView> {
+
+
+  @override
+  void initState() {
+    super.initState();
+    Get.put(HomeViewModel());
+
+  }
 
   int _currentIndex = 0;
   bool typing = false;
 
   @override
   Widget build(BuildContext context) {
+
+
+    Size size = MediaQuery.of(context).size;
+
+    var height = size.height;
+    var width = size.width;
     return Scaffold(
+        extendBody: true,
         appBar: AppBar(
           backgroundColor: Colors.grey.shade50,
           elevation: 0.0,
@@ -41,7 +66,7 @@ class _ControlViewState extends State<ControlView> {
         ),
       body:Container(
         child:
-          (_currentIndex == 0 ? homeScreen() : (_currentIndex == 1 ? Cart() : profileView())),
+          (_currentIndex == 0 ? homeScreen() : _currentIndex == 1 ? Cart() :  _currentIndex == 4 ? profileView(name: widget.name, email: widget.email, pic: widget.pic,) : Cart()),
 
 
 
@@ -49,45 +74,83 @@ class _ControlViewState extends State<ControlView> {
 
 
       ),
-      bottomNavigationBar:CustomNavigationBar(
-        iconSize: 30.0,
-        selectedColor: Color(0xff040307),
-        strokeColor: Color(0x30040307),
-        unSelectedColor: Color(0xffacacac),
-        backgroundColor: Colors.white,
-        items: [
-          CustomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text("Home"),
+      bottomNavigationBar:Container(
+        padding: EdgeInsets.only(left: 17, right: 17, bottom: 18, top: 10),
 
+        child: Container(
+          decoration:  BoxDecoration(boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(1),
+              //color of shadow
+              spreadRadius: 0.1,
+              //spread radius
+              offset: Offset(0.2, 0.2), // changes position of shadow
+              //first paramerter of offset is left-right
+              //second parameter is top to down
+            ),
+            //you can set more BoxShadow() here
+          ],
+              borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(20),
+                  // bottomLeft: Radius.circular(30),
+                  // bottomRight: Radius.circular(30),
+                  topLeft: Radius.circular(20)),
           ),
-          CustomNavigationBarItem(
-            icon: Padding(
-                padding: EdgeInsets.only(top: 5,left: 3),
-                child: Image.asset('assets/homeview/Icon_Cart.png')),
-            title: Text("Me"),
-          ),
-          CustomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
-            title: Text("Cart"),
-          ),
-          CustomNavigationBarItem(
-            icon: Icon(Icons.lightbulb_outline),
-            title: Text("Explore"),
-          ),
-          CustomNavigationBarItem(
-            icon: Icon(Icons.search),
-            title: Text("Search"),
-          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(20),
+              topLeft: Radius.circular(20),
+              // bottomLeft: Radius.circular(30),
+              // bottomRight: Radius.circular(30)
 
-        ],
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          print(index);
-          setState(() {
-            _currentIndex = index;
-          });
-        },
+            ),
+            child: CustomNavigationBar(
+
+              iconSize: 30.0,
+              selectedColor: kPrimaryColor,
+              strokeColor: Color(0x30040307),
+              unSelectedColor: Color(0xffacacac),
+              backgroundColor: Colors.white,
+              items: [
+                CustomNavigationBarItem(
+                  icon: Icon(Icons.home),
+                  title: Text("Home", style: TextStyle(fontFamily: 'second'),),
+
+                ),
+
+                CustomNavigationBarItem(
+                  icon: Icon(Icons.lightbulb_outline),
+                  title: Text("Explore", style: TextStyle(fontFamily: 'second'),),
+                ),
+
+                CustomNavigationBarItem(
+                  icon: Icon(Icons.shopping_cart),
+                  title: Text("Cart", style: TextStyle(fontFamily: 'second'),),
+                ),
+                CustomNavigationBarItem(
+                  icon: Icon(Icons.search),
+                  title: Text("Search", style: TextStyle(fontFamily: 'second'),),
+                ),
+
+                CustomNavigationBarItem(
+                  icon: Icon(Icons.account_circle),
+                  title: Text("Me", style: TextStyle(fontFamily: 'second'),),
+                ),
+
+              ],
+              currentIndex: _currentIndex,
+              onTap: (index) {
+                print(index);
+                setState(() {
+                  _currentIndex = index;
+                });
+
+              },
+
+            ),
+          ),
+        ),
+
       )
     );
   }
@@ -118,6 +181,7 @@ class TextBox extends StatelessWidget {
       ),
     );
   }
+
 }
 
 

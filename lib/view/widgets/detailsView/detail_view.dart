@@ -61,7 +61,7 @@ class DetailScreen extends StatelessWidget {
                       Text(
                         model.price,
                         style:
-                            TextStyle(color: Color(0xff0a81ab), fontSize: 20),
+                            TextStyle(color: kPrimaryColor, fontSize: 20),
                       ),
                     ],
                   ),
@@ -72,7 +72,7 @@ class DetailScreen extends StatelessWidget {
                     child: button(
                       radius: 6,
                       text: 'ADD',
-                      color: Color(0xff0a81ab),
+                      color: kPrimaryColor,
                       widthP: 0.3,
                       press: () {},
                       textColor: Colors.white,

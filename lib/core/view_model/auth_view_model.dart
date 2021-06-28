@@ -6,8 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_facebook_login/flutter_facebook_login.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:souq/components/dialog.dart';
 import 'package:souq/core/services/firestore_user.dart';
+import 'package:souq/core/view_model/home_view_model.dart';
+import 'package:souq/model/category_model.dart';
+import 'package:souq/model/products_mode.dart';
 import 'package:souq/model/user_model.dart';
+import 'package:souq/view/Auth/LoginPage/loginScreen.dart';
 import 'package:souq/view/HomeScreen/home_screen.dart';
 
 import 'package:http/http.dart' as http;
@@ -19,8 +24,34 @@ import 'package:souq/view/control_view.dart';
 class AuthViewModel extends GetxController {
 
 
+  void dependencies() {
+
+    Get.lazyPut(() => AuthViewModel());
+    Get.lazyPut(() => HomeViewModel());
+    Get.lazyPut(() => CategoryModel());
+    Get.lazyPut(() => ProductModel());
+
+  }
+
+  ValueNotifier<bool> get loading => _loading;
+  ValueNotifier<bool> _loading = ValueNotifier(false);
+
+  final GlobalKey<FormState> formKey = GlobalKey();
+
+  void saveForm() {
+    final bool isValid = formKey.currentState.validate();
+    if(isValid){
+      print('Got a valid input');
+      // And do something here
+    }else{
+      print("erorrrrrrrr");
+    }
+  }
+
+
+
+
 //spinner
-  bool showSpinner = false;
 
   //google instance
   GoogleSignIn _googleSignIn = GoogleSignIn();
@@ -87,25 +118,33 @@ class AuthViewModel extends GetxController {
   void signIn({  email,   password}) async {
 
 
+
     try {
-      await _auth.signInWithEmailAndPassword(email: email, password: password);
+_loading.value = true;
+    await _auth.signInWithEmailAndPassword(email: email, password: password);
 
-      print(email);
+    print(email);
+      update();
 
-      Get.offAll(ControlView());
+      Get.offAll(ControlView(name: name,pic: null, email: email,));
+_loading.value = false;
+
       // Get.offAll(homeScreen(email: email, name: null,));
     } on FirebaseAuthException catch (e) {
+      _loading.value = false;
 
       print( e.message);
       Get.snackbar("error", e.toString(), colorText: Colors.black, snackPosition: SnackPosition.TOP);
+      update();
+
     }
   }
 
   //SIGN OUT METHOD
   Future signOut() async {
     await _auth.signOut();
-
-    print('signout');
+Get.offAll(LoginScreen());
+print('signout');
   }
 
 
@@ -129,6 +168,8 @@ final FacebookLoginResult result = await _facebookLogin.logInWithReadPermissions
 
 
     case FacebookLoginStatus.loggedIn:
+
+
       final graphResponse = await http.get(
           Uri.parse(
               'https://graph.facebook.com/v2.12/me?fields=name,picture.width(800).height(800),first_name,last_name,email&access_token=${result.accessToken.token}'));
@@ -150,8 +191,10 @@ final FacebookLoginResult result = await _facebookLogin.logInWithReadPermissions
       UserModel userModel = UserModel(email:email, userId: result.accessToken.userId, name: name, pic : pic );
 
       await FireStoreUser().addUserToFireStore(userModel);
+Get.lazyPut(() => HomeViewModel());
 
-      Get.offAll(homeScreen(email: email, name: name, pic: pic,));
+
+      Get.offAll(ControlView(email: email, name: name, pic: pic,));
 
       // Get.offAll(homeScreen());
 
@@ -174,13 +217,14 @@ final FacebookLoginResult result = await _facebookLogin.logInWithReadPermissions
 break;
     case FacebookLoginStatus.cancelledByUser:
 print("login canceled by the user");
-showSpinner = false;
+
 
 
 break;
     case FacebookLoginStatus.error:
       print('something went wrong with the login process.\n ${result.errorMessage}');
-      showSpinner = false;
+
+
 
       break;
   }
@@ -193,7 +237,7 @@ break;
 //   final faceCredential = FacebookAuthProvider.credential(accessToken);
 //   await _auth.signInWithCredential(faceCredential);
 // }
-
+update();
 }
 
 
@@ -227,7 +271,6 @@ break;
     );
 
 
-
     final UserCredential authResult = await _auth.signInWithCredential(credential);
 
 
@@ -237,6 +280,9 @@ break;
     final User user = authResult.user;
 
     if (user != null) {
+      _loading.value = true;
+
+
       assert(!user.isAnonymous);
       assert(await user.getIdToken() != null);
 
@@ -248,7 +294,7 @@ break;
       email = user.email;
       pic = user.photoURL;
 
-      Get.offAll(ControlView());
+      Get.offAll(ControlView(name: name,email: email, pic: pic,));
 
 
       UserModel userModel = UserModel(email:email, userId: user.uid, name: name, pic: pic  );
@@ -268,12 +314,17 @@ break;
       print('signInWithGoogle succeeded: $user');
       print(name);
       print(email);
+      _loading.value = false;
 
       return '$user';
     }else {
-      showSpinner = false;
+      _loading.value = false;
+
       return null;
+
     }
+
+
     }
 
 
@@ -311,6 +362,10 @@ void saveUser(UserCredential user) async{
 // first function to run
   @override
   void onInit() {
+
+
+
+
     // TODO: implement onInit
     super.onInit();
   }
@@ -319,6 +374,17 @@ void saveUser(UserCredential user) async{
   // when the widget is ready on screen
   @override
   void onReady() {
+
+    // void dependencies() {
+    //
+    //   Get.lazyPut(() => AuthViewModel());
+    //   Get.lazyPut(() => HomeViewModel());
+    //   Get.lazyPut(() => CategoryModel());
+    //   Get.lazyPut(() => ProductModel());
+    //
+    // }
+    // dependencies();
+
     // TODO: implement onReady
     super.onReady();
   }
@@ -327,6 +393,19 @@ void saveUser(UserCredential user) async{
   // when the controller is deleted from memory
   @override
   void onClose() {
+
+
+    // void dependencies() {
+    //
+    //   Get.lazyPut(() => AuthViewModel());
+    //   Get.lazyPut(() => HomeViewModel());
+    //   Get.lazyPut(() => CategoryModel());
+    //   Get.lazyPut(() => ProductModel());
+    //
+    // }
+    // dependencies();
+
+
     // TODO: implement onClose
     super.onClose();
   }

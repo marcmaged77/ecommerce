@@ -21,20 +21,22 @@ class Body extends GetWidget<AuthViewModel> {
     final TextController3 = TextEditingController();
 
     return Scaffold(
-      extendBodyBehindAppBar: true,
       appBar: AppBar(
+
         elevation: 0,
-        backgroundColor: kPrimaryColor,
-        title: Image.asset(
-          "assets/icons/shopify.png",
-          width: 120,
+        backgroundColor: Colors.transparent,
+      leading: Padding(
+        padding: EdgeInsets.only(top: 20),
+        child: BackButton(
+          color: Colors.black,
         ),
-        centerTitle: true,
       ),
+      ),
+
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.only(
-            top: height * 0.17,
+            top: height * 0.03,
             left: width * 0.060,
             right: width * 0.060,
           ),
@@ -47,6 +49,7 @@ class Body extends GetWidget<AuthViewModel> {
                   onSaved2: (value) {
                     TextController2.text = value;
                   },
+                  labelText: "Enter Your Name",
                   validator1: (value) {},
                   validator2: (value) {},
                   controller1: TextController1,
