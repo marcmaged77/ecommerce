@@ -1,7 +1,7 @@
 import 'package:souq/model/reviews.dart';
 
 class ProductModel {
-  List<ProductModel> reviews;
+  List<ProductModel> reviews = <ProductModel>[];
 
   String pic, name, description, price;
       // review;
@@ -24,7 +24,11 @@ class ProductModel {
         name: map['name'],
         description: map['description'],
         price: map['price'],
-        reviews: List.from(map['reviews'])
+
+
+        // reviews: map['reviews'].map((item) {
+        //   return item.toMap();
+        // }).toList()
         // reviews: Reviews.fromJsonArray(map['reviews'])
 
     );

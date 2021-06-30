@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:souq/model/products_mode.dart';
+import 'package:souq/model/productModel.dart';
 
-class Reviews extends ProductModel {
+class Reviews extends Product {
+
+String name;
+String pic;
+String review;
+
   Reviews({
-    String name,
-    String pic,
-    String review,
-    int stars,
-    DateTime date,
-  }) ;
+    this.name,
+    this.pic,
+    this.review,
+  });
 
 
 
 
 
 
-  factory Reviews.fromJson(Map<dynamic, dynamic> json){
+  factory Reviews.fromJson(Map<String, dynamic> json){
     return Reviews(
       name: json['name'],
       pic: json['pic'],

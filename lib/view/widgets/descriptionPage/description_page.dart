@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:souq/model/productModel.dart';
 import 'package:souq/model/products_mode.dart';
 
 
 
 
 class Description extends StatelessWidget {
-  ProductModel model;
+  Product model;
 
    Description({Key key,
    this.model

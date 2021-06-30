@@ -71,7 +71,7 @@ class ListViewProducts extends StatelessWidget {
           height: MediaQuery.of(context).size.height,
           child: ListView.separated(
             scrollDirection: Axis.vertical,
-            itemCount: controller.productModel.length,
+            itemCount: controller.mostSelling.length,
             itemBuilder: (context, index) {
               return Row(
                 children:[ Column(children: <Widget>[
@@ -102,7 +102,7 @@ class ListViewProducts extends StatelessWidget {
                     //   },
                     child: InkWell(
                       onTap: (){
-                        Get.to(DetailScreen(model: controller.productModel[index],));
+                        Get.to(DetailScreen(model: controller.mostSelling[index],));
 
                       },
                       child: Stack(
@@ -112,10 +112,10 @@ class ListViewProducts extends StatelessWidget {
                             Container(
 
 
-                              child:  (controller.productModel[index].pic == null)
+                              child:  (controller.mostSelling[index].pic == null)
                                   ? Image.asset('assets/homeview/product2.png',width: 250,)
 
-                                  : Image.network(controller.productModel[index].pic,fit: BoxFit.cover,height: 170, width: 200,
+                                  : Image.network(controller.mostSelling[index].pic,fit: BoxFit.cover,height: 170, width: 200,
                                 loadingBuilder:(BuildContext context, Widget child,ImageChunkEvent loadingProgress) {
                                   if (loadingProgress == null) return child;
                                   return Center(
@@ -246,17 +246,17 @@ class ListViewProducts extends StatelessWidget {
                         Container(
                             padding: EdgeInsets.only(left: 5),
                             alignment: Alignment.topLeft,
-                            child: Text(controller.productModel[index].name,style: TextStyle(fontSize: 17),)),
+                            child: Text(controller.mostSelling[index].name,style: TextStyle(fontSize: 17),)),
 
                         Container(
                             padding: EdgeInsets.only(left: 5),
                             alignment: Alignment.topLeft,
-                            child: Text(controller.productModel[index].description,style: TextStyle(fontSize: 13, color: Colors.grey),)),
+                            child: Text(controller.mostSelling[index].description,style: TextStyle(fontSize: 13, color: Colors.grey),)),
 
                         Container(
                             padding: EdgeInsets.only(left: 5, top: 5),
                             alignment: Alignment.topLeft,
-                            child: Text('${controller.productModel[index].price} EGP',style: TextStyle(fontSize: 17, color: kPrimaryColor),)),
+                            child: Text('${controller.mostSelling[index].price} EGP',style: TextStyle(fontSize: 17, color: kPrimaryColor),)),
 
 
                       ],
