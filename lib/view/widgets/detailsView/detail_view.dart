@@ -1,15 +1,19 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:souq/components/button.dart';
 import 'package:souq/constants.dart';
+import 'package:souq/model/new/productModel.dart';
 import 'package:souq/model/products_mode.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'package:souq/view/widgets/descriptionPage/description_page.dart';
+
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+
 class DetailScreen extends StatelessWidget {
-  ProductModel model;
+  Product model;
 
   DetailScreen({Key key, this.model}) : super(key: key);
 
@@ -62,8 +66,7 @@ class DetailScreen extends StatelessWidget {
                       ),
                       Text(
                         model.price,
-                        style:
-                            TextStyle(color: Color(0xff0a81ab), fontSize: 20),
+                        style: TextStyle(color: kPrimaryColor, fontSize: 20),
                       ),
                     ],
                   ),
@@ -74,7 +77,7 @@ class DetailScreen extends StatelessWidget {
                     child: button(
                       radius: 6,
                       text: 'ADD',
-                      color: Color(0xff0a81ab),
+                      color: kPrimaryColor,
                       widthP: 0.3,
                       press: () {},
                       textColor: Colors.white,
@@ -270,123 +273,69 @@ class DetailScreen extends StatelessWidget {
                         fontSize: 26,
                         fontFamily: "second"),
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
+                  // SizedBox(
+                  //   height: 20,
+                  // ),
 
-                  ListTile(
-                    leading: Container(
-                      width: 50.0,
-                      height: 50.0,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage('assets/avatar/marc.jpg')),
-                          borderRadius: BorderRadius.all(Radius.circular(60))),
-                    ),
-                    title: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                        children: [
-
-                      Text(
-                        'Marc Maged',
-                        style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'second'),
-                      ),
-                      RatingBar(
-                        itemSize:15,
-                          itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
-                          itemCount: 5,
-                          initialRating: 3 ,ratingWidget:RatingWidget(
-
-                          full:Image.asset('assets/reviews/heart.png'),
-                        empty: Image.asset('assets/reviews/heart_border.png'),
-
-                      ) , onRatingUpdate: (rating){
-                        print('heart');
-                      })
-                    ]),
-                    isThreeLine: true,
-                    subtitle: Text('Wonderful product, perfect gift to buy'),
-                  ),
-                  ListTile(
-                    leading: Container(
-                      width: 50.0,
-                      height: 50.0,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage('assets/avatar/avatar1.png')),
-                          borderRadius: BorderRadius.all(Radius.circular(60))),
-                    ),
-                    title: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                        children: [
-
-                          Text(
-                            'Sam Smith',
-                            style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'second'),
+                  ListView.separated(
+                    shrinkWrap: true,
+                    itemCount: model.reviews.length,
+                    padding: EdgeInsets.all(10),
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      return Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                                color: Colors.grey.shade400, width: 1)),
+                        child: ListTile(
+                          leading: Container(
+                            width: 50.0,
+                            height: 50.0,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: model.reviews[index].pic != null ? NetworkImage(model.reviews[index].pic) : AssetImage('assets/avatar/unkown.jpg'),
+                                ),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(60))),
                           ),
-                          RatingBar(
-                              itemSize:15,
-                              itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
-                              itemCount: 5,
-                              initialRating: 3 ,ratingWidget:RatingWidget(
-
-                            full:Image.asset('assets/reviews/heart.png'),
-                            empty: Image.asset('assets/reviews/heart_border.png'),
-
-                          ) , onRatingUpdate: (rating){
-                            print('heart');
-                          })
-                        ]),
-                    isThreeLine: true,
-                    subtitle: Text('Wonderful product, perfect gift to buy'),
-                  ),
-                  ListTile(
-                    leading: Container(
-                      width: 50.0,
-                      height: 50.0,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage('assets/avatar/milva.jpg')),
-                          borderRadius: BorderRadius.all(Radius.circular(60))),
+                          title: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  model.reviews[index].name == null
+                                      ? 'User-90132'
+                                      : model.reviews[index].name,
+                                  style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'second'),
+                                ),
+                                RatingBar(
+                                    itemSize: 15,
+                                    itemPadding:
+                                        EdgeInsets.symmetric(horizontal: 2.0),
+                                    itemCount: 5,
+                                    initialRating: 3,
+                                    ratingWidget: RatingWidget(
+                                      full: Image.asset(
+                                          'assets/reviews/heart.png'),
+                                      empty: Image.asset(
+                                          'assets/reviews/heart_border.png'),
+                                    ),
+                                    onRatingUpdate: (rating) {
+                                      print('heart');
+                                    })
+                              ]),
+                          isThreeLine: true,
+                          subtitle: Text(model.reviews[index].review),
+                        ),
+                      );
+                    },
+                    separatorBuilder: (context, index) => SizedBox(
+                      height: 5,
                     ),
-                    title: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-                        children: [
-
-                          Text(
-                            'Milva Moussa',
-                            style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.bold,
-                                fontFamily: 'second'),
-                          ),
-                          RatingBar(
-                              itemSize:15,
-                              itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
-                              itemCount: 5,
-                              initialRating: 3 ,ratingWidget:RatingWidget(
-
-                            full:Image.asset('assets/reviews/heart.png'),
-                            empty: Image.asset('assets/reviews/heart_border.png'),
-
-                          ) , onRatingUpdate: (rating){
-                            print('heart');
-                          })
-                        ]),
-                    isThreeLine: true,
-                    subtitle: Text('Wonderful product, perfect gift to buy'),
                   ),
 
                   SizedBox(height: 10,),

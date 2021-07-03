@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:souq/core/helper/binding.dart';
+import 'package:souq/view/Auth/LoginPage/components/textfieldTest.dart';
 import 'package:souq/view/HomeScreen/home_screen.dart';
 import 'package:souq/view/Auth/LoginPage/loginScreen.dart';
 import 'package:flutter/services.dart';
@@ -52,7 +53,7 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home:
+      home: LoginScreen()
 
 
 
@@ -65,15 +66,20 @@ class MyApp extends StatelessWidget {
       // )
 
 
-      SplashScreen( seconds: 2,
-        imageBackground:       AssetImage('assets/background/BG.png',),
-        image: Image.asset('assets/logo/Logo-img.png', ),
-        photoSize: 70,
-        useLoader: false,
-        title:           Text('WELCOME TO', style: TextStyle(letterSpacing: 5, fontSize: 14, color: Colors.white, fontFamily: 'thirdLight',fontWeight: FontWeight.bold ),),
-        // subtitle:             Text('SHOPIFY', style: TextStyle(fontSize: 24, color: Colors.white, fontFamily: 'third'),),
-      navigateAfterSeconds: ControlView(),
-      ),
+      // SplashScreen( seconds: 2,
+      //   imageBackground:       AssetImage('assets/background/BG.png',),
+      //   image: Image.asset('assets/logo/Logo-img.png', ),
+      //   photoSize: 70,
+      //   useLoader: false,
+      //   title:           Text('WELCOME TO', style: TextStyle(letterSpacing: 5, fontSize: 14, color: Colors.white, fontFamily: 'thirdLight',fontWeight: FontWeight.bold ),),
+      //
+      //   // subtitle:             Text('SHOPIFY', style: TextStyle(fontSize: 24, color: Colors.white, fontFamily: 'third'),),
+      // navigateAfterSeconds: ControlView(),
+      //
+      //   // subtitle: Text('SHOPIFY', style: TextStyle(fontSize: 24, color: Colors.white, fontFamily: 'third'),),
+      // navigateAfterSeconds: LoginScreen(),
+      //
+      // ),
 
 
     );

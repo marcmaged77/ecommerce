@@ -13,6 +13,8 @@ class SignCard extends GetWidget <AuthViewModel> {
   final String firstRight;
   final String secondColumnText;
   final String buttonText;
+  final String labelText;
+  final String labelText2;
   final VoidCallback buttonFunction;
   final VoidCallback firstRightPress;
   final Widget child;
@@ -24,6 +26,7 @@ class SignCard extends GetWidget <AuthViewModel> {
       final FormFieldValidator<String> validator2;
   final TextEditingController controller1;
   final TextEditingController controller2;
+  final GlobalKey<FormState> formKey;
 
 
 
@@ -40,6 +43,9 @@ class SignCard extends GetWidget <AuthViewModel> {
 
   const SignCard(
       {Key key,
+        this.labelText,
+        this.labelText2,
+        this.formKey,
          this.onSaved1,
          this.onSaved2,
          this.validator1,
@@ -113,7 +119,7 @@ class SignCard extends GetWidget <AuthViewModel> {
               ],
             ),
             SizedBox(
-              height: height * 0.001,
+              height: height * 0.0001,
             ),
             Container(
                 alignment: Alignment.topLeft,
@@ -125,6 +131,8 @@ class SignCard extends GetWidget <AuthViewModel> {
               height: height * 0.06,
             ),
             CustomTextField(
+              labelText: labelText,
+              formKey: formKey ,
                 heading: firstTextContainerheader,
                 hintText: firstTextContainerHintText,
                 obscure: false,
@@ -136,6 +144,7 @@ class SignCard extends GetWidget <AuthViewModel> {
               height: height * 0.03,
             ),
             CustomTextField(
+              labelText: labelText2,
                 heading: secondTextContainerheader,
                 hintText: secondTextContainerHintText,
                 obscure: secondTextContainerObscure,
@@ -178,6 +187,7 @@ controller.signOutGoogle();
                 press: buttonFunction,
                 color: kPrimaryColor,
                 widthP: 0.8,
+                radius: 7,
                 textColor: Colors.white),
             SizedBox(
               height: height * 0.025,

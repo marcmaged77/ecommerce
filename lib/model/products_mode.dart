@@ -1,32 +1,56 @@
-class ProductModel{
+import 'package:souq/model/reviews.dart';
+
+class ProductModel {
+  List<ProductModel> reviews = <ProductModel>[];
+
+  String pic, name, description, price;
+      // review;
+  // DateTime date;
+  // int stars;
+
+  // reviews;
+
+  ProductModel({
+    this.pic,
+    this.name,
+    this.description,
+    this.price,
+    this.reviews,
+  });
+
+  factory ProductModel.fromJson(Map<dynamic, dynamic> map) {
+    return ProductModel(
+        pic: map['pic'],
+        name: map['name'],
+        description: map['description'],
+        price: map['price'],
 
 
-  String pic, name, description, price ,reviews;
+        // reviews: map['reviews'].map((item) {
+        //   return item.toMap();
+        // }).toList()
+        // reviews: Reviews.fromJsonArray(map['reviews'])
 
-  ProductModel({this.pic, this.name,this.description,this.price, this.reviews});
+    );
 
-
-  ProductModel.fromJson(Map<dynamic, dynamic> map) {
-    if (map == null) {
-      return;
-    }
-    reviews = map['reviews'];
-    pic = map['pic'];
-    name = map['name'];
-    description = map ['description'];
-    price = map ['price'];
+    // if (map == null) {
+    //   return;
+    // }
+    // pic = map['pic'];
+    // name = map['name'];
+    // description = map ['description'];
+    // price = map ['price'];
+    // reviews =
+    // // reviews = map ['reviews'];
   }
 
   toJson() {
     return {
-      'reviews' : reviews,
       'name': name,
       'pic': pic,
-      'description':description,
+      'description': description,
       'price': price,
-
-
+      // 'reviews': reviews,
     };
   }
-
 }
