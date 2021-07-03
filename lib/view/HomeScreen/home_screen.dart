@@ -1,50 +1,29 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:get/get.dart';
 import 'package:souq/components/button.dart';
 import 'package:souq/components/customTextField.dart';
 import 'package:souq/constants.dart';
 import 'package:souq/core/view_model/home_view_model.dart';
+import 'package:souq/model/new/sub/products.dart';
 import 'package:souq/view/HomeScreen/seeAll/see_all.dart';
 import 'package:souq/view/categories/category_view.dart';
 import 'package:souq/view/widgets/detailsView/detail_view.dart';
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-class homeScreen extends  StatelessWidget {
-
-
-
-
-
-
+class homeScreen extends StatelessWidget {
   //
-   String email;
-   String name;
-   String pic;
+  String email;
+  String name;
+  String pic;
 
   final TextController1 = TextEditingController();
 
   homeScreen({
     Key key,
-     this.email,
+    this.email,
     this.name,
     this.pic,
   }) : super(key: key);
@@ -56,133 +35,313 @@ class homeScreen extends  StatelessWidget {
     var height = size.height;
     var width = size.width;
     return GetBuilder<HomeViewModel>(
-init: Get.find(),
-      builder: (controller)=>
-
-      controller.loading.value == true ? Center(child: CircularProgressIndicator()) :
-
-      Scaffold(
-
-
-
-          body: SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.only( left: 20, right: 10),
-              child: Column(
-                children: <Widget>[
-
-
-
-
-                  //textfield
-                  // textFormField(),
-button(widthP: 4, color: Colors.black, text: 'fetch',radius: 2,textColor: Colors.white, press: (){
-  print(controller.categories.length);
-},),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Container(
-                      alignment: Alignment.topLeft,
-                      child: Text(
-                        "Categories",
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, fontFamily: 'first'),
-                      )),
-                  SizedBox(
-                    height: 30,
-                  ),
-
-
-                  //listview
-                  ListViewCategories(),
-                  SizedBox(
-                    height: 40,
-                  ),
-
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      init: Get.find(),
+      builder: (controller) => controller.loading.value == true
+          ? Center(child: CircularProgressIndicator())
+          : Scaffold(
+              body: SingleChildScrollView(
+                child: Container(
+                  padding: EdgeInsets.only(left: 20, right: 10),
+                  child: Column(
                     children: <Widget>[
-                    Text('Best Selling', style: TextStyle( fontSize: 20, fontWeight: FontWeight.w600)),
-                         FlatButton(
-                             onPressed: (){
-                               Get.to(All());
+                      //textfield
+                      // textFormField(),
+                      button(
+                        widthP: 4,
+                        color: Colors.black,
+                        text: 'fetch',
+                        radius: 2,
+                        textColor: Colors.white,
+                        press: () {
+                          print(controller
+                              .categories[1].subCategory[2].products[1].pic);
+                        },
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Container(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            "Categories",
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                fontFamily: 'first'),
+                          )),
+                      SizedBox(
+                        height: 30,
+                      ),
 
+                      //listview
+                      ListViewCategories(),
+                      SizedBox(
+                        height: 40,
+                      ),
 
-                               print('see all');},
-                             child: Text('See All', style: TextStyle( fontSize: 17))),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            'Best Selling',
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.w600),
+                          ),
+                          FlatButton(
+                              onPressed: () {
+                                Get.to(All());
 
+                                print('see all');
+                              },
+                              child: Text('See All',
+                                  style: TextStyle(fontSize: 17))),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
 
+                      ListViewProducts(),
+                      SizedBox(
+                        height: 20,
+                      ),
 
-                  ],),
-                  SizedBox(
-                    height: 20,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text('Top Branded',
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.w600)),
+                          FlatButton(
+                              onPressed: () {
+                                print('see all');
+                              },
+                              child: Text('See All',
+                                  style: TextStyle(fontSize: 17))),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
 
+                      Container(
+                        height: 400,
+                        child: Card(
+                          elevation: 1,
+                          margin: EdgeInsets.symmetric(horizontal: 20),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Swiper(
+                            itemCount: controller
+                                .categories[1].subCategory[2].products.length,
+                            autoplay: true,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                child: Stack(fit: StackFit.expand, children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(15),
+                                        image: DecorationImage(
+                                          colorFilter: new ColorFilter.mode(
+                                              Colors.black.withOpacity(0.8),
+                                              BlendMode.dstATop),
+                                          image: NetworkImage(controller
+                                              .categories[1]
+                                              .subCategory[2]
+                                              .products[index]
+                                              .pic),
+                                          fit: BoxFit.cover,
+                                        )),
+                                  ),
+                                  Positioned(
+                                    child: Image.asset(
+                                      'assets/logo/zara-logo.png',
+                                      height: 50,
+                                      width: 50,
+                                    ),
+                                  ),
+                                  Positioned(
+                                      right: 40,
+                                      bottom: 60,
+                                      child: Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(7),
+                                              color: Colors.black),
+                                          child: Container(
+                                              margin: EdgeInsets.fromLTRB(
+                                                  3, 0, 3, 0),
+                                              child: Text(
+                                                controller
+                                                        .categories[1]
+                                                        .subCategory[2]
+                                                        .products[index]
+                                                        .price +
+                                                    ' EGP',
+                                                style: TextStyle(
+                                                    fontFamily: 'second',
+                                                    fontSize: 23,
+                                                    color: Colors.white),
+                                              )))),
+                                  Positioned(
+                                      left: 10,
+                                      top: 60,
+                                      child: Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                              BorderRadius.circular(7),
+                                              color: Colors.black),
+                                          child: Container(
+                                              margin: EdgeInsets.fromLTRB(
+                                                  3, 3, 3, 3),
+                                              child: Text('Introducing',
+                                                style: TextStyle(
+                                                    fontFamily: 'third',
+                                                    fontSize: 17,
+                                                    color: Colors.white),
+                                              )))),
+
+                                ]),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        height: 400,
+                        child: Card(
+                          elevation: 1,
+                          margin: EdgeInsets.symmetric(horizontal: 20),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Swiper(
+                            itemCount: controller
+                                .categories[0].subCategory[2].products.length,
+                            autoplay: true,
+                            itemBuilder: (context, index)  {
+                              return Container(
+                                margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                child: Stack(fit: StackFit.expand, children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(15),
+                                        image: DecorationImage(
+                                          colorFilter: new ColorFilter.mode(
+                                              Colors.black.withOpacity(0.8),
+                                              BlendMode.dstATop),
+                                          image: NetworkImage(controller
+                                              .categories[0]
+                                              .subCategory[2]
+                                              .products[index]
+                                              .pic),
+                                          fit: BoxFit.cover,
+                                        )),
+                                  ),
+                                  Positioned(
+                                    child: Image.asset(
+                                      'assets/logo/Gap-logo.png',
+                                      height: 50,
+                                      width: 50,
+                                    ),
+                                  ),
+                                  Positioned(
+                                      right: 40,
+                                      bottom: 60,
+                                      child: Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                              BorderRadius.circular(7),
+                                              color: Colors.black),
+                                          child: Container(
+                                              margin: EdgeInsets.fromLTRB(
+                                                  3, 0, 3, 0),
+                                              child: Text(
+                                                controller
+                                                    .categories[1]
+                                                    .subCategory[2]
+                                                    .products[index]
+                                                    .price +
+                                                    ' EGP',
+                                                style: TextStyle(
+                                                    fontFamily: 'second',
+                                                    fontSize: 23,
+                                                    color: Colors.white),
+                                              )))),
+                                  Positioned(
+                                      left: 10,
+                                      top: 60,
+                                      child: Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                              BorderRadius.circular(7),
+                                              color: Colors.black),
+                                          child: Container(
+                                              margin: EdgeInsets.fromLTRB(
+                                                  3, 3, 3, 3),
+                                              child: Text('Introducing',
+                                                style: TextStyle(
+                                                    fontFamily: 'third',
+                                                    fontSize: 17,
+                                                    color: Colors.white),
+                                              )))),
+                                ]),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+
+                      SizedBox(
+                        height: 1000,
+                      )
+                    ],
                   ),
-
-
-                  ListViewProducts(),
-                  SizedBox(height: 1000,)
-                ],
+                ),
               ),
             ),
-          ),
-        ),
     );
-
   }
-
-
 }
-
-
 
 class ListViewProducts extends StatelessWidget {
   const ListViewProducts({
     Key key,
-
   }) : super(key: key);
-
-
-
 
   @override
   Widget build(BuildContext context) {
-
     Size size = MediaQuery.of(context).size;
 
     var height = size.height;
     var width = size.width;
-    return
-
-
-
-      GetBuilder<HomeViewModel>(
-        builder:(controller) => Container(
-        height: 305,
+    return GetBuilder<HomeViewModel>(
+      builder: (controller) => Container(
+        height: 320,
         child: ListView.separated(
           scrollDirection: Axis.horizontal,
           itemCount: controller.mostSelling.length,
           itemBuilder: (context, index) {
             return Column(children: <Widget>[
-              SizedBox(height: 5,),
+              SizedBox(
+                height: 5,
+              ),
               Container(
-
-                decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
-                        //color of shadow
-                        spreadRadius: 0.5,
-                        //spread radius
-                        offset:
-                        Offset(0, 1), // changes position of shadow
-                        //first paramerter of offset is left-right
-                        //second parameter is top to down
-                      ),
-                      //you can set more BoxShadow() here
-                    ],
-                    color: Colors.white),
+                decoration: BoxDecoration(boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    //color of shadow
+                    spreadRadius: 0.5,
+                    //spread radius
+                    offset: Offset(0, 1), // changes position of shadow
+                    //first paramerter of offset is left-right
+                    //second parameter is top to down
+                  ),
+                  //you can set more BoxShadow() here
+                ], color: Colors.white),
                 height: height * .256,
                 width: width * .36,
                 // child: FlatButton(
@@ -190,105 +349,112 @@ class ListViewProducts extends StatelessWidget {
                 //     Get.to(DetailScreen(model: controller.productModel[index],));
                 //
                 //   },
-                  child: InkWell(
-                    onTap: (){
-                      Get.to(DetailScreen(model: controller.mostSelling[index],));
-
-                    },
-                    child: Stack(
-                      fit: StackFit.passthrough,
-                      children:[
-
-                        Container(
-
-
-                          child:  (controller.mostSelling[index].pic == null)
-                              ? Image.asset('assets/homeview/product2.png',width: 250,)
-
-                              : Image.network(controller.mostSelling[index].pic,fit: BoxFit.cover,height: 170, width: 200,
-                            loadingBuilder:(BuildContext context, Widget child,ImageChunkEvent loadingProgress) {
-                              if (loadingProgress == null) return child;
-                              return Center(
-                                child: CircularProgressIndicator(
-                                  value: loadingProgress.expectedTotalBytes != null ?
-                                  loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes
-                                      : null,
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                 ] ),
-                  ),
+                child: InkWell(
+                  onTap: () {
+                    Get.to(DetailScreen(
+                      model: controller.mostSelling[index],
+                    ));
+                  },
+                  child: Stack(fit: StackFit.passthrough, children: [
+                    Container(
+                      child: (controller.mostSelling[index].pic == null)
+                          ? Image.asset(
+                              'assets/homeview/product2.png',
+                              width: 250,
+                            )
+                          : Image.network(
+                              controller.mostSelling[index].pic,
+                              fit: BoxFit.cover,
+                              height: 170,
+                              width: 200,
+                              loadingBuilder: (BuildContext context,
+                                  Widget child,
+                                  ImageChunkEvent loadingProgress) {
+                                if (loadingProgress == null) return child;
+                                return Center(
+                                  child: CircularProgressIndicator(
+                                    value: loadingProgress.expectedTotalBytes !=
+                                            null
+                                        ? loadingProgress
+                                                .cumulativeBytesLoaded /
+                                            loadingProgress.expectedTotalBytes
+                                        : null,
+                                  ),
+                                );
+                              },
+                            ),
+                    ),
+                  ]),
                 ),
-              SizedBox(height: 10,),
-              Container(
-                decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
+              ),
+              SizedBox(
+                height: 3,
+              ),
+              Card(
+                shadowColor: Colors.grey.shade100,
+                elevation: 2,
+                child: Container(
+                  decoration: BoxDecoration(
+                  color: Colors.white),
+                  height: 95,
+                  width: width * .36,
+                  child: Container(
+                    margin: EdgeInsets.fromLTRB(0, 9, 0, 0),
+                    child: Stack(
+                      children: <Widget>[
+                        SizedBox(
+                          height: height * 0.003,
+                        ),
+                        Column(
+                          children:[ Container(
+                              padding: EdgeInsets.only(left: 5),
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                controller.mostSelling[index].name,
+                                style: TextStyle(fontSize: 17),
+                              )),
+                            Container(
+                                padding: EdgeInsets.only(left: 5),
+                                alignment: Alignment.topLeft,
+                                child: Text(
+                                  controller.mostSelling[index].description,
+                                  style: TextStyle(fontSize: 13, color: Colors.grey),
+                                )),
+                        ]),
 
-                        color: Colors.black.withOpacity(0.1),
-                        //color of shadow
-                        spreadRadius: 0.5,
-                        //spread radius
-                        offset:
-                        Offset(0, 0), // changes position of shadow
-                        //first paramerter of offset is left-right
-                        //second parameter is top to down
-                      ),
-                      //you can set more BoxShadow() here
-                    ],
-                    color: Colors.white),
-                height: 90,
-                width: width * .36,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children:<Widget> [
-
-                    SizedBox(height: height * 0.003,),
-                    Container(
-                        padding: EdgeInsets.only(left: 5),
-                        alignment: Alignment.topLeft,
-                        child: Text(controller.mostSelling[index].name,style: TextStyle(fontSize: 17),)),
-
-                    Container(
-                        padding: EdgeInsets.only(left: 5),
-                        alignment: Alignment.topLeft,
-                        child: Text(controller.mostSelling[index].description,style: TextStyle(fontSize: 13, color: Colors.grey),)),
-
-                    Container(
-                        padding: EdgeInsets.only(left: 5, top: 5),
-                        alignment: Alignment.topLeft,
-                        child: Text('${controller.mostSelling[index].price} EGP',style: TextStyle(fontSize: 17, color: kPrimaryColor),)),
-
-
-                  ],
-
+                        Positioned(
+                          bottom: 7,
+                          child: Container(
+                              padding: EdgeInsets.only(left: 5, top: 5),
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                '${controller.mostSelling[index].price} EGP',
+                                style: TextStyle(fontSize: 17, color: kPrimaryColor),
+                              )),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
               // ),
-
             ]);
           },
           separatorBuilder: (context, index) => SizedBox(
             width: 20,
           ),
         ),
-    ),
-      );
+      ),
+    );
   }
 }
 
 class ListViewCategories extends StatelessWidget {
-   ListViewCategories({
+  ListViewCategories({
     Key key,
-
-
   }) : super(key: key);
 
-
-
-  final List <String> imgs = <String> [
+  final List<String> imgs = <String>[
     'assets/homeview/Icon_Mens Shoe.png',
     'assets/homeview/women.png',
     'assets/homeview/Devices.png',
@@ -297,30 +463,24 @@ class ListViewCategories extends StatelessWidget {
     'assets/homeview/Icon_Gaming.png',
     'assets/homeview/Icon_Gaming.png',
     'assets/homeview/Icon_Gaming.png',
-
-
-
   ];
-
-
-
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeViewModel>(
-      builder:(controller) => Container(
+      builder: (controller) => Container(
         height: 100,
         child: ListView.separated(
           scrollDirection: Axis.horizontal,
           itemCount: controller.categories.length,
           itemBuilder: (context, index) {
-            return
-
-              Column(children: <Widget>[
+            return Column(children: <Widget>[
               InkWell(
-                onTap: (){
+                onTap: () {
                   print('categories');
-                  Get.to(CatView(model:controller.categories[index] ,));
+                  Get.to(CatView(
+                    model: controller.categories[index],
+                  ));
                 },
                 child: Container(
                   decoration: BoxDecoration(
@@ -330,8 +490,7 @@ class ListViewCategories extends StatelessWidget {
                           //color of shadow
                           spreadRadius: 0.1,
                           //spread radius
-                          offset:
-                              Offset(0, 001), // changes position of shadow
+                          offset: Offset(0, 001), // changes position of shadow
                           //first paramerter of offset is left-right
                           //second parameter is top to down
                         ),
@@ -343,7 +502,9 @@ class ListViewCategories extends StatelessWidget {
                   width: 60,
                   child: Padding(
                       padding: EdgeInsets.all(1),
-                      child:(controller.categories[index].pic == null) ? Image.asset(imgs[index]) : Image.network(controller.categories[index].pic) ) ,
+                      child: (controller.categories[index].pic == null)
+                          ? Image.asset(imgs[index])
+                          : Image.network(controller.categories[index].pic)),
                 ),
               ),
               SizedBox(

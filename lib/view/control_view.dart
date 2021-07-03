@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:souq/constants.dart';
 import 'package:souq/core/view_model/auth_view_model.dart';
 import 'package:souq/core/view_model/home_view_model.dart';
+import 'package:souq/view/Explore/explore_view.dart';
 import 'package:souq/view/HomeScreen/home_screen.dart';
 import 'package:souq/view/Auth/LoginPage/loginScreen.dart';
 import 'package:souq/view/profileView/profile_view.dart';
@@ -53,7 +54,7 @@ class _ControlViewState extends State<ControlView> {
         appBar: AppBar(
           backgroundColor: Colors.grey.shade50,
           elevation: 0.0,
-          title: typing ? TextBox() : Text("Title", style: TextStyle(color: Colors.black),),
+          title: _currentIndex == 1 ? Container() : typing ? TextBox() : Text("", style: TextStyle(color: Colors.white),),
           leading: IconButton(
             icon:
             Icon(typing ? Icons.done : Icons.search),
@@ -70,7 +71,7 @@ class _ControlViewState extends State<ControlView> {
 
 
 
-          (_currentIndex == 0 ? homeScreen() : _currentIndex == 1 ? Cart() :  _currentIndex == 4 ? profileView(name: widget.name, email: widget.email, pic: widget.pic,) : Cart()),
+          (_currentIndex == 0 ? homeScreen() : _currentIndex == 1 ? ExploreView() :  _currentIndex == 4 ? profileView(name: widget.name, email: widget.email, pic: widget.pic,) : Cart()),
 
 
 
