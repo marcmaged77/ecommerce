@@ -53,9 +53,10 @@ class _ControlViewState extends State<ControlView> {
         appBar: AppBar(
           backgroundColor: Colors.grey.shade50,
           elevation: 0.0,
-          title: typing ? TextBox() : Text("Title"),
+          title: typing ? TextBox() : Text("Title", style: TextStyle(color: Colors.black),),
           leading: IconButton(
-            icon: Icon(typing ? Icons.done : Icons.search),
+            icon:
+            Icon(typing ? Icons.done : Icons.search),
             onPressed: () {
               setState(() {
                 typing = !typing;
@@ -66,6 +67,9 @@ class _ControlViewState extends State<ControlView> {
         ),
       body:Container(
         child:
+
+
+
           (_currentIndex == 0 ? homeScreen() : _currentIndex == 1 ? Cart() :  _currentIndex == 4 ? profileView(name: widget.name, email: widget.email, pic: widget.pic,) : Cart()),
 
 
@@ -113,7 +117,7 @@ class _ControlViewState extends State<ControlView> {
               backgroundColor: Colors.white,
               items: [
                 CustomNavigationBarItem(
-                  icon: Icon(Icons.home),
+                  icon: Icon(Icons.cottage, size: 30,),
                   title: Text("Home", style: TextStyle(fontFamily: 'second'),),
 
                 ),

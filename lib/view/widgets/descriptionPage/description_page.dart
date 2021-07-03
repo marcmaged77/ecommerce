@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:souq/model/productModel.dart';
+import 'package:souq/model/new/productModel.dart';
 import 'package:souq/model/products_mode.dart';
 
 

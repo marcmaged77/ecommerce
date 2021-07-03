@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 
 import 'package:flutter/material.dart';
 import 'package:souq/model/category_model.dart';
-import 'package:souq/model/productModel.dart';
+import 'package:souq/model/new/categoryModel.dart';
+import 'package:souq/model/new/productModel.dart';
 import 'package:souq/model/products_mode.dart';
 import 'package:souq/view/HomeScreen/home_screen.dart';
 import 'package:souq/view/cartView/cart_view.dart';
@@ -11,41 +12,28 @@ import 'package:souq/view/profileView/profile_view.dart';
 
 class HomeViewModel extends GetxController {
 
-
-
+//////////////////////////////////////////////////// loading effect ////////////////////////////////////////////////////////////
   ValueNotifier<bool> get loading => _loading;
   ValueNotifier<bool> _loading = ValueNotifier(false);
+//////////////////////////////////////////////////// loading effect ////////////////////////////////////////////////////////////
 
+
+
+
+
+
+
+////////////////////////////////////////////////////////////Old////////////////////////////////////////////////////////
   //instance of categories collection of firestore
-  final _collectionReference =
-      FirebaseFirestore.instance.collection('Categories');
+  final _collectionReference = FirebaseFirestore.instance.collection('Categories');
 
 //instance of products collection of firestore
   final _ProductReference = FirebaseFirestore.instance.collection('Products');
 
-  List<Product> _mostSelling = [];
-  List<Product> get mostSelling => _mostSelling;
-  List<Product> getMostSelling() {
-    return _mostSelling;
-  }
 
-  Future<void> getMostSellingFirebase() async {
-    CollectionReference mostSelling =
-        FirebaseFirestore.instance.collection('Product');
 
-    DocumentSnapshot snapshot = await mostSelling.doc('mostSelling').get();
 
-//data is products
-    var data = snapshot.data() as Map;
-    var productsData = data['products'] as List<dynamic>;
-
-    productsData.forEach((proData) {
-      _mostSelling.add(Product.fromJson(proData));
-//// isa hateshta3'al
-    });
-  }
-
-//adding data to the category model
+  //adding data to the category model
   List<CategoryModel> get categoryModel => _categoryModel;
   List<CategoryModel> _categoryModel = [];
 
@@ -53,12 +41,8 @@ class HomeViewModel extends GetxController {
   List<ProductModel> get productModel => _productModel;
   List<ProductModel> _productModel = [];
 
-  HomeViewModel() {
-    getCategory();
-    // getProduct();
-    getMostSellingFirebase();
-    getMostSelling();
-  }
+
+
 
   getCategory() async {
     _loading.value = true;
@@ -107,4 +91,120 @@ class HomeViewModel extends GetxController {
       update();
     });
   }
+
+
+////////////////////////////////////////////////////////////Old////////////////////////////////////////////////////////
+
+  /////////////////////////////////////////////////////////////// new ///////////////////////////////////////////////////
+
+
+
+  //most selling
+  List<Product> _mostSelling = [];
+  List<Product> get mostSelling => _mostSelling;
+  List<Product> getMostSelling() {
+    return _mostSelling;
+  }
+
+getMostSellingFirebase() async {
+    CollectionReference ProductR =
+        FirebaseFirestore.instance.collection('Product');
+    DocumentSnapshot snapshot = await ProductR.doc('mostSelling').get();
+    DocumentSnapshot snapshot2 = await ProductR.doc('categories').get();
+
+//data is products
+    var data = snapshot.data() as Map;
+    var data2 = snapshot2.data() as Map;
+
+    var productsData = data['products'] as List<dynamic>;
+    var categoriesData = data2['categories'] as List<dynamic>;
+
+
+    productsData.forEach((proData) {
+      _mostSelling.add(Product.fromJson(proData));
+      update();
+
+//// isa hateshta3'al
+    });
+
+    categoriesData.forEach((proData) {
+      _categories.add(Category.fromJson(proData));
+      update();
+
+//// isa hateshta3'al
+    });
+  update();
+
+  }
+
+
+
+
+
+//categories
+  List<Category> _categories = [];
+  List<Category> get categories => _categories;
+
+  List<Category> getCategories (){
+    return _categories;
+  }
+
+//   Future<void> getCategoriesFireBase() async {
+//     CollectionReference mostSelling =
+//     FirebaseFirestore.instance.collection('Product');
+//
+//     DocumentSnapshot snapshot = await mostSelling.doc('categories').get();
+//
+// //data is products
+//     var data = snapshot.data() as Map;
+//     var productsData = data['categories'] as List<dynamic>;
+//
+//     productsData.forEach((proData) {
+//       _categories.add(Category.fromJson(proData));
+// //// isa hateshta3'al
+//     });
+//   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /////////////////////////////////// end step/////////////////////
+
+
+
+  HomeViewModel() {
+
+    ///////////////////// old ///////////////////////////
+    // getCategory();
+    // getProduct();
+
+
+
+
+    //////////////////////////////////////////////// new  ///////////////////////////////////////
+    getMostSellingFirebase();
+    getMostSelling();
+
+    getCategories();
+
+
+  }
+
+
 }

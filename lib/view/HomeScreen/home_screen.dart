@@ -8,6 +8,7 @@ import 'package:souq/components/customTextField.dart';
 import 'package:souq/constants.dart';
 import 'package:souq/core/view_model/home_view_model.dart';
 import 'package:souq/view/HomeScreen/seeAll/see_all.dart';
+import 'package:souq/view/categories/category_view.dart';
 import 'package:souq/view/widgets/detailsView/detail_view.dart';
 
 
@@ -76,7 +77,7 @@ init: Get.find(),
                   //textfield
                   // textFormField(),
 button(widthP: 4, color: Colors.black, text: 'fetch',radius: 2,textColor: Colors.white, press: (){
-  print(controller.mostSelling[0].reviews[0].pic);
+  print(controller.categories.length);
 },),
                   SizedBox(
                     height: 30,
@@ -217,63 +218,6 @@ class ListViewProducts extends StatelessWidget {
                             },
                           ),
                         ),
-
-                      //   Container(
-                      //     child: Column(
-                      //     children:<Widget> [
-                      //
-                      //       // Padding(
-                      //       //   padding: EdgeInsets.all(3),
-                      //       //   child: Container(
-                      //       //
-                      //       //       child:  (controller.productModel[index].pic == null)
-                      //       //           ? Image.asset('assets/homeview/product2.png',width: 250,)
-                      //       //
-                      //       //           : Image.network(controller.productModel[index].pic,fit: BoxFit.cover,height: 170,
-                      //       //         loadingBuilder:(BuildContext context, Widget child,ImageChunkEvent loadingProgress) {
-                      //       //           if (loadingProgress == null) return child;
-                      //       //           return Center(
-                      //       //             child: CircularProgressIndicator(
-                      //       //               value: loadingProgress.expectedTotalBytes != null ?
-                      //       //               loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes
-                      //       //                   : null,
-                      //       //             ),
-                      //       //           );
-                      //       //         },
-                      //       //       ),
-                      //       //   ),
-                      //       // ),
-                      //
-                      //       // Padding(
-                      //       //   padding: EdgeInsets.all(10),
-                      //       //   child: Container(
-                      //       //
-                      //       //    child:  (controller.productModel[index].pic == null)
-                      //       //        ? Image.asset('assets/homeview/product2.png',width: 250,)
-                      //       //        : Image.network(controller.productModel[index].pic,fit: BoxFit.cover,height: 150,)
-                      //       //   ),
-                      //       // ),
-                      //       SizedBox(height: height * 0.003,),
-                      //       Container(
-                      //         padding: EdgeInsets.only(left: 5),
-                      //           alignment: Alignment.topLeft,
-                      //           child: Text(controller.productModel[index].name,style: TextStyle(fontSize: 17),)),
-                      //
-                      //       Container(
-                      //           padding: EdgeInsets.only(left: 5),
-                      //           alignment: Alignment.topLeft,
-                      //           child: Text(controller.productModel[index].description,style: TextStyle(fontSize: 13, color: Colors.grey),)),
-                      //
-                      //       Container(
-                      //           padding: EdgeInsets.only(left: 5, top: 10),
-                      //           alignment: Alignment.topLeft,
-                      //           child: Text('${controller.productModel[index].price} EGP',style: TextStyle(fontSize: 17, color: kPrimaryColor),)),
-                      //
-                      //
-                      //     ],
-                      //
-                      // ),
-                      //   ),
                  ] ),
                   ),
                 ),
@@ -301,37 +245,6 @@ class ListViewProducts extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children:<Widget> [
 
-                    // Padding(
-                    //   padding: EdgeInsets.all(3),
-                    //   child: Container(
-                    //
-                    //       child:  (controller.productModel[index].pic == null)
-                    //           ? Image.asset('assets/homeview/product2.png',width: 250,)
-                    //
-                    //           : Image.network(controller.productModel[index].pic,fit: BoxFit.cover,height: 170,
-                    //         loadingBuilder:(BuildContext context, Widget child,ImageChunkEvent loadingProgress) {
-                    //           if (loadingProgress == null) return child;
-                    //           return Center(
-                    //             child: CircularProgressIndicator(
-                    //               value: loadingProgress.expectedTotalBytes != null ?
-                    //               loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes
-                    //                   : null,
-                    //             ),
-                    //           );
-                    //         },
-                    //       ),
-                    //   ),
-                    // ),
-
-                    // Padding(
-                    //   padding: EdgeInsets.all(10),
-                    //   child: Container(
-                    //
-                    //    child:  (controller.productModel[index].pic == null)
-                    //        ? Image.asset('assets/homeview/product2.png',width: 250,)
-                    //        : Image.network(controller.productModel[index].pic,fit: BoxFit.cover,height: 150,)
-                    //   ),
-                    // ),
                     SizedBox(height: height * 0.003,),
                     Container(
                         padding: EdgeInsets.only(left: 5),
@@ -399,13 +312,16 @@ class ListViewCategories extends StatelessWidget {
         height: 100,
         child: ListView.separated(
           scrollDirection: Axis.horizontal,
-          itemCount: controller.categoryModel.length,
+          itemCount: controller.categories.length,
           itemBuilder: (context, index) {
             return
 
               Column(children: <Widget>[
               InkWell(
-                onTap: (){},
+                onTap: (){
+                  print('categories');
+                  Get.to(CatView(model:controller.categories[index] ,));
+                },
                 child: Container(
                   decoration: BoxDecoration(
                       boxShadow: [
@@ -427,13 +343,13 @@ class ListViewCategories extends StatelessWidget {
                   width: 60,
                   child: Padding(
                       padding: EdgeInsets.all(1),
-                      child:(controller.categoryModel[index].pic == null) ? Image.asset(imgs[index]) : Image.network(controller.categoryModel[index].pic) ) ,
+                      child:(controller.categories[index].pic == null) ? Image.asset(imgs[index]) : Image.network(controller.categories[index].pic) ) ,
                 ),
               ),
               SizedBox(
                 height: 10,
               ),
-              Text(controller.categoryModel[index].name)
+              Text(controller.categories[index].name)
             ]);
           },
           separatorBuilder: (context, index) => SizedBox(
