@@ -19,27 +19,25 @@ class CatView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: height * 0.14,
+        toolbarHeight: height * 0.10,
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        title: Padding(
-          padding: EdgeInsets.only(top: height * 0.03),
-          child: Text(
-            model.name,
-            style: TextStyle(
-              color: Colors.black,
-              fontFamily: 'second',
-            ),
-          ),
-        ),
-        leading: Padding(
-          padding: EdgeInsets.only(top: height * 0.03),
-          child: BackButton(
+        title: Text(
+          model.name,
+          style: TextStyle(
             color: Colors.black,
+            fontFamily: 'second',
+            fontSize: 23
           ),
         ),
+        leading: BackButton(
+          color: Colors.black,
+        ),
+
+
       ),
+
       body: Container(
           padding: EdgeInsets.only(left: width * 0.06, right: width * 0.06),
           child: SingleChildScrollView(
