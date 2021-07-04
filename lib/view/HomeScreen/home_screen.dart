@@ -44,7 +44,6 @@ class homeScreen extends StatelessWidget {
                   padding: EdgeInsets.only(left: 20, right: 10),
                   child: Column(
                     children: <Widget>[
-
                       // button(
                       //   widthP: 4,
                       //   color: Colors.black,
@@ -189,18 +188,18 @@ class homeScreen extends StatelessWidget {
                                       child: Container(
                                           decoration: BoxDecoration(
                                               borderRadius:
-                                              BorderRadius.circular(7),
+                                                  BorderRadius.circular(7),
                                               color: Colors.black),
                                           child: Container(
                                               margin: EdgeInsets.fromLTRB(
                                                   3, 3, 3, 3),
-                                              child: Text('Introducing',
+                                              child: Text(
+                                                'Introducing',
                                                 style: TextStyle(
                                                     fontFamily: 'third',
                                                     fontSize: 17,
                                                     color: Colors.white),
                                               )))),
-
                                 ]),
                               );
                             },
@@ -221,7 +220,7 @@ class homeScreen extends StatelessWidget {
                             itemCount: controller
                                 .categories[0].subCategory[2].products.length,
                             autoplay: true,
-                            itemBuilder: (context, index)  {
+                            itemBuilder: (context, index) {
                               return Container(
                                 margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
                                 child: Stack(fit: StackFit.expand, children: [
@@ -253,17 +252,17 @@ class homeScreen extends StatelessWidget {
                                       child: Container(
                                           decoration: BoxDecoration(
                                               borderRadius:
-                                              BorderRadius.circular(7),
+                                                  BorderRadius.circular(7),
                                               color: Colors.black),
                                           child: Container(
                                               margin: EdgeInsets.fromLTRB(
                                                   3, 0, 3, 0),
                                               child: Text(
                                                 controller
-                                                    .categories[1]
-                                                    .subCategory[2]
-                                                    .products[index]
-                                                    .price +
+                                                        .categories[1]
+                                                        .subCategory[2]
+                                                        .products[index]
+                                                        .price +
                                                     ' EGP',
                                                 style: TextStyle(
                                                     fontFamily: 'second',
@@ -276,12 +275,13 @@ class homeScreen extends StatelessWidget {
                                       child: Container(
                                           decoration: BoxDecoration(
                                               borderRadius:
-                                              BorderRadius.circular(7),
+                                                  BorderRadius.circular(7),
                                               color: Colors.black),
                                           child: Container(
                                               margin: EdgeInsets.fromLTRB(
                                                   3, 3, 3, 3),
-                                              child: Text('Introducing',
+                                              child: Text(
+                                                'Introducing',
                                                 style: TextStyle(
                                                     fontFamily: 'third',
                                                     fontSize: 17,
@@ -319,7 +319,7 @@ class ListViewProducts extends StatelessWidget {
     var width = size.width;
     return GetBuilder<HomeViewModel>(
       builder: (controller) => Container(
-        height: 360,
+        height: 300,
         child: ListView.separated(
           scrollDirection: Axis.horizontal,
           itemCount: controller.mostSelling.length,
@@ -328,119 +328,188 @@ class ListViewProducts extends StatelessWidget {
               SizedBox(
                 height: 5,
               ),
-              Container(
-                decoration: BoxDecoration(boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    //color of shadow
-                    spreadRadius: 0.5,
-                    //spread radius
-                    offset: Offset(0, 1), // changes position of shadow
-                    //first paramerter of offset is left-right
-                    //second parameter is top to down
-                  ),
-                  //you can set more BoxShadow() here
-                ], color: Colors.white),
-                height: height * .256,
-                width: width * .36,
-                // child: FlatButton(
-                //   onPressed: (){
-                //     Get.to(DetailScreen(model: controller.productModel[index],));
-                //
-                //   },
+              Card(
+                shadowColor: Colors.grey.shade200,
+                elevation: 0.5,
+                margin: EdgeInsets.only(right: 10),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5)),
                 child: InkWell(
                   onTap: () {
                     Get.to(DetailScreen(
                       model: controller.mostSelling[index],
                     ));
                   },
-                  child: Stack(fit: StackFit.passthrough, children: [
-                    Container(
-                      child: (controller.mostSelling[index].pic == null)
-                          ? Image.asset(
-                              'assets/homeview/product2.png',
-                              width: 250,
-                            )
-                          : Image.network(
-                              controller.mostSelling[index].pic,
-                              fit: BoxFit.cover,
-                              height: 170,
-                              width: 200,
-                              loadingBuilder: (BuildContext context,
-                                  Widget child,
-                                  ImageChunkEvent loadingProgress) {
-                                if (loadingProgress == null) return child;
-                                return Center(
-                                  child: CircularProgressIndicator(
-                                    value: loadingProgress.expectedTotalBytes !=
-                                            null
-                                        ? loadingProgress
-                                                .cumulativeBytesLoaded /
-                                            loadingProgress.expectedTotalBytes
-                                        : null,
-                                  ),
-                                );
-                              },
-                            ),
-                    ),
-                  ]),
-                ),
-              ),
-              SizedBox(
-                height: 3,
-              ),
-              Card(
-                shadowColor: Colors.grey.shade100,
-                elevation: 2,
-                child: Container(
-                  decoration: BoxDecoration(
-                  color: Colors.white),
-                  height: 95,
-                  width: width * .36,
-                  child: Container(
-                    margin: EdgeInsets.fromLTRB(0, 9, 0, 0),
-                    child: Stack(
-                      children: <Widget>[
+                  child: SizedBox(
+                    height: 260,
+                    child: Column(
+                      children: [
+                        Container(
+                          width: 150,
+                          height: 170,
+                          alignment: Alignment.topRight,
+                          padding: EdgeInsets.only(top: 12, right: 12),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(3),
+                              image: DecorationImage(
+                                  image: NetworkImage(
+                                      controller.mostSelling[index].pic),
+                                  fit: BoxFit.cover)),
+                        ),
                         SizedBox(
-                          height: height * 0.003,
-                        ),
-                        Column(
-                          children:[ Container(
-                              padding: EdgeInsets.only(left: 5),
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                controller.mostSelling[index].name,
-                                style: TextStyle(fontSize: 17),
-                              )),
-                            Container(
-                                padding: EdgeInsets.only(left: 5),
-                                alignment: Alignment.topLeft,
-                                child: Text(
-                                  controller.mostSelling[index].description,
-                                  style: TextStyle(fontSize: 13, color: Colors.grey),
-                                )),
-                        ]),
-
-                        Positioned(
-                          bottom: 7,
-                          child: Container(
-                              padding: EdgeInsets.only(left: 5, top: 5),
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                '${controller.mostSelling[index].price} EGP',
-                                style: TextStyle(fontSize: 17, color: kPrimaryColor),
-                              )),
-                        ),
+                          width: 150,
+                          height: 90,
+                          child: Stack(
+                            children:[
+                              Column(children: [
+                                Container(
+                                    padding: EdgeInsets.only(top: 10,left: 5),
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      controller.mostSelling[index].name,
+                                      style: TextStyle(fontSize: 17),
+                                    )),
+                                Container(
+                                    padding: EdgeInsets.only(left: 5),
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      controller.mostSelling[index].description,
+                                      style: TextStyle(
+                                          fontSize: 13, color: Colors.grey),
+                                    )),
+                              ]),
+                              Positioned(
+                                bottom: 10,
+                                child: Container(
+                                    padding: EdgeInsets.only(left: 5, top: 5),
+                                    alignment: Alignment.topLeft,
+                                    child: Text(
+                                      '${controller.mostSelling[index].price} EGP',
+                                      style: TextStyle(
+                                          fontSize: 17, color: kPrimaryColor),
+                                    )),
+                              ),
+                          ]),
+                        )
                       ],
                     ),
                   ),
                 ),
               ),
+
+              // Container(
+              //   decoration: BoxDecoration(boxShadow: [
+              //     BoxShadow(
+              //       color: Colors.black.withOpacity(0.1),
+              //       //color of shadow
+              //       spreadRadius: 0.5,
+              //       //spread radius
+              //       offset: Offset(0, 1), // changes position of shadow
+              //       //first paramerter of offset is left-right
+              //       //second parameter is top to down
+              //     ),
+              //     //you can set more BoxShadow() here
+              //   ], color: Colors.white),
+              //   height: height * .256,
+              //   width: width * .36,
+              //   // child: FlatButton(
+              //   //   onPressed: (){
+              //   //     Get.to(DetailScreen(model: controller.productModel[index],));
+              //   //
+              //   //   },
+              //   child: InkWell(
+              //     onTap: () {
+              //       Get.to(DetailScreen(
+              //         model: controller.mostSelling[index],
+              //       ));
+              //     },
+              //     child: Stack(fit: StackFit.passthrough, children: [
+              //       Container(
+              //         child: (controller.mostSelling[index].pic == null)
+              //             ? Image.asset(
+              //                 'assets/homeview/product2.png',
+              //                 width: 250,
+              //               )
+              //             : Image.network(
+              //                 controller.mostSelling[index].pic,
+              //                 fit: BoxFit.cover,
+              //                 height: 170,
+              //                 width: 200,
+              //                 loadingBuilder: (BuildContext context,
+              //                     Widget child,
+              //                     ImageChunkEvent loadingProgress) {
+              //                   if (loadingProgress == null) return child;
+              //                   return Center(
+              //                     child: CircularProgressIndicator(
+              //                       value: loadingProgress.expectedTotalBytes !=
+              //                               null
+              //                           ? loadingProgress
+              //                                   .cumulativeBytesLoaded /
+              //                               loadingProgress.expectedTotalBytes
+              //                           : null,
+              //                     ),
+              //                   );
+              //                 },
+              //               ),
+              //       ),
+              //     ]),
+              //   ),
+              // ),
+              SizedBox(
+                height: 3,
+              ),
+              // Card(
+              //   shadowColor: Colors.grey.shade100,
+              //   elevation: 2,
+              //   child: Container(
+              //     decoration: BoxDecoration(
+              //     color: Colors.white),
+              //     height: 95,
+              //     width: width * .36,
+              //     child: Container(
+              //       margin: EdgeInsets.fromLTRB(0, 9, 0, 0),
+              //       child: Stack(
+              //         children: <Widget>[
+              //           SizedBox(
+              //             height: height * 0.003,
+              //           ),
+              //           Column(
+              //             children:[ Container(
+              //                 padding: EdgeInsets.only(left: 5),
+              //                 alignment: Alignment.topLeft,
+              //                 child: Text(
+              //                   controller.mostSelling[index].name,
+              //                   style: TextStyle(fontSize: 17),
+              //                 )),
+              //               Container(
+              //                   padding: EdgeInsets.only(left: 5),
+              //                   alignment: Alignment.topLeft,
+              //                   child: Text(
+              //                     controller.mostSelling[index].description,
+              //                     style: TextStyle(fontSize: 13, color: Colors.grey),
+              //                   )),
+              //           ]),
+              //
+              //           Positioned(
+              //             bottom: 7,
+              //             child: Container(
+              //                 padding: EdgeInsets.only(left: 5, top: 5),
+              //                 alignment: Alignment.topLeft,
+              //                 child: Text(
+              //                   '${controller.mostSelling[index].price} EGP',
+              //                   style: TextStyle(fontSize: 17, color: kPrimaryColor),
+              //                 )),
+              //           ),
+              //         ],
+              //       ),
+              //     ),
+              //   ),
+              // ),
               // ),
             ]);
           },
           separatorBuilder: (context, index) => SizedBox(
-            width: 20,
+            width: 17,
           ),
         ),
       ),
