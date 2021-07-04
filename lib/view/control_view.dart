@@ -108,13 +108,13 @@ class _ControlViewState extends State<ControlView> {
           BottomNavyBarItem(
             icon: Icon(Icons.apps),
             title: Text('Home'),
-            activeColor: kPrimaryColor,
+            activeColor: kPrimaryColor2,
               inactiveColor: Colors.black
           ),
           BottomNavyBarItem(
               icon: Icon(Icons.explore),
               title: Text('Explore'),
-              activeColor: kPrimaryColor,
+              activeColor: kPrimaryColor2,
             inactiveColor: Colors.black
 
           ),
@@ -122,19 +122,19 @@ class _ControlViewState extends State<ControlView> {
               icon: Icon(Icons.shopping_cart),
               title: Text('Cart'),
 
-              activeColor: kPrimaryColor,
+              activeColor: kPrimaryColor2,
               inactiveColor: Colors.black
           ),
           BottomNavyBarItem(
-              icon: Icon(Icons.settings),
-              title: Text('Settings'),
-              activeColor: kPrimaryColor,
+              icon: Icon(Icons.search),
+              title: Text('Search'),
+              activeColor: kPrimaryColor2,
               inactiveColor: Colors.black
           ),
           BottomNavyBarItem(
               icon: Icon(Icons.account_circle),
               title: Text('Account'),
-              activeColor: kPrimaryColor,
+              activeColor: kPrimaryColor2,
               inactiveColor: Colors.black
           ),
         ],
