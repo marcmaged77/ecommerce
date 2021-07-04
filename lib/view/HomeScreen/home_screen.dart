@@ -319,7 +319,8 @@ class ListViewProducts extends StatelessWidget {
     var width = size.width;
     return GetBuilder<HomeViewModel>(
       builder: (controller) => Container(
-        height: 300,
+        //background
+        height: 310,
         child: ListView.separated(
           scrollDirection: Axis.horizontal,
           itemCount: controller.mostSelling.length,
@@ -329,11 +330,10 @@ class ListViewProducts extends StatelessWidget {
                 height: 5,
               ),
               Card(
-                shadowColor: Colors.grey.shade200,
-                elevation: 0.5,
+                elevation: 1,
                 margin: EdgeInsets.only(right: 10),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5)),
+                    borderRadius: BorderRadius.circular(2)),
                 child: InkWell(
                   onTap: () {
                     Get.to(DetailScreen(
@@ -341,12 +341,14 @@ class ListViewProducts extends StatelessWidget {
                     ));
                   },
                   child: SizedBox(
-                    height: 260,
+                    //card nafso abyad
+                    height: 290,
                     child: Column(
                       children: [
                         Container(
+                          //image
                           width: 150,
-                          height: 170,
+                          height: 190,
                           alignment: Alignment.topRight,
                           padding: EdgeInsets.only(top: 12, right: 12),
                           decoration: BoxDecoration(
@@ -379,7 +381,7 @@ class ListViewProducts extends StatelessWidget {
                                     )),
                               ]),
                               Positioned(
-                                bottom: 10,
+                                bottom: 5,
                                 child: Container(
                                     padding: EdgeInsets.only(left: 5, top: 5),
                                     alignment: Alignment.topLeft,
