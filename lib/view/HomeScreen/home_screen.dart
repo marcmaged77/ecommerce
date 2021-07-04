@@ -333,7 +333,7 @@ class ListViewProducts extends StatelessWidget {
                 elevation: 1,
                 margin: EdgeInsets.only(right: 10),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(2)),
+                    borderRadius: BorderRadius.circular(7)),
                 child: InkWell(
                   onTap: () {
                     Get.to(DetailScreen(
@@ -342,7 +342,7 @@ class ListViewProducts extends StatelessWidget {
                   },
                   child: SizedBox(
                     //card nafso abyad
-                    height: 290,
+                    height: 300,
                     child: Column(
                       children: [
                         Container(
@@ -360,7 +360,7 @@ class ListViewProducts extends StatelessWidget {
                         ),
                         SizedBox(
                           width: 150,
-                          height: 90,
+                          height: 110,
                           child: Stack(
                             children:[
                               Column(children: [

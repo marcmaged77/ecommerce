@@ -31,6 +31,12 @@ class profileView extends GetWidget<AuthViewModel> {
     var width = size.width;
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Text('Account', style: TextStyle(color: Colors.black, fontFamily: 'second'),),
+        centerTitle: true,
+      ),
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.only(left: width * 0.06, right: width* 0.06),

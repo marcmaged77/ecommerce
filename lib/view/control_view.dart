@@ -58,19 +58,19 @@ class _ControlViewState extends State<ControlView> {
     var width = size.width;
     return Scaffold(
         extendBody: true,
-        appBar: AppBar(
+        appBar: (_currentIndex == 1  ? null :  _currentIndex == 2  ? null :  _currentIndex == 4  ? null :AppBar(
           backgroundColor: Colors.grey.shade50,
           elevation: 0.0,
           title:(
 
-              _currentIndex == 1  ? Container() :
+
                                                    typing ? TextBox() : Text("", style: TextStyle(color: Colors.white),)
 
 
           ),
 
 
-          leading: _currentIndex == 1  ? Container() : IconButton(
+          leading:  IconButton(
             icon:
             Icon(typing ? Icons.done : Icons.search),
             onPressed: () {
@@ -80,7 +80,7 @@ class _ControlViewState extends State<ControlView> {
             },
             color: Colors.black,
           ),
-        ),
+        ) ),
       body:Container(
         child:
 
@@ -96,7 +96,7 @@ class _ControlViewState extends State<ControlView> {
       ),
       bottomNavigationBar:
       BottomNavyBar(
-        containerHeight: 50,
+        itemCornerRadius: 15,
         selectedIndex: _currentIndex,
         showElevation: true, // use this to remove appBar's elevation
         onItemSelected: (index) => setState(() {

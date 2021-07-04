@@ -10,6 +10,11 @@ class ExploreView extends StatelessWidget {
     var height = size.height;
 
     return Scaffold(
+      appBar: AppBar(
+backgroundColor: Colors.transparent,
+elevation: 0,
+        title: Text("Explore",style: TextStyle(color: Colors.black, fontFamily: 'second'),),
+      ),
       body: Container(
         padding: EdgeInsets.only(left: width * 0.06, right: width * 0.06),
         child: SingleChildScrollView(
