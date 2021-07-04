@@ -10,6 +10,7 @@ import 'package:souq/view/Auth/LoginPage/loginScreen.dart';
 import 'package:souq/view/profileView/profile_view.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
 import 'cartView/cart_view.dart';
+import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 
 
 
@@ -36,10 +37,16 @@ class _ControlViewState extends State<ControlView> {
     super.initState();
     Get.put(HomeViewModel());
 
+
   }
 
+
+
   int _currentIndex = 0;
+  PageController _pageController;
   bool typing = false;
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +61,16 @@ class _ControlViewState extends State<ControlView> {
         appBar: AppBar(
           backgroundColor: Colors.grey.shade50,
           elevation: 0.0,
-          title: _currentIndex == 1 ? Container() : typing ? TextBox() : Text("", style: TextStyle(color: Colors.white),),
-          leading: IconButton(
+          title:(
+
+              _currentIndex == 1  ? Container() :
+                                                   typing ? TextBox() : Text("", style: TextStyle(color: Colors.white),)
+
+
+          ),
+
+
+          leading: _currentIndex == 1  ? Container() : IconButton(
             icon:
             Icon(typing ? Icons.done : Icons.search),
             onPressed: () {
@@ -71,7 +86,7 @@ class _ControlViewState extends State<ControlView> {
 
 
 
-          (_currentIndex == 0 ? homeScreen() : _currentIndex == 1 ? ExploreView() :  _currentIndex == 4 ? profileView(name: widget.name, email: widget.email, pic: widget.pic,) : Cart()),
+          (_currentIndex == 0 ? homeScreen() : _currentIndex == 1 ? ExploreView() : _currentIndex == 2 ? Cart() :  _currentIndex == 4 ? profileView(name: widget.name, email: widget.email, pic: widget.pic,) : Cart()),
 
 
 
@@ -79,84 +94,131 @@ class _ControlViewState extends State<ControlView> {
 
 
       ),
-      bottomNavigationBar:Container(
-        padding: EdgeInsets.only(left: 17, right: 17, bottom: 18, top: 10),
-
-        child: Container(
-          decoration:  BoxDecoration(boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(1),
-              //color of shadow
-              spreadRadius: 0.1,
-              //spread radius
-              offset: Offset(0.2, 0.2), // changes position of shadow
-              //first paramerter of offset is left-right
-              //second parameter is top to down
-            ),
-            //you can set more BoxShadow() here
-          ],
-              borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(20),
-                  // bottomLeft: Radius.circular(30),
-                  // bottomRight: Radius.circular(30),
-                  topLeft: Radius.circular(20)),
+      bottomNavigationBar:
+      BottomNavyBar(
+        containerHeight: 50,
+        selectedIndex: _currentIndex,
+        showElevation: true, // use this to remove appBar's elevation
+        onItemSelected: (index) => setState(() {
+          _currentIndex = index;
+          // _pageController.animateToPage(index,
+          //     duration: Duration(milliseconds: 300), curve: Curves.ease);
+        }),
+        items: [
+          BottomNavyBarItem(
+            icon: Icon(Icons.apps),
+            title: Text('Home'),
+            activeColor: kPrimaryColor,
+              inactiveColor: Colors.black
           ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.only(
-              topRight: Radius.circular(20),
-              topLeft: Radius.circular(20),
-              // bottomLeft: Radius.circular(30),
-              // bottomRight: Radius.circular(30)
+          BottomNavyBarItem(
+              icon: Icon(Icons.explore),
+              title: Text('Explore'),
+              activeColor: kPrimaryColor,
+            inactiveColor: Colors.black
 
-            ),
-            child: CustomNavigationBar(
-
-              iconSize: 30.0,
-              selectedColor: kPrimaryColor,
-              strokeColor: Color(0x30040307),
-              unSelectedColor: Color(0xffacacac),
-              backgroundColor: Colors.white,
-              items: [
-                CustomNavigationBarItem(
-                  icon: Icon(Icons.cottage, size: 30,),
-                  title: Text("Home", style: TextStyle(fontFamily: 'second'),),
-
-                ),
-
-                CustomNavigationBarItem(
-                  icon: Icon(Icons.lightbulb_outline),
-                  title: Text("Explore", style: TextStyle(fontFamily: 'second'),),
-                ),
-
-                CustomNavigationBarItem(
-                  icon: Icon(Icons.shopping_cart),
-                  title: Text("Cart", style: TextStyle(fontFamily: 'second'),),
-                ),
-                CustomNavigationBarItem(
-                  icon: Icon(Icons.search),
-                  title: Text("Search", style: TextStyle(fontFamily: 'second'),),
-                ),
-
-                CustomNavigationBarItem(
-                  icon: Icon(Icons.account_circle),
-                  title: Text("Me", style: TextStyle(fontFamily: 'second'),),
-                ),
-
-              ],
-              currentIndex: _currentIndex,
-              onTap: (index) {
-                print(index);
-                setState(() {
-                  _currentIndex = index;
-                });
-
-              },
-
-            ),
           ),
-        ),
+          BottomNavyBarItem(
+              icon: Icon(Icons.shopping_cart),
+              title: Text('Cart'),
 
+              activeColor: kPrimaryColor,
+              inactiveColor: Colors.black
+          ),
+          BottomNavyBarItem(
+              icon: Icon(Icons.settings),
+              title: Text('Settings'),
+              activeColor: kPrimaryColor,
+              inactiveColor: Colors.black
+          ),
+          BottomNavyBarItem(
+              icon: Icon(Icons.account_circle),
+              title: Text('Account'),
+              activeColor: kPrimaryColor,
+              inactiveColor: Colors.black
+          ),
+        ],
       )
+
+
+      // Container(
+      //   padding: EdgeInsets.only(left: 17, right: 17, bottom: 18, top: 10),
+      //
+      //   child: Container(
+      //     decoration:  BoxDecoration(boxShadow: [
+      //       BoxShadow(
+      //         color: Colors.grey.withOpacity(1),
+      //         //color of shadow
+      //         spreadRadius: 0.1,
+      //         //spread radius
+      //         offset: Offset(0.2, 0.2), // changes position of shadow
+      //         //first paramerter of offset is left-right
+      //         //second parameter is top to down
+      //       ),
+      //       //you can set more BoxShadow() here
+      //     ],
+      //         borderRadius: BorderRadius.only(
+      //             topRight: Radius.circular(20),
+      //             // bottomLeft: Radius.circular(30),
+      //             // bottomRight: Radius.circular(30),
+      //             topLeft: Radius.circular(20)),
+      //     ),
+      //     child: ClipRRect(
+      //       borderRadius: BorderRadius.only(
+      //         topRight: Radius.circular(20),
+      //         topLeft: Radius.circular(20),
+      //         // bottomLeft: Radius.circular(30),
+      //         // bottomRight: Radius.circular(30)
+      //
+      //       ),
+      //       child: CustomNavigationBar(
+      //
+      //         iconSize: 30.0,
+      //         selectedColor: kPrimaryColor,
+      //         strokeColor: Color(0x30040307),
+      //         unSelectedColor: Color(0xffacacac),
+      //         backgroundColor: Colors.white,
+      //         items: [
+      //           CustomNavigationBarItem(
+      //             icon: Icon(Icons.cottage, size: 30,),
+      //             title: Text("Home", style: TextStyle(fontFamily: 'second'),),
+      //
+      //           ),
+      //
+      //           CustomNavigationBarItem(
+      //             icon: Icon(Icons.lightbulb_outline),
+      //             title: Text("Explore", style: TextStyle(fontFamily: 'second'),),
+      //           ),
+      //
+      //           CustomNavigationBarItem(
+      //             icon: Icon(Icons.shopping_cart),
+      //             title: Text("Cart", style: TextStyle(fontFamily: 'second'),),
+      //           ),
+      //           CustomNavigationBarItem(
+      //             icon: Icon(Icons.search),
+      //             title: Text("Search", style: TextStyle(fontFamily: 'second'),),
+      //           ),
+      //
+      //           CustomNavigationBarItem(
+      //             icon: Icon(Icons.account_circle),
+      //             title: Text("Me", style: TextStyle(fontFamily: 'second'),),
+      //           ),
+      //
+      //         ],
+      //         currentIndex: _currentIndex,
+      //         onTap: (index) {
+      //           print(index);
+      //           setState(() {
+      //             _currentIndex = index;
+      //           });
+      //
+      //         },
+      //
+      //       ),
+      //     ),
+      //   ),
+      //
+      // )
     );
   }
 

@@ -44,19 +44,18 @@ class homeScreen extends StatelessWidget {
                   padding: EdgeInsets.only(left: 20, right: 10),
                   child: Column(
                     children: <Widget>[
-                      //textfield
-                      // textFormField(),
-                      button(
-                        widthP: 4,
-                        color: Colors.black,
-                        text: 'fetch',
-                        radius: 2,
-                        textColor: Colors.white,
-                        press: () {
-                          print(controller
-                              .categories[1].subCategory[2].products[1].pic);
-                        },
-                      ),
+
+                      // button(
+                      //   widthP: 4,
+                      //   color: Colors.black,
+                      //   text: 'fetch',
+                      //   radius: 2,
+                      //   textColor: Colors.white,
+                      //   press: () {
+                      //     print(controller
+                      //         .categories[1].subCategory[2].products[1].pic);
+                      //   },
+                      // ),
                       SizedBox(
                         height: 30,
                       ),
@@ -320,7 +319,7 @@ class ListViewProducts extends StatelessWidget {
     var width = size.width;
     return GetBuilder<HomeViewModel>(
       builder: (controller) => Container(
-        height: 320,
+        height: 360,
         child: ListView.separated(
           scrollDirection: Axis.horizontal,
           itemCount: controller.mostSelling.length,
