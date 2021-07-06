@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:souq/model/category_model.dart';
 import 'package:souq/model/new/categoryModel.dart';
+import 'package:souq/model/new/exploreModel.dart';
 import 'package:souq/model/new/productModel.dart';
 import 'package:souq/model/products_mode.dart';
 import 'package:souq/view/HomeScreen/home_screen.dart';
@@ -97,6 +98,14 @@ class HomeViewModel extends GetxController {
 
   /////////////////////////////////////////////////////////////// new ///////////////////////////////////////////////////
 
+  List<Explore> _explore = [];
+  List<Explore> get explore => _explore;
+  List<Explore> getexplore() {
+    return _explore;
+  }
+
+
+
 
 
   //most selling
@@ -106,18 +115,21 @@ class HomeViewModel extends GetxController {
     return _mostSelling;
   }
 
-getMostSellingFirebase() async {
+Future getMostSellingFirebase() async {
     CollectionReference ProductR =
         FirebaseFirestore.instance.collection('Product');
     DocumentSnapshot snapshot = await ProductR.doc('mostSelling').get();
     DocumentSnapshot snapshot2 = await ProductR.doc('categories').get();
+    DocumentSnapshot snapshot3 = await ProductR.doc('explore').get();
 
 //data is products
     var data = snapshot.data() as Map;
     var data2 = snapshot2.data() as Map;
+    var data3 = snapshot3.data() as Map;
 
     var productsData = data['products'] as List<dynamic>;
     var categoriesData = data2['categories'] as List<dynamic>;
+    var exploreData = data3['explore'] as List<dynamic>;
 
 
     productsData.forEach((proData) {
@@ -126,6 +138,13 @@ getMostSellingFirebase() async {
 
 //// isa hateshta3'al
     });
+
+  exploreData.forEach((proData) {
+    _explore.add(Explore.fromJson(proData));
+    update();
+
+//// isa hateshta3'al
+  });
 
     categoriesData.forEach((proData) {
       _categories.add(Category.fromJson(proData));
@@ -200,7 +219,7 @@ getMostSellingFirebase() async {
     //////////////////////////////////////////////// new  ///////////////////////////////////////
     getMostSellingFirebase();
     getMostSelling();
-
+getexplore();
     getCategories();
 
 

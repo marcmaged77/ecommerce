@@ -18,8 +18,10 @@ class homeScreen extends StatelessWidget {
   String email;
   String name;
   String pic;
+  int _currentIndex = 0;
 
   final TextController1 = TextEditingController();
+
 
   homeScreen({
     Key key,
@@ -27,6 +29,7 @@ class homeScreen extends StatelessWidget {
     this.name,
     this.pic,
   }) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -39,265 +42,275 @@ class homeScreen extends StatelessWidget {
       builder: (controller) => controller.loading.value == true
           ? Center(child: CircularProgressIndicator())
           : Scaffold(
-              body: SingleChildScrollView(
-                child: Container(
-                  padding: EdgeInsets.only(left: 20, right: 10),
-                  child: Column(
-                    children: <Widget>[
-                      // button(
-                      //   widthP: 4,
-                      //   color: Colors.black,
-                      //   text: 'fetch',
-                      //   radius: 2,
-                      //   textColor: Colors.white,
-                      //   press: () {
-                      //     print(controller
-                      //         .categories[1].subCategory[2].products[1].pic);
-                      //   },
-                      // ),
-                      SizedBox(
-                        height: 30,
-                      ),
-                      Container(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            "Categories",
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
-                                fontFamily: 'first'),
-                          )),
-                      SizedBox(
-                        height: 30,
-                      ),
-
-                      //listview
-                      ListViewCategories(),
-                      SizedBox(
-                        height: 40,
-                      ),
-
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            'Best Selling',
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.w600),
-                          ),
-                          FlatButton(
-                              onPressed: () {
-                                Get.to(All());
-
-                                print('see all');
-                              },
-                              child: Text('See All',
-                                  style: TextStyle(fontSize: 17))),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-
-                      ListViewProducts(),
-                      SizedBox(
-                        height: 20,
-                      ),
-
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text('Top Branded',
+              body: Container(
+                child: SingleChildScrollView(
+                  child: Container(
+                    padding: EdgeInsets.only(left: 20, right: 10),
+                    child: Column(
+                      children: <Widget>[
+                        // button(
+                        //   widthP: 4,
+                        //   color: Colors.black,
+                        //   text: 'fetch',
+                        //   radius: 2,
+                        //   textColor: Colors.white,
+                        //   press: () {
+                        //     print(controller
+                        //         .categories[1].subCategory[2].products[1].pic);
+                        //   },
+                        // ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Container(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "Categories",
                               style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.w600)),
-                          FlatButton(
-                              onPressed: () {
-                                print('see all');
-                              },
-                              child: Text('See All',
-                                  style: TextStyle(fontSize: 17))),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600,
+                                  fontFamily: 'first'),
+                            )),
+                        SizedBox(
+                          height: 30,
+                        ),
 
-                      Container(
-                        height: 400,
-                        child: Card(
-                          elevation: 1,
-                          margin: EdgeInsets.symmetric(horizontal: 20),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Swiper(
-                            itemCount: controller
-                                .categories[1].subCategory[2].products.length,
-                            autoplay: true,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                child: Stack(fit: StackFit.expand, children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(15),
-                                        image: DecorationImage(
-                                          colorFilter: new ColorFilter.mode(
-                                              Colors.black.withOpacity(0.8),
-                                              BlendMode.dstATop),
-                                          image: NetworkImage(controller
-                                              .categories[1]
-                                              .subCategory[2]
-                                              .products[index]
-                                              .pic),
-                                          fit: BoxFit.cover,
-                                        )),
-                                  ),
-                                  Positioned(
-                                    child: Image.asset(
-                                      'assets/logo/zara-logo.png',
-                                      height: 50,
-                                      width: 50,
-                                    ),
-                                  ),
-                                  Positioned(
-                                      right: 40,
-                                      bottom: 60,
-                                      child: Container(
+                        //listview
+                        ListViewCategories(),
+                        SizedBox(
+                          height: 40,
+                        ),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text(
+                              'Best Selling',
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.w600),
+                            ),
+                            FlatButton(
+                                onPressed: () {
+                                  Get.to(All());
+
+                                  print('see all');
+                                },
+                                child: Text('See All',
+                                    style: TextStyle(fontSize: 17))),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+
+                        ListViewProducts(),
+                        SizedBox(
+                          height: 45,
+                        ),
+
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text('Top Branded',
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.w600)),
+                            FlatButton(
+                                onPressed: () {
+                                  print('see all');
+                                },
+                                child: Text('See All',
+                                    style: TextStyle(fontSize: 17))),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 40,
+                        ),
+
+                        Container(
+                          height: 400,
+                          child: Card(
+                            elevation: 1,
+                            margin: EdgeInsets.symmetric(horizontal: 20),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            child:
+
+                                 GetBuilder<HomeViewModel>(
+                                   builder:(controller) => Swiper(
+                                itemCount: controller.categories[1].subCategory[2].products.length,
+                                autoplay: true,
+                                itemBuilder: (context, index) {
+                                    return Container(
+                                      margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                      child: Stack(fit: StackFit.expand, children: [
+                                        Container(
                                           decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(7),
-                                              color: Colors.black),
-                                          child: Container(
-                                              margin: EdgeInsets.fromLTRB(
-                                                  3, 0, 3, 0),
-                                              child: Text(
-                                                controller
-                                                        .categories[1]
-                                                        .subCategory[2]
-                                                        .products[index]
-                                                        .price +
-                                                    ' EGP',
-                                                style: TextStyle(
-                                                    fontFamily: 'second',
-                                                    fontSize: 23,
-                                                    color: Colors.white),
-                                              )))),
-                                  Positioned(
-                                      left: 10,
-                                      top: 60,
-                                      child: Container(
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(7),
-                                              color: Colors.black),
-                                          child: Container(
-                                              margin: EdgeInsets.fromLTRB(
-                                                  3, 3, 3, 3),
-                                              child: Text(
-                                                'Introducing',
-                                                style: TextStyle(
-                                                    fontFamily: 'third',
-                                                    fontSize: 17,
-                                                    color: Colors.white),
-                                              )))),
-                                ]),
-                              );
-                            },
+                                              borderRadius: BorderRadius.circular(15),
+                                              image: DecorationImage(
+                                                colorFilter: new ColorFilter.mode(
+                                                    Colors.black.withOpacity(0.8),
+                                                    BlendMode.dstATop),
+                                                image: NetworkImage(controller
+                                                    .categories[1]
+                                                    .subCategory[2]
+                                                    .products[index]
+                                                    .pic),
+                                                fit: BoxFit.cover,
+                                              )),
+                                        ),
+                                        Positioned(
+                                          child: Image.asset(
+                                            'assets/logo/zara-logo.png',
+                                            height: 50,
+                                            width: 50,
+                                          ),
+                                        ),
+                                        Positioned(
+                                            right: 40,
+                                            bottom: 60,
+                                            child: Container(
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(7),
+                                                    color: Colors.black),
+                                                child: Container(
+                                                    margin: EdgeInsets.fromLTRB(
+                                                        3, 0, 3, 0),
+                                                    child: Text(
+                                                      controller
+                                                              .categories[1]
+                                                              .subCategory[2]
+                                                              .products[index]
+                                                              .price +
+                                                          ' EGP',
+                                                      style: TextStyle(
+                                                          fontFamily: 'second',
+                                                          fontSize: 23,
+                                                          color: Colors.white),
+                                                    )))),
+                                        Positioned(
+                                            left: 10,
+                                            top: 60,
+                                            child: Container(
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(7),
+                                                    color: Colors.black),
+                                                child: Container(
+                                                    margin: EdgeInsets.fromLTRB(
+                                                        3, 3, 3, 3),
+                                                    child: Text(
+                                                      'Introducing',
+                                                      style: TextStyle(
+                                                          fontFamily: 'third',
+                                                          fontSize: 17,
+                                                          color: Colors.white),
+                                                    )))),
+                                      ]),
+                                    );
+                                },
+                              ),
+                                 ),
+
+
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Container(
-                        height: 400,
-                        child: Card(
-                          elevation: 1,
-                          margin: EdgeInsets.symmetric(horizontal: 20),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Swiper(
-                            itemCount: controller
-                                .categories[0].subCategory[2].products.length,
-                            autoplay: true,
-                            itemBuilder: (context, index) {
-                              return Container(
-                                margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                child: Stack(fit: StackFit.expand, children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(15),
-                                        image: DecorationImage(
-                                          colorFilter: new ColorFilter.mode(
-                                              Colors.black.withOpacity(0.8),
-                                              BlendMode.dstATop),
-                                          image: NetworkImage(controller
-                                              .categories[0]
-                                              .subCategory[2]
-                                              .products[index]
-                                              .pic),
-                                          fit: BoxFit.cover,
-                                        )),
-                                  ),
-                                  Positioned(
-                                    child: Image.asset(
-                                      'assets/logo/Gap-logo.png',
-                                      height: 50,
-                                      width: 50,
-                                    ),
-                                  ),
-                                  Positioned(
-                                      right: 40,
-                                      bottom: 60,
-                                      child: Container(
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(7),
-                                              color: Colors.black),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          height: 400,
+                          child: Card(
+                            elevation: 1,
+                            margin: EdgeInsets.symmetric(horizontal: 20),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            child: GetBuilder<HomeViewModel>(
+
+                              builder:(controller) => Swiper(
+                                itemCount: controller
+                                    .categories[0].subCategory[2].products.length,
+                                autoplay: true,
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                    child: Stack(fit: StackFit.expand, children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(15),
+                                            image: DecorationImage(
+                                              colorFilter: new ColorFilter.mode(
+                                                  Colors.black.withOpacity(0.8),
+                                                  BlendMode.dstATop),
+                                              image: NetworkImage(controller
+                                                  .categories[0]
+                                                  .subCategory[2]
+                                                  .products[index]
+                                                  .pic),
+                                              fit: BoxFit.cover,
+                                            )),
+                                      ),
+                                      Positioned(
+                                        child: Image.asset(
+                                          'assets/logo/Gap-logo.png',
+                                          height: 50,
+                                          width: 50,
+                                        ),
+                                      ),
+                                      Positioned(
+                                          right: 40,
+                                          bottom: 60,
                                           child: Container(
-                                              margin: EdgeInsets.fromLTRB(
-                                                  3, 0, 3, 0),
-                                              child: Text(
-                                                controller
-                                                        .categories[1]
-                                                        .subCategory[2]
-                                                        .products[index]
-                                                        .price +
-                                                    ' EGP',
-                                                style: TextStyle(
-                                                    fontFamily: 'second',
-                                                    fontSize: 23,
-                                                    color: Colors.white),
-                                              )))),
-                                  Positioned(
-                                      left: 10,
-                                      top: 60,
-                                      child: Container(
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(7),
-                                              color: Colors.black),
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(7),
+                                                  color: Colors.black),
+                                              child: Container(
+                                                  margin: EdgeInsets.fromLTRB(
+                                                      3, 0, 3, 0),
+                                                  child: Text(
+                                                    controller
+                                                            .categories[1]
+                                                            .subCategory[2]
+                                                            .products[index]
+                                                            .price +
+                                                        ' EGP',
+                                                    style: TextStyle(
+                                                        fontFamily: 'second',
+                                                        fontSize: 23,
+                                                        color: Colors.white),
+                                                  )))),
+                                      Positioned(
+                                          left: 10,
+                                          top: 60,
                                           child: Container(
-                                              margin: EdgeInsets.fromLTRB(
-                                                  3, 3, 3, 3),
-                                              child: Text(
-                                                'Introducing',
-                                                style: TextStyle(
-                                                    fontFamily: 'third',
-                                                    fontSize: 17,
-                                                    color: Colors.white),
-                                              )))),
-                                ]),
-                              );
-                            },
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(7),
+                                                  color: Colors.black),
+                                              child: Container(
+                                                  margin: EdgeInsets.fromLTRB(
+                                                      3, 3, 3, 3),
+                                                  child: Text(
+                                                    'Introducing',
+                                                    style: TextStyle(
+                                                        fontFamily: 'third',
+                                                        fontSize: 17,
+                                                        color: Colors.white),
+                                                  )))),
+                                    ]),
+                                  );
+                                },
+                              ),
+                            ),
                           ),
                         ),
-                      ),
 
-                      SizedBox(
-                        height: 1000,
-                      )
-                    ],
+                        SizedBox(
+                          height: 1000,
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
