@@ -49,14 +49,15 @@ class CatTypes extends StatelessWidget {
                       crossAxisSpacing: 10.0,
                       mainAxisSpacing: 20.0,
                       childAspectRatio:
-                          width / (MediaQuery.of(context).size.height / 0.85),
+                          width / (MediaQuery.of(context).size.height / 0.9),
                     ),
                     itemCount: model.products.length,
                     itemBuilder: (context, index) {
                       return InkWell(
                           onTap: () {},
                           child: Card(
-                            elevation: 1,
+                            color: Colors.transparent,
+                            elevation: 0,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(4.0),
                             ),
@@ -65,7 +66,7 @@ class CatTypes extends StatelessWidget {
                                   alignment: AlignmentDirectional.bottomStart,
                                   children: [
                                     Container(
-                                        height: 300,
+                                        height: 270,
                                         decoration: BoxDecoration(
                                             image: DecorationImage(
                                                 image: NetworkImage(
