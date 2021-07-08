@@ -1,6 +1,7 @@
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:souq/components/button.dart';
+import 'package:souq/constants.dart';
 import 'package:souq/model/new/categoryModel.dart';
 import 'package:souq/model/new/sub/products.dart';
 import 'package:souq/model/new/sub/subCategory.dart';
@@ -10,9 +11,7 @@ class CatTypes extends StatelessWidget {
 
   CatTypes({Key key, this.model}) : super(key: key);
 
-
   GlobalKey<FlipCardState> cardKey = GlobalKey<FlipCardState>();
-
 
   @override
   Widget build(BuildContext context) {
@@ -21,114 +20,149 @@ class CatTypes extends StatelessWidget {
     var height = size.height;
     var width = size.width;
     return Scaffold(
-      appBar: AppBar(
-        leading: BackButton(
-          color: Colors.black,
+        appBar: AppBar(
+          title: Text(
+            model.name,
+            style: TextStyle(color: Colors.black, fontFamily: 'second'),
+          ),
+          centerTitle: true,
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          leading: BackButton(
+            color: Colors.black,
+          ),
         ),
-      ),
-      body: SingleChildScrollView(
-        child: Container(
-          padding:
-              EdgeInsets.only(top: 200, left: width * 0.06, right: width * 0.06),
+        body: SingleChildScrollView(
+            child: Container(
+          padding: EdgeInsets.only(
+            top: 20,
+            left: width * 0.02,
+            right: width * 0.02,
+          ),
           child: Column(children: [
-            button(
-              widthP: 4,
-              text: 'fetch',
-              textColor: Colors.white,
-              color: Colors.black,
-              press: () {
-                print(model.products[1].price);
-              },
-            ),
-
-
             SizedBox(
-                height: 500,
-                width: width,
                 child: GridView.builder(
-                    gridDelegate:
-                    SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 1,
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 10.0,
+                      mainAxisSpacing: 20.0,
+                      childAspectRatio:
+                          width / (MediaQuery.of(context).size.height / 0.85),
                     ),
                     itemCount: model.products.length,
                     itemBuilder: (context, index) {
-                      return
-                        FlatButton(
-                          child: FlipCard(
-                            key: cardKey,
-                            // flipOnTouch: false,
-                            front: Container(
-                              child: InkWell(
-                                onLongPress: () => cardKey.currentState.toggleCard(),
-                                child: Image.network(model.products[index].pic, fit: BoxFit.cover,),
-                              ),
+                      return InkWell(
+                          onTap: () {},
+                          child: Card(
+                            elevation: 1,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(4.0),
                             ),
-                            back: Container(
-                              child:  FlatButton(
-                                onLongPress: () => cardKey.currentState.toggleCard(),
-                                child: Text(model.products[index].description),
+                            child: Column(children: [
+                              Stack(
+                                  alignment: AlignmentDirectional.bottomStart,
+                                  children: [
+                                    Container(
+                                        height: 300,
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                image: NetworkImage(
+                                                  model.products[index].pic,
+                                                ),
+                                                fit: BoxFit.cover))),
+                                    Container(
+                                        decoration:
+                                            BoxDecoration(color: Colors.red),
+                                        child: Container(
+                                            margin:
+                                                EdgeInsets.fromLTRB(3, 3, 3, 3),
+                                            child: Text(
+                                              'Sale',
+                                              style: TextStyle(
+                                                  fontFamily: 'third',
+                                                  fontSize: 17,
+                                                  color: Colors.white),
+                                            )))
+                                  ]),
+                              SizedBox(
+                                height: 10,
                               ),
-                            ),
-                          ),
-                        );
+                              Column(
+                                  children: [
+                                model.products[index].name == null
+                                    ? Container(
+                                        alignment: Alignment.topLeft,
+                                        child: Text('Product 01-290',
+                                            style: TextStyle(
+                                                color: Color(0xFF575E67),
+                                                fontFamily: 'second',
+                                                fontSize: 14.0)),
+                                      )
+                                    : Container(
+                                        padding: EdgeInsets.only(left: 4),
+                                        alignment: Alignment.topLeft,
+                                        child: Text(
+                                            '${model.products[index].name}',
+                                            style: TextStyle(
+                                              color: Color(0xFF575E67),
+                                              fontFamily: 'second',
+                                              fontSize: 16,
+                                            )),
+                                      ),
+                                Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
 
+                                    children: [
+                                  Container(
+                                    padding: EdgeInsets.only(left: 4, top: 1),
+                                    alignment: Alignment.topLeft,
+                                    child: Text('Elgible for Free Shipping',
+                                        style: TextStyle(
+                                          color: Colors.grey,
+                                          fontFamily: 'second',
+                                          fontSize: 13,
+                                        )),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.only(right: 80, top: 2, bottom: 4),
 
-                      //   InkWell(
-                      //   onTap: () {
-                      //
-                      //     print(model.subCategory[index].products[0].name);
-                      //   },
-                      //   child: Stack(
-                      //     children: [
-                      //       Container(
-                      //         decoration: BoxDecoration(
-                      //             image: DecorationImage(
-                      //               image: NetworkImage(model.products[index].pic,),
-                      //               fit: BoxFit.cover,
-                      //             ),
-                      //             boxShadow: [
-                      //               BoxShadow(
-                      //                 color:
-                      //                 Colors.black.withOpacity(0.5),
-                      //                 //color of shadow
-                      //                 spreadRadius: 0.3,
-                      //                 //spread radius
-                      //                 offset: Offset(0.0,
-                      //                     0.0), // changes position of shadow
-                      //                 //first paramerter of offset is left-right
-                      //                 //second parameter is top to down
-                      //               ),
-                      //               //you can set more BoxShadow() here
-                      //             ],
-                      //             borderRadius: BorderRadius.circular(10),
-                      //             color: Colors.red),
-                      //       ),
-                      //       Positioned(
-                      //           left: 10,
-                      //           bottom: 20,
-                      //           child: Text(
-                      //             model.products[index].name,
-                      //             style: TextStyle(
-                      //                 fontFamily: 'second',
-                      //                 color: Colors.white,
-                      //                 fontWeight: FontWeight.bold,
-                      //                 fontSize: 20),
-                      //           ))
-                      //     ],
-                      //   ),
-                      // );
+                                    child: Container(
+                                        decoration:
+                                            BoxDecoration(color: kPrimaryColor),
+                                        child: Container(
+                                            margin:
+                                                EdgeInsets.fromLTRB(3, 3, 3, 3),
+                                            child: Text(
+                                              'Fullfiled by Aramex',
+                                              style: TextStyle(
+                                                  fontFamily: 'third',
+                                                  fontSize: 10,
+                                                  color: Colors.white),
+                                            ))),
+                                  )
+                                ]),
+                                Container(
+                                  padding: EdgeInsets.only(
+                                    left: 4,
+                                  ),
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                      model.products[index].price + ' EGP',
+                                      style: TextStyle(
+                                          color: kPrimaryColor,
+                                          fontFamily: 'second',
+                                          fontSize: 16)),
+                                ),
+                              ]),
+                            ]),
+                          ));
                     })),
-
-
-
-
-
-
-
-
+            SizedBox(
+              height: 100,
+            )
           ]),
-        ),
-      ),
-    );
+        )));
   }
 }

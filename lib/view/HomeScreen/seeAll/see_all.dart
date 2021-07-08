@@ -80,58 +80,64 @@ class ListViewProducts extends StatelessWidget {
                       model: controller.mostSelling[index],
                     ));
                   },
-                  child: SizedBox(
+                  child: Container(
                     //card nafso abyad
                     height: 300,
                     child: Column(
                       children: [
-                        Container(
-                          //image
-                          width: 170,
-                          height: 190,
-                          alignment: Alignment.topRight,
-                          padding: EdgeInsets.only(top: 12, right: 12),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(3),
-                              image: DecorationImage(
-                                  image: NetworkImage(
-                                      controller.mostSelling[index].pic),
-                                  fit: BoxFit.cover)),
+                        Expanded(
+                          flex: 5,
+                          child: Container(
+                            //image
+                            width: 170,
+                            height: 190,
+                            alignment: Alignment.topRight,
+                            padding: EdgeInsets.only(top: 12, right: 12),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(3),
+                                image: DecorationImage(
+                                    image: NetworkImage(
+                                        controller.mostSelling[index].pic),
+                                    fit: BoxFit.cover)),
+                          ),
                         ),
-                        SizedBox(
-                          width: 150,
-                          height: 110,
-                          child: Stack(
-                              children:[
-                                Column(children: [
-                                  Container(
-                                      padding: EdgeInsets.only(top: 20,left: 5),
-                                      alignment: Alignment.topLeft,
-                                      child: Text(
-                                        controller.mostSelling[index].name,
-                                        style: TextStyle(fontSize: 17),
-                                      )),
-                                  Container(
-                                      padding: EdgeInsets.only(left: 5),
-                                      alignment: Alignment.topLeft,
-                                      child: Text(
-                                        controller.mostSelling[index].description,
-                                        style: TextStyle(
-                                            fontSize: 13, color: Colors.grey),
-                                      )),
+                        Expanded(
+                          flex: 2,
+                          child: SizedBox(
+                            width: 150,
+                            height: 110,
+                            child: Stack(
+                                children:[
+                                  Column(children: [
+                                    Container(
+                                        padding: EdgeInsets.only(top: 20,left: 5),
+                                        alignment: Alignment.topLeft,
+                                        child: Text(
+                                          controller.mostSelling[index].name,
+                                          style: TextStyle(fontSize: 17),
+                                        )),
+                                    Container(
+                                        padding: EdgeInsets.only(left: 5),
+                                        alignment: Alignment.topLeft,
+                                        child: Text(
+                                          controller.mostSelling[index].description,
+                                          style: TextStyle(
+                                              fontSize: 13, color: Colors.grey),
+                                        )),
+                                  ]),
+                                  Positioned(
+                                    bottom: 5,
+                                    child: Container(
+                                        padding: EdgeInsets.only(left: 5, top: 5),
+                                        alignment: Alignment.topLeft,
+                                        child: Text(
+                                          '${controller.mostSelling[index].price} EGP',
+                                          style: TextStyle(
+                                              fontSize: 17, color: kPrimaryColor),
+                                        )),
+                                  ),
                                 ]),
-                                Positioned(
-                                  bottom: 5,
-                                  child: Container(
-                                      padding: EdgeInsets.only(left: 5, top: 5),
-                                      alignment: Alignment.topLeft,
-                                      child: Text(
-                                        '${controller.mostSelling[index].price} EGP',
-                                        style: TextStyle(
-                                            fontSize: 17, color: kPrimaryColor),
-                                      )),
-                                ),
-                              ]),
+                          ),
                         )
                       ],
                     ),
