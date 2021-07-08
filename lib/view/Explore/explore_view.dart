@@ -15,7 +15,9 @@ class ExploreView extends GetWidget<HomeViewModel>{
     var height = size.height;
 
     return Scaffold(
+
       appBar: AppBar(
+        centerTitle: true,
 backgroundColor: Colors.transparent,
 elevation: 0,
         title: Text("Explore",style: TextStyle(color: Colors.black, fontFamily: 'second'),),

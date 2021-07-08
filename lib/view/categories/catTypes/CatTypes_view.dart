@@ -6,6 +6,7 @@ import 'package:souq/model/new/categoryModel.dart';
 import 'package:souq/model/new/sub/products.dart';
 import 'package:souq/model/new/sub/subCategory.dart';
 
+
 class CatTypes extends StatelessWidget {
   Category model;
 
@@ -20,8 +21,8 @@ class CatTypes extends StatelessWidget {
     var height = size.height;
     var width = size.width;
 
-    double cardWidth = MediaQuery.of(context).size.width / 3.3;
-    double cardHeight = MediaQuery.of(context).size.height / 2.9;
+    double cardWidth = MediaQuery.of(context).size.width / 3.5;
+    double cardHeight = 250;
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -56,8 +57,11 @@ class CatTypes extends StatelessWidget {
                     ),
                     itemCount: model.products.length,
                     itemBuilder: (context, index) {
-                      return InkWell(
-                          onTap: () {},
+                      return
+                        InkWell(
+                          onTap: ()
+                          {
+                          },
                           child: Card(
                             color: Colors.transparent,
                             elevation: 0,
@@ -161,7 +165,10 @@ class CatTypes extends StatelessWidget {
                                 ),
                               ]),
                             ]),
-                          ));
+                          ),
+                        );
+
+
                     })),
             SizedBox(
               height: 100,
