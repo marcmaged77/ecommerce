@@ -19,6 +19,9 @@ class CatTypes extends StatelessWidget {
 
     var height = size.height;
     var width = size.width;
+
+    double cardWidth = MediaQuery.of(context).size.width / 3.3;
+    double cardHeight = MediaQuery.of(context).size.height / 2.9;
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -49,7 +52,7 @@ class CatTypes extends StatelessWidget {
                       crossAxisSpacing: 10.0,
                       mainAxisSpacing: 20.0,
                       childAspectRatio:
-                          width / (MediaQuery.of(context).size.height / 0.9),
+                      cardWidth/cardHeight,
                     ),
                     itemCount: model.products.length,
                     itemBuilder: (context, index) {
