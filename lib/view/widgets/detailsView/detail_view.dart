@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:souq/components/button.dart';
 import 'package:souq/constants.dart';
+import 'package:souq/core/view_model/home_view_model.dart';
 import 'package:souq/model/new/productModel.dart';
 import 'package:souq/model/products_mode.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
@@ -23,7 +24,6 @@ class DetailScreen extends StatelessWidget {
 
     var height = size.height;
     var width = size.width;
-
 
     return Scaffold(
       bottomNavigationBar: Container(
@@ -266,12 +266,14 @@ class DetailScreen extends StatelessWidget {
                   SizedBox(
                     height: 5,
                   ),
-                  Text(
-                    'Reviews & Comments',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 26,
-                        fontFamily: "second"),
+                  Container(
+                    child: Text(
+                      'Reviews & Comments',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 26,
+                          fontFamily: "second"),
+                    ),
                   ),
                   // SizedBox(
                   //   height: 20,
@@ -294,8 +296,10 @@ class DetailScreen extends StatelessWidget {
                             height: 50.0,
                             decoration: BoxDecoration(
                                 image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: model.reviews[index].pic != null ? NetworkImage(model.reviews[index].pic) : AssetImage('assets/avatar/unkown.jpg'),
+                                  fit: BoxFit.cover,
+                                  image: model.reviews[index].pic != null
+                                      ? NetworkImage(model.reviews[index].pic)
+                                      : AssetImage('assets/avatar/unkown.jpg'),
                                 ),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(60))),
@@ -338,101 +342,140 @@ class DetailScreen extends StatelessWidget {
                     ),
                   ),
 
-                  SizedBox(height: 10,),
-
+                  SizedBox(
+                    height: 10,
+                  ),
 
                   button(
                     widthP: 1,
                     text: "write a review",
-                    press: (){
+                    press: () {
                       print("milva");
-showCupertinoModalBottomSheet(context: context, builder: (context) =>
-Scaffold(
-  appBar: AppBar(
-    title: Text('Write a Review', style: TextStyle(color: Colors.black),),
-    backgroundColor: Colors.transparent,
-    centerTitle: true,
-    elevation: 0.0,
-    leading: BackButton(
-      color: Colors.black,
-    ),
+                      showCupertinoModalBottomSheet(
+                          context: context,
+                          builder: (context) => Scaffold(
+                                appBar: AppBar(
+                                  title: Text(
+                                    'Write a Review',
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                  backgroundColor: Colors.transparent,
+                                  centerTitle: true,
+                                  elevation: 0.0,
+                                  leading: BackButton(
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                body: Container(
+                                  padding: EdgeInsets.only(
+                                      left: width * 0.06,
+                                      right: width * 0.06,
+                                      top: height * 0.04),
+                                  child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        ListTile(
+                                          leading: Container(
+                                            width: 50.0,
+                                            height: 50.0,
+                                            decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                                    fit: BoxFit.cover,
+                                                    image: NetworkImage(
+                                                        model.pic)),
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(60))),
+                                          ),
+                                          title: Text(model.name),
+                                          subtitle: Text(model.description),
+                                        ),
 
-  ),
-  body:   Container(
-    padding: EdgeInsets.only(
-        left: width * 0.06,
-        right: width * 0.06,
-        top: height * 0.04
+                                        SizedBox(
+                                          height: 20,
+                                        ),
 
-    ),
+                                        Container(
+                                            child: Text('Write Your Review')),
 
-    child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+                                        SizedBox(
+                                          height: 20,
+                                        ),
 
-        children:[
-      ListTile(
-        leading: Container(
-          width: 50.0,
-          height: 50.0,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: NetworkImage(model.pic)),
-              borderRadius: BorderRadius.all(Radius.circular(60))),
-        ),
-        title: Text(model.name),
-        subtitle: Text(model.description),
+                                        SizedBox(
+                                          width: 400,
+                                          child: TextField(
+                                            decoration: InputDecoration(
+                                              hintText: 'placeholder text',
+                                              contentPadding:
+                                                  EdgeInsets.symmetric(
+                                                      vertical: 40,
+                                                      horizontal: 20),
+                                              border: OutlineInputBorder(),
+                                            ),
+                                          ),
+                                        ),
 
+                                        SizedBox(
+                                          height: 20,
+                                        ),
 
+                                        button(
+                                          widthP: 2,
+                                          text: 'Submit Your Review',
+                                          press: () {},
+                                          color: kPrimaryColor,
+                                          textColor: Colors.white,
+                                          radius: 10,
+                                        )
 
-      ),
-
-      SizedBox(height: 20,),
-
-      Container(
-
-          child: Text('Write Your Review')),
-
-          SizedBox(height: 20,),
-
-  SizedBox(
-      width: 400,
-      child: TextField(
-        decoration: InputDecoration(
-          hintText: 'placeholder text',
-          contentPadding:
-          EdgeInsets.symmetric(vertical: 40, horizontal: 20),
-          border: OutlineInputBorder(),
-        ),
-      ),),
-
-          SizedBox(height: 20,),
-
-      button(
-        widthP: 2,
-        text: 'Submit Your Review',
-        press: (){},
-        color: kPrimaryColor,
-        textColor: Colors.white,
-        radius: 10,
-
-
-      )
-      
-      
-      // Text('milva')
-
-
-    ]),
-  ),
-)
-);
+                                        // Text('milva')
+                                      ]),
+                                ),
+                              ));
                     },
-  color: kPrimaryColor,
+                    color: kPrimaryColor,
                     textColor: Colors.white,
                     radius: 10,
-
                   ),
+
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Divider(
+                    color: Colors.grey.shade700,
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(top: 10),
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      'More Related Products',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 20,
+                          fontFamily: "second"),
+                    ),
+                  ),
+
+                  SizedBox(
+                    height: 20,
+                  ),
+
+                  Stack(
+                      overflow: Overflow.visible,
+                      children:[
+                    Card(elevation: 1, child: ListViewProducts()),
+
+                    Positioned(
+                      left: -20,
+                        top: 120,
+                        child: Icon(Icons.arrow_back_ios_new)),
+                    Positioned(
+                        right: -20,
+                        top: 120,child: Icon(Icons.arrow_forward_ios)),
+                  ]),
+
+
 
                   SizedBox(
                     height: 1000,
@@ -443,6 +486,133 @@ Scaffold(
           ],
         ),
       )),
+    );
+  }
+}
+
+class ListViewProducts extends StatelessWidget {
+  const ListViewProducts({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
+    var height = size.height;
+    var width = size.width;
+    return GetBuilder<HomeViewModel>(
+      builder: (controller) => Container(
+        //background
+        height: 260,
+        child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          itemCount: controller.mostSelling.length,
+          itemBuilder: (context, index) {
+            return InkWell(
+              onTap: () {},
+              child: Stack(
+                children:[
+
+                  Card(
+
+                  color: Colors.transparent,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(4.0),
+                  ),
+                  child: Column(children: [
+                    Stack(alignment: AlignmentDirectional.bottomStart, children: [
+
+                      Container(
+                          height: 160,
+                          width: 150,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: NetworkImage(
+                                    controller.mostSelling[index].pic,
+                                  ),
+                                  fit: BoxFit.cover))),
+                      Container(
+                          decoration: BoxDecoration(color: Colors.red),
+                          child: Container(
+                              margin: EdgeInsets.fromLTRB(3, 3, 3, 3),
+                              child: Text(
+                                'Sale',
+                                style: TextStyle(
+                                    fontFamily: 'third',
+                                    fontSize: 17,
+                                    color: Colors.white),
+                              )))
+                    ]),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Column(children: [
+                      controller.mostSelling[index].name == null
+                          ? Container(
+                              alignment: Alignment.topLeft,
+                              child: Text('Product 01-290',
+                                  style: TextStyle(
+                                      color: Color(0xFF575E67),
+                                      fontFamily: 'second',
+                                      fontSize: 14.0)),
+                            )
+                          : Container(
+                              child: Text('${controller.mostSelling[index].name}',
+                                  style: TextStyle(
+                                    color: Color(0xFF575E67),
+                                    fontFamily: 'second',
+                                    fontSize: 16,
+                                  )),
+                            ),
+                      Column(children: [
+                        Container(
+                          padding: EdgeInsets.only(right: 30, top: 1),
+                          alignment: Alignment.topLeft,
+                          child: Text('Elgible for Free Shipping',
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontFamily: 'second',
+                                fontSize: 13,
+                              )),
+                        ),
+                        Container(
+                          padding: EdgeInsets.only(right: 50, top: 2, bottom: 4),
+                          child: Container(
+                              decoration: BoxDecoration(color: kPrimaryColor),
+                              child: Container(
+                                  margin: EdgeInsets.fromLTRB(3, 3, 3, 3),
+                                  child: Text(
+                                    'Fullfiled by Aramex',
+                                    style: TextStyle(
+                                        fontFamily: 'third',
+                                        fontSize: 10,
+                                        color: Colors.white),
+                                  ))),
+                        )
+                      ]),
+                      Container(
+                        padding: EdgeInsets.only(right: 90, top: 1),
+                        alignment: Alignment.topLeft,
+                        child: Text(controller.mostSelling[index].price + ' EGP',
+                            style: TextStyle(
+                                color: kPrimaryColor,
+                                fontFamily: 'second',
+                                fontSize: 16)),
+                      ),
+                    ]),
+                  ]),
+                ),
+
+              ]),
+            );
+          },
+          separatorBuilder: (context, index) => SizedBox(
+            width: 10,
+          ),
+        ),
+      ),
     );
   }
 }
