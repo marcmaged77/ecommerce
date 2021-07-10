@@ -10,6 +10,7 @@ import 'package:souq/view/Auth/LoginPage/loginScreen.dart';
 import 'package:flutter/services.dart';
 import 'package:souq/view/Splash/splash_screen.dart';
 import 'package:souq/view/control_view.dart';
+import 'package:souq/view/onboarding/onboarding_view.dart';
 import 'package:souq/view/onboarding/welcome_screen.dart';
 import 'package:souq/view/widgets/alertLocation/alert_location.dart';
 import 'package:splashscreen/splashscreen.dart';
@@ -53,33 +54,11 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home: LoginScreen()
+      home: OnBoarding()
+      // LoginScreen()
 
 
 
-      // AnimatedSplashScreen(
-      //   splash: Splash(),
-      //   nextScreen: WelcomeScreen(),
-      //   splashTransition: SplashTransition.fadeTransition,
-      //
-      //
-      // )
-
-
-      // SplashScreen( seconds: 2,
-      //   imageBackground:       AssetImage('assets/background/BG.png',),
-      //   image: Image.asset('assets/logo/Logo-img.png', ),
-      //   photoSize: 70,
-      //   useLoader: false,
-      //   title:           Text('WELCOME TO', style: TextStyle(letterSpacing: 5, fontSize: 14, color: Colors.white, fontFamily: 'thirdLight',fontWeight: FontWeight.bold ),),
-      //
-      //   // subtitle:             Text('SHOPIFY', style: TextStyle(fontSize: 24, color: Colors.white, fontFamily: 'third'),),
-      // navigateAfterSeconds: ControlView(),
-      //
-      //   // subtitle: Text('SHOPIFY', style: TextStyle(fontSize: 24, color: Colors.white, fontFamily: 'third'),),
-      // navigateAfterSeconds: LoginScreen(),
-      //
-      // ),
 
 
     );
@@ -87,4 +66,3 @@ class MyApp extends StatelessWidget {
 }
 
 
-// SplashScreen( seconds: 2, imageBackground:       AssetImage('assets/background/BG.png',), image: Image.asset('assets/logo/Logo-img.png', ), photoSize: 70, useLoader: false, title:           Text('WELCOME TO', style: TextStyle(letterSpacing: 5, fontSize: 14, color: Colors.white, fontFamily: 'thirdLight',fontWeight: FontWeight.bold ),), subtitle:             Text('SHOPIFY', style: TextStyle(fontSize: 24, color: Colors.white, fontFamily: 'third'),), )

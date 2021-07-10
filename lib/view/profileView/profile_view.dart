@@ -15,7 +15,7 @@ class profileView extends GetWidget<AuthViewModel> {
   String pic;
 
   profileView({Key key,
-  this.name,
+    this.name,
     this.email,
     this.pic
 
@@ -23,8 +23,9 @@ class profileView extends GetWidget<AuthViewModel> {
 
   @override
   Widget build(BuildContext context) {
-
-    Size size = MediaQuery.of(context).size;
+    Size size = MediaQuery
+        .of(context)
+        .size;
 
 
     var height = size.height;
@@ -34,16 +35,17 @@ class profileView extends GetWidget<AuthViewModel> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text('Account', style: TextStyle(color: Colors.black, fontFamily: 'second'),),
+        title: Text('Account',
+          style: TextStyle(color: Colors.black, fontFamily: 'second'),),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.only(left: width * 0.06, right: width* 0.06),
+          padding: EdgeInsets.only(left: width * 0.06, right: width * 0.06),
 
           child: Column(
 
-              children:[
+              children: [
 
 
                 Row(
@@ -55,104 +57,114 @@ class profileView extends GetWidget<AuthViewModel> {
                     NameEmailContainer(name: name, email: email),
 
 
-
                   ],
                 ),
-SizedBox(height: 20,),
+                SizedBox(height: 20,),
                 //
-           ListTile(
-             onTap: (){},
+                ListTile(
+                  onTap: () {},
 
-             leading: Image.asset('assets/profileView/Icon_Edit-Profile.png'),
-             title: Text('Edit Profile',style: TextStyle(fontSize: 18, fontFamily: "second"),),
-             trailing: Icon(Icons.arrow_forward_ios,color: Colors.black,size: 17,),
+                  leading: Image.asset(
+                      'assets/profileView/Icon_Edit-Profile.png'),
+                  title: Text('Edit Profile',
+                    style: TextStyle(fontSize: 18, fontFamily: "second"),),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios, color: Colors.black, size: 17,),
 
-           ),
+                ),
                 SizedBox(height: 10,),
                 ListTile(
-                  onTap: (){},
+                  onTap: () {},
                   leading: Image.asset('assets/profileView/Icon_Location.png'),
-                  title: Text('Shipping Address',style: TextStyle(fontSize: 18, fontFamily: "second"),),
-                  trailing: Icon(Icons.arrow_forward_ios,color: Colors.black,size: 17,),
+                  title: Text('Shipping Address',
+                    style: TextStyle(fontSize: 18, fontFamily: "second"),),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios, color: Colors.black, size: 17,),
 
                 ),
                 SizedBox(height: 10,),
 
 
                 ListTile(
-                  onTap: (){},
+                  onTap: () {},
 
                   leading: Image.asset('assets/profileView/Icon_Wishlist.png'),
-                  title: Text('WishList',style: TextStyle(fontSize: 18, fontFamily: "second"),),
-                  trailing: Icon(Icons.arrow_forward_ios,color: Colors.black,size: 17,),
+                  title: Text('WishList',
+                    style: TextStyle(fontSize: 18, fontFamily: "second"),),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios, color: Colors.black, size: 17,),
 
                 ),
                 SizedBox(height: 10,),
                 ListTile(
-                  onTap: (){},
+                  onTap: () {},
 
                   leading: Image.asset('assets/profileView/Icon_History.png'),
-                  title: Text('Order History',style: TextStyle(fontSize: 18, fontFamily: "second"),),
-                  trailing: Icon(Icons.arrow_forward_ios,color: Colors.black,size: 17,),
+                  title: Text('Order History',
+                    style: TextStyle(fontSize: 18, fontFamily: "second"),),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios, color: Colors.black, size: 17,),
 
                 ),
                 SizedBox(height: 10,),
 
                 ListTile(
-                  onTap: (){},
+                  onTap: () {},
 
                   leading: Image.asset('assets/profileView/Icon_Order.png'),
-                  title: Text('Track Order',style: TextStyle(fontSize: 18, fontFamily: "second"),),
-                  trailing: Icon(Icons.arrow_forward_ios,color: Colors.black,size: 17,),
+                  title: Text('Track Order',
+                    style: TextStyle(fontSize: 18, fontFamily: "second"),),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios, color: Colors.black, size: 17,),
 
                 ),
                 SizedBox(height: 10,),
                 ListTile(
-                  onTap: (){
+                  onTap: () {
                     Get.to(CreditCard());
-
                   },
 
                   leading: Image.asset('assets/profileView/Icon_Payment.png'),
-                  title: Text('Cards',style: TextStyle(fontSize: 18, fontFamily: "second"),),
-                  trailing: Icon(Icons.arrow_forward_ios,color: Colors.black,size: 17,),
+                  title: Text('Cards',
+                    style: TextStyle(fontSize: 18, fontFamily: "second"),),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios, color: Colors.black, size: 17,),
 
                 ),
                 SizedBox(height: 10,),
 
                 ListTile(
-                  onTap: (){},
+                  onTap: () {},
 
-                  leading: Image.asset('assets/profileView/Icon_Edit-Profile.png'),
-                  title: Text('Notification',style: TextStyle(fontSize: 18, fontFamily: "second"),),
-                  trailing: Icon(Icons.arrow_forward_ios,color: Colors.black,size: 17,),
+                  leading: Image.asset(
+                      'assets/profileView/Icon_Edit-Profile.png'),
+                  title: Text('Notification',
+                    style: TextStyle(fontSize: 18, fontFamily: "second"),),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios, color: Colors.black, size: 17,),
 
                 ),
                 SizedBox(height: 10,),
                 ListTile(
-                  onTap: (){
-
+                  onTap: () {
                     controller.signOutGoogle();
                     controller.signOut();
                     controller.signOutFacebook();
-
-
                   },
 
                   leading: Image.asset('assets/profileView/Icon_Exit.png'),
-                  title: Text('Log Out',style: TextStyle(fontSize: 18, fontFamily: "second"),),
-                  trailing: Icon(Icons.arrow_forward_ios,color: Colors.red,size: 17,),
+                  title: Text('Log Out',
+                    style: TextStyle(fontSize: 18, fontFamily: "second"),),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios, color: Colors.red, size: 17,),
 
                 ),
-
-
 
 
                 SizedBox(height: 100,),
 
 
               ]),
-
 
 
         ),
@@ -176,15 +188,21 @@ class NameEmailContainer extends StatelessWidget {
     return Container(
       alignment: Alignment.topLeft,
       child: Column(
-crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
 
-        (name != null ? Text(name,style: TextStyle(fontSize: 18, fontFamily: "third", fontWeight: FontWeight.bold),) : ( email != null ? Text(email)  : Text('Cannot fetch name') )    ),
+          name == null ? Text(email) : Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
 
-        Text(email)
+            children: [
+
+            Text(name,style: TextStyle(fontFamily: 'third', fontSize: 18),),
+            Text(email,style: TextStyle(fontFamily: 'third', fontSize: 15, color: Colors.grey),),
+
+          ],)
 
 
-      ]),
+    ]),
     );
   }
 }
@@ -205,10 +223,11 @@ class ImageContainer extends StatelessWidget {
       decoration: new BoxDecoration(
         color: const Color(0xff7c94b6),
         image: new DecorationImage(
-          image:   pic != null ? NetworkImage(pic) : AssetImage('assets/avatar/unkown.jpg'),
+          image: pic != null ? NetworkImage(pic) : AssetImage(
+              'assets/avatar/unkown.jpg'),
           fit: BoxFit.cover,
         ),
-        borderRadius:  BorderRadius.all(new Radius.circular(65.0)),
+        borderRadius: BorderRadius.all(new Radius.circular(65.0)),
 
       ),
     );

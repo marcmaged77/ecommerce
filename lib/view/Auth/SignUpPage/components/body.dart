@@ -50,6 +50,12 @@ class Body extends GetWidget<AuthViewModel> {
                     TextController2.text = value;
                   },
                   labelText: "Enter Your Name",
+                  labelText2: 'Enter your Email',
+                  icon: Icon(Icons.account_circle_outlined, size: 17, color: Colors.grey,),
+                  icon2: Icon(Icons.email_outlined, size: 17, color: Colors.grey,),
+
+
+
                   validator1: (value) {},
                   validator2: (value) {},
                   controller1: TextController1,
@@ -71,15 +77,17 @@ class Body extends GetWidget<AuthViewModel> {
                   secondTextContainerHintText: "iamMarc@hotmailcom",
                   child: Column(children: <Widget>[
                     SizedBox(
-                      height: height * 0.023,
+                      height: height * 0.019,
                     ),
                     CustomTextField(
+                      icon: Icon(Icons.lock, size: 17, color: Colors.grey,),
+                      labelText: 'Enter your New Password',
                         validator: (value) {},
                         onSaved: (value) {
                           TextController3.text = value;
                         },
                         controller: TextController3,
-                        heading: 'Password',
+                        // heading: 'Password',
                         hintText: 'Your Password',
                         obscure: true)
                   ]))

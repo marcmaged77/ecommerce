@@ -88,9 +88,9 @@ class AuthViewModel extends GetxController {
   //SIGN UP METHOD
   Future signUp({   name,   email,   password, }) async {
     try {
-      //      UserCredential result =
-      //       // User? user = result.user;
-      //       // user!.updateProfile(displayName: name);
+           // UserCredential result =
+           //  User? user = result.user;
+           //  user!.updateProfile(displayName: name);
 
 
       await _auth.createUserWithEmailAndPassword(email: email, password: password).then((user) async {
@@ -191,7 +191,6 @@ final FacebookLoginResult result = await _facebookLogin.logInWithReadPermissions
       UserModel userModel = UserModel(email:email, userId: result.accessToken.userId, name: name, pic : pic );
 
       await FireStoreUser().addUserToFireStore(userModel);
-Get.lazyPut(() => HomeViewModel());
 
 
       Get.offAll(ControlView(email: email, name: name, pic: pic,));

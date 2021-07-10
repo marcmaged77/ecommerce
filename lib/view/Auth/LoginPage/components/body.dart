@@ -85,7 +85,8 @@ class Body extends GetWidget<AuthViewModel>  {
               ),
               child: Column(children: <Widget>[
                 SignCard(
-
+icon: Icon(Icons.email_outlined,size: 17,color: Colors.grey,),
+icon2: Icon(Icons.lock, size: 17, color: Colors.grey,),
                   //fUNCTIONS,
                     formKey: controller.formKey,
                     onSaved1: (value){TextController1.text= value;},

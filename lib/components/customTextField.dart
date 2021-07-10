@@ -11,8 +11,11 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final GlobalKey<FormState> formKey;
 
+  final Icon icon;
+
   const CustomTextField(
       {this.labelText,
+        this.icon,
       this.formKey,
       this.heading,
       this.hintText,
@@ -54,19 +57,21 @@ class CustomTextField extends StatelessWidget {
             // ),
             decoration: InputDecoration(
                 labelText: labelText,
+                labelStyle: TextStyle(color: Colors.grey),
                 hintText: hintText,
+                floatingLabelBehavior: FloatingLabelBehavior.always,
+                suffixIcon: icon ,
                 border: OutlineInputBorder(
-                  borderSide: BorderSide(color: kPrimaryColor),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                focusedBorder: OutlineInputBorder(
+
+                  borderSide: BorderSide(color: Colors.grey, ),
                   borderRadius: BorderRadius.circular(7),
                 ),
-                // focusedBorder: OutlineInputBorder(
-                //
-                //   borderSide: BorderSide(color: kPrimaryColor),
-                //   borderRadius: BorderRadius.circular(7),
-                // ),
                 errorBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(7),
-                    borderSide: BorderSide(color: Colors.red))),
+                    borderSide: BorderSide(color: Colors.red, width: 0.9))),
           ),
         ),
       ],

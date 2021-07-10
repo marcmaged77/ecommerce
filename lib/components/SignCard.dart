@@ -36,6 +36,8 @@ class SignCard extends GetWidget <AuthViewModel> {
   final String firstTextContainerHintText;
   final String secondTextContainerHintText;
 
+  final Icon icon;
+  final Icon icon2;
 
 
   final String forgotPassword;
@@ -43,6 +45,8 @@ class SignCard extends GetWidget <AuthViewModel> {
 
   const SignCard(
       {Key key,
+        this.icon,
+        this.icon2,
         this.labelText,
         this.labelText2,
         this.formKey,
@@ -53,7 +57,9 @@ class SignCard extends GetWidget <AuthViewModel> {
          this.controller1,
          this.controller2,
 
-      this.firstLeft = "",
+
+
+        this.firstLeft = "",
       this.firstRight = '',
       this.secondColumnText = '',
       this.forgotPassword = '',
@@ -128,12 +134,13 @@ class SignCard extends GetWidget <AuthViewModel> {
                   style: TextStyle(color: Colors.grey),
                 )),
             SizedBox(
-              height: height * 0.06,
+              height: height * 0.01,
             ),
             CustomTextField(
+              icon: icon,
               labelText: labelText,
               formKey: formKey ,
-                heading: firstTextContainerheader,
+                heading: '',
                 hintText: firstTextContainerHintText,
                 obscure: false,
             onSaved: onSaved1,
@@ -141,11 +148,12 @@ class SignCard extends GetWidget <AuthViewModel> {
               controller: controller1,
             ),
             SizedBox(
-              height: height * 0.03,
+              height: height * 0.01,
             ),
             CustomTextField(
+              icon: icon2,
               labelText: labelText2,
-                heading: secondTextContainerheader,
+                heading: '',
                 hintText: secondTextContainerHintText,
                 obscure: secondTextContainerObscure,
             onSaved: onSaved2,
