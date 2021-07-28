@@ -3,7 +3,10 @@
 
 
 
+
 # EcommerceApp
+
+PS: Database  at the Bottom  " Scroll Down "
 
 this app is under Development
 
@@ -17,6 +20,8 @@ https://user-images.githubusercontent.com/30737385/125171955-42264080-e1b7-11eb-
 
 
 <img width="1629" alt="Screen Shot 2021-07-10 at 7 33 49 PM" src="https://user-images.githubusercontent.com/30737385/125172127-1192d680-e1b8-11eb-9b19-6b9b60b7f279.png">
+
+
 
 # 1- Onboarding , Login , Sign Up Screens :
 
@@ -52,7 +57,24 @@ https://user-images.githubusercontent.com/30737385/125171955-42264080-e1b7-11eb-
 
 ![Men](https://user-images.githubusercontent.com/30737385/127245213-f77b8da9-b294-4452-b490-2dac6b030b5f.png)
 
-2-Devices Category Screens : 
+3-Devices Category Screens : 
+
+![Devices](https://user-images.githubusercontent.com/30737385/127246335-fafb60f0-2fb1-474b-80f2-c219760f8af0.png)
+
+4- Gaming Category Screens :
+
+![Google Pixel 4 XL Presentation (3)](https://user-images.githubusercontent.com/30737385/127246532-241de02b-94e3-444e-be3b-8df547154741.png)
+
+
+# 5- Cloud Firestore DataBase :
+ 1- Users
+ 
+ ![users database](https://user-images.githubusercontent.com/30737385/127246711-0b22a4a8-365f-479b-b9fb-fc322d0037a2.PNG)
+ 
+ 2- Products 
+ 
+ ![products database](https://user-images.githubusercontent.com/30737385/127246728-2a32906f-fac2-49d8-914d-f51191186383.PNG)
+
 
 
 
