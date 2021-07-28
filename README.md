@@ -41,6 +41,12 @@ https://user-images.githubusercontent.com/30737385/125171955-42264080-e1b7-11eb-
 
 1-Women Category Screens : 
  
+![Women JEANS](https://user-images.githubusercontent.com/30737385/127244854-f5425312-1a68-493e-8cee-f052e8509d36.png)
+
+![Dresses](https://user-images.githubusercontent.com/30737385/127244974-556fcd47-b328-40d4-977e-cc7d582c9592.png)
+
+![Google Pixel 4 XL Presentation (1)](https://user-images.githubusercontent.com/30737385/127245047-3820222b-f9ba-4a4b-9921-3b6219e7e314.png)
+
 
 
 
