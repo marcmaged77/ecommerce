@@ -48,7 +48,11 @@ https://user-images.githubusercontent.com/30737385/125171955-42264080-e1b7-11eb-
 ![Google Pixel 4 XL Presentation (1)](https://user-images.githubusercontent.com/30737385/127245047-3820222b-f9ba-4a4b-9921-3b6219e7e314.png)
 
 
+2-Men Category Screens : 
 
+![Men](https://user-images.githubusercontent.com/30737385/127245213-f77b8da9-b294-4452-b490-2dac6b030b5f.png)
+
+2-Devices Category Screens : 
 
 
 
