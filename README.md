@@ -18,8 +18,21 @@ https://user-images.githubusercontent.com/30737385/125171955-42264080-e1b7-11eb-
 
 <img width="1629" alt="Screen Shot 2021-07-10 at 7 33 49 PM" src="https://user-images.githubusercontent.com/30737385/125172127-1192d680-e1b8-11eb-9b19-6b9b60b7f279.png">
 
-# 1- Onboarding Screens , Login , Sign Up
+# 1- Onboarding , Login , Sign Up Screens :
 
 ![Login and onboarding](https://user-images.githubusercontent.com/30737385/127243836-9118c82a-3658-40e1-8fc5-bc5941e58179.png)
+
+![Apple iPhone 11 Pro Max Presentation (10)](https://user-images.githubusercontent.com/30737385/127244119-02adddf6-9c80-40e0-a5c3-33ba871b2368.png)
+
+
+# 2- Home And Explore Screens :
+
+![Home Explore View](https://user-images.githubusercontent.com/30737385/127244203-75c4c41f-e929-4789-85a5-ff09a886088a.png)
+
+
+# 3- Profile View  Screen :
+
+![Profile View](https://user-images.githubusercontent.com/30737385/127244279-b49cc361-3ffc-4cf7-a1ea-01bfa9cd9c32.png)
+
 
 
